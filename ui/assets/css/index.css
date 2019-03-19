@@ -36,7 +36,23 @@ body {
   text-align: center;
   padding: 0 20px;
 }
+.createBankAccountCoverPage {
+  background-image: url("../images/landing1.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
 
+.formModal h4 {
+  color: #d9cec6;
+  text-decoration: none;
+}
 .formModal a {
   color: #d9cec6;
   text-decoration: none;
@@ -46,6 +62,55 @@ body {
   font-size: 30px;
   color: #d9cec6;
 }
+/* ------ nav links---  */
+.landing .nav-links-wrapper {
+  color: white;
+  position: fixed;
+  left: -300px;
+  top: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  width: 250px;
+  height: 100%;
+  box-shadow: 13px 0px 16px -1px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+.nav-links-wrapper a {
+  padding-left: 30px;
+  height: 100%;
+  width: 100%;
+  line-height: 50px;
+}
+
+.nav-links {
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links-wrapper.animate {
+  left: 0;
+}
+
+.nav-links>li {
+  height: 50px;
+  padding: 0;
+  border-bottom: 1px solid white;
+}
+
+.nav-links>li:hover {
+  transform: none;
+  background: white;
+  color: rgb(22, 41, 67);
+}
+
+.nav-links>li:not(:first-of-type) {
+  border-left: none;
+}
+/* ----nav link ending */
 .formModal {
   margin: 0px auto;
   background-color: #334a5a7d; /*#708188*/ /*#fff,  */
@@ -53,7 +118,7 @@ body {
   border-radius: 5px;
   width: 88%;
 }
-.formModal h3 {
+.landing h3 {
   color: #d9cec6;
   padding-top: 40px;
   margin-bottom: 20px;
@@ -61,6 +126,17 @@ body {
 .formModal input {
   padding: 6px;
   width: 90%;
+  outline: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font: "Roboto Slab", serif;
+}
+.formModal label {
+  position: relative;
+  clear: both;
+  display: inline-flex;
+  padding: 0px;
+  width: 80%;
   outline: none;
   margin-top: 5px;
   margin-bottom: 5px;
