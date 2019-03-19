@@ -1,0 +1,222 @@
+@-ms-viewport {
+  width: device-width;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
+
+:root {
+	--primaryColor: #0c1824;
+	--black: #000;
+	--white: #fff;
+}
+
+
+body {
+  margin: 0;
+  font-family: "Roboto Slab", serif;
+  font-size: 17px;
+  color: --primaryColor;
+  line-height: 1.6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.loginCoverPage {
+  background-image: url("../images/landing3.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.formModal a {
+  color: #d9cec6;
+  text-decoration: none;
+}
+.landing #logo {
+  padding: 10px;
+  font-size: 30px;
+  color: #d9cec6;
+}
+.formModal {
+  margin: 0px auto;
+  background-color: #334a5a7d; /*#708188*/ /*#fff,  */
+  padding: 20px;
+  border-radius: 5px;
+  width: 88%;
+}
+.formModal h3 {
+  color: #d9cec6;
+  padding-top: 40px;
+  margin-bottom: 20px;
+}
+.formModal input {
+  padding: 6px;
+  width: 90%;
+  outline: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font: "Roboto Slab", serif;
+}
+
+.formModal .loginBtn {
+  color: #d9cec6;
+  font-size: 18px;
+  width: 80%;
+  margin: 0px auto;
+  text-decoration: none;
+  border: var(--primaryColor) 1px solid;
+  padding: 6px 20px;
+  margin-top: 20px;
+}
+.formModal .loginBtn:hover {
+  background: var(--primaryColor);
+  color: var(--white);
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.innerFooter {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 10px;
+  margin-top: 25px;
+}
+
+.innerFooter > .reset {
+  float: left;
+}
+.innerFooter > .create {
+  float: right;
+}
+/* Navigation style */
+#navbar.landing {
+  position: fixed;
+  background: none;
+  color: --white;
+  box-shadow: none;
+}
+
+#navbar {
+  color: rgb(22, 41, 67);
+  background: --white;
+  box-shadow: -2px 6px 16px -1px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0 30px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background 0.3s linear;
+}
+
+.landing #nav-container .nav-title #logo {
+  margin-left: 5px;
+  font-size: 40px;
+}
+
+footer {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
+  font-size: 10px;
+}
+
+#nav-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+/* End of navigation styling */
+
+/* Mobile styling ends here */
+/* small devices */
+@media only screen and (min-width: 731px){
+  /* .formModal{
+    width: 60%;
+  }
+  .formModal .loginBtn {
+    width: 65%
+  } */
+}
+/* Tablet and others */
+@media only screen and (min-width: 768px){
+  .formModal input {
+    padding: 6px;
+    width: 80%;
+    outline: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font: "Roboto Slab", serif;
+  }
+  .formModal{
+    width: 60%;
+  }
+  .formModal .loginBtn {
+    width: 74%;
+  }
+  footer {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    font-size: 15px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media only screen and (min-width: 992px){
+  
+.landing #nav-container .nav-title #logo {
+  margin-left: 5px;
+  font-size: 50px;
+}
+  .formModal input{
+    width: 70%;
+    padding: 10px;
+  }
+  .formModal .loginBtn{
+    width: 65%;
+  }
+
+  .innerFooter {
+    width: 70%;
+  }
+  
+  .innerFooter > .reset {
+    float: left;
+  }
+  .innerFooter > .create {
+    float: right;
+  }
+  .formModal {
+    width: 30%;
+  }
+  .formModal > a h1 {
+    margin: 30px 0;
+  }
+  
+  
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1200px){
+
+}
+/* Reset- zero out the margin */
+
+
