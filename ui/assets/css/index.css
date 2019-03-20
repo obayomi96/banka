@@ -5,17 +5,16 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
 
 :root {
-	--primaryColor: #0c1824;
-	--black: #000;
-	--white: #fff;
+  --primaryColor: #0c1824;
+  --black: #000;
+  --white: #fff;
 }
-
 
 body {
   margin: 0;
   font-family: "Roboto Slab", serif;
   font-size: 17px;
-  color: --primaryColor;
+  color: var(--primaryColor);
   line-height: 1.6;
 }
 
@@ -24,10 +23,192 @@ body {
   padding: 0;
 }
 
+/* -----NAVIGATION BAR STYLE---- */
+nav{
+  padding: 8px auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 45%;
+  margin-left: -45%;
+  background: var(--primaryColor);
+  color: var(--white);
+  transition: all 0.5s;
+  z-index: 1;
+  /* opacity: 0.9; */
+}
+.sidebar #logo{
+  color: var(--white) !important;
+  font-size: 30px;
+  padding: 2px 5px;
+  margin: 5px 0 25px 1px;
+  position: absolute;
+  top: 0;
+}
+.sidebarItems {
+  padding-left: 15px;
+  line-height: 50px;
+  margin: 30px auto;
+}
+.sidebar img {
+  height: 90px;
+  width: 90px;
+  border-radius: 100%;
+  margin: 40px auto 15px auto; 
+}
+.sidebar img:hover {
+  opacity: 0.8;
+}
+.sidebarItems a {
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--white);
+}
+.sidebarItems a:hover {
+  cursor: pointer;
+  color: #d9cec6;
+}
+.sidebar .userName {
+display: none;
+}
+/* .landingProfile {
+
+} */
+.landingProfile h4 {
+  color: var(--black);
+  justify-content: flex-start;
+  padding: 10px
+}
+nav #menuLogo{
+  color: var(--black);
+  font-size: 25px;
+  padding: 2px 10px;
+  margin: 5px 0 300px 5px;
+}
+/*
+nav span {
+  font-weight: bold;
+  color: #000;
+}
+.sidebar .menuItems {
+  display: none;
+}
+
+nav .innerNav {
+  padding: 0 20px;
+  display: inline-flex;
+}
+
+.menuItems {
+  position: relative;
+  display: inline-block;
+} */
+
+ .accountInfo {
+  margin-top: 30px;
+  width: 100%;
+  line-height: 50px;
+  /* border-bottom: var(--black) 1px solid; */
+}
+ /* .accountInfo {
+  height: 150px;
+  margin-top: 50px;
+  margin-right: 20px;
+  border-radius: 2px;
+} */
+.accountInfo a {
+  width: 100%;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--black);
+}
+.accountInfo a:hover {
+  background: var(--primaryColor);
+  color: var(--white);
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+/* ---- NAVIGATION END----- */
+
+.userAccountCoverPage {
+  text-align: center;
+  margin: 100px auto 0 auto; 
+  font-size: 15px;
+  line-height: 30px;
+}
+/* .userAccountCoverPage img {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+} */
+.userAccountCoverPage #accountSection {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 80%;
+}
+.userInfo h4 {
+  margin: 0 auto 30px auto;
+}
+
+#accountSection ul li b{
+  padding: 0 5px;
+
+}
+.userAccountCoverPage #accountSection ul{
+  list-style: none;
+}
+
+
+
+/* -----NAVIGATION BAR STYLE---- */
+/* .landing #logo {
+  padding: 10px;
+  font-size: 30px;
+  color: #d9cec6;
+}
+#navbar.landing {
+  position: fixed;
+  background: none;
+  color: var(--white);
+  box-shadow: none;
+}
+
+#navbar {
+  position: sticky;
+  top: 0;
+  padding: 0 30px;
+  width: 100%;
+}
+
+.landing #nav-container .nav-title #logo {
+  margin-left: 5px; */
+  /* font-size: 40px;
+}
+#nav-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.landing {
+  color: #d9cec6;
+  margin-top: 20px;
+  margin-bottom: 20px;
+} */
+/* ----NAVIGATION BAR END----- */
+
 .loginCoverPage {
   background-image: url("../images/landing3.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,10 +217,11 @@ body {
   text-align: center;
   padding: 0 20px;
 }
+/* --- CREATE BANK ACCOUNT PAGE --- */
 .createBankAccountCoverPage {
   background-image: url("../images/landing1.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -48,6 +230,74 @@ body {
   text-align: center;
   padding: 0 20px;
 }
+/* ---USER ACCOUNT PAGE--- */
+.landingProfile #nav-container #logo {
+  padding: 10px;
+  font-size: 30px;
+  position: absolute;
+  top: 0;
+  color: #d9cec6;
+}
+/* -----NAVIGATION BAR STYLE---- */
+
+.landingProfile {
+  position: absolute;
+  top: 0px;
+  background: none;
+  color: var(--white);
+  box-shadow: none;
+}
+
+#navbar {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.landingProfile #nav-container #logo {
+  font-size: 30px;
+  color: var(--black);
+  top: 0;
+  position: absolute;
+  padding: 5px;
+  margin-top: 0px;
+}
+.landingProfile #nav-container .userName {
+  
+  font-size: 20px;
+}
+#nav-container {
+  margin: 0 auto;
+  display: inline-flex;
+  float: left;
+  justify-content: left;
+}
+
+
+
+
+
+/* .userAccountCoverPage section>table {
+  background-color: #d9cec6;
+}
+.userAccountCoverPage section > table {
+  width: 60%;
+  float: right;
+  text-align: left;
+  padding: 5px;
+  border: var(--primaryColor) 1px solid;
+} */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-top: 15px;
+}
+/* .userAccountCoverPage .userInfo section > table > tr > td {
+} */
+
+/* --- USER ACCOUNT PAGE END--- */
 
 .formModal h4 {
   color: #d9cec6;
@@ -57,71 +307,13 @@ body {
   color: #d9cec6;
   text-decoration: none;
 }
-.landing #logo {
-  padding: 10px;
-  font-size: 30px;
-  color: #d9cec6;
-}
-/* ------ nav links---  */
-.landing .nav-links-wrapper {
-  color: white;
-  position: fixed;
-  left: -300px;
-  top: 0;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 0;
-  width: 250px;
-  height: 100%;
-  box-shadow: 13px 0px 16px -1px rgba(0,0,0,0.2);
-  z-index: 3;
-}
 
-.nav-links-wrapper a {
-  padding-left: 30px;
-  height: 100%;
-  width: 100%;
-  line-height: 50px;
-}
-
-.nav-links {
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links-wrapper.animate {
-  left: 0;
-}
-
-.nav-links>li {
-  height: 50px;
-  padding: 0;
-  border-bottom: 1px solid white;
-}
-
-.nav-links>li:hover {
-  transform: none;
-  background: white;
-  color: rgb(22, 41, 67);
-}
-
-.nav-links>li:not(:first-of-type) {
-  border-left: none;
-}
-/* ----nav link ending */
 .formModal {
   margin: 0px auto;
-  background-color: #334a5a7d; /*#708188*/ /*#fff,  */
+  background-color: #334a5a7d;
   padding: 20px;
   border-radius: 5px;
   width: 88%;
-}
-.landing h3 {
-  color: #d9cec6;
-  padding-top: 40px;
-  margin-bottom: 20px;
 }
 .formModal input {
   padding: 6px;
@@ -173,31 +365,6 @@ body {
 .innerFooter > .create {
   float: right;
 }
-/* Navigation style */
-#navbar.landing {
-  position: fixed;
-  background: none;
-  color: --white;
-  box-shadow: none;
-}
-
-#navbar {
-  color: rgb(22, 41, 67);
-  background: --white;
-  box-shadow: -2px 6px 16px -1px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  padding: 0 30px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: background 0.3s linear;
-}
-
-.landing #nav-container .nav-title #logo {
-  margin-left: 5px;
-  font-size: 40px;
-}
 
 footer {
   text-align: center;
@@ -206,20 +373,14 @@ footer {
   position: absolute;
   bottom: 0;
   font-size: 10px;
-}
-
-#nav-container {
-  margin: 0 auto;
-  display: flex;
-  justify-content: left;
-  align-items: center;
+  margin-top: 10px;
 }
 
 /* End of navigation styling */
 
 /* Mobile styling ends here */
 /* small devices */
-@media only screen and (min-width: 731px){
+@media only screen and (min-width: 731px) {
   /* .formModal{
     width: 60%;
   }
@@ -228,7 +389,7 @@ footer {
   } */
 }
 /* Tablet and others */
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 768px) {
   .formModal input {
     padding: 6px;
     width: 80%;
@@ -237,7 +398,7 @@ footer {
     margin-bottom: 5px;
     font: "Roboto Slab", serif;
   }
-  .formModal{
+  .formModal {
     width: 60%;
   }
   .formModal .loginBtn {
@@ -254,24 +415,23 @@ footer {
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media only screen and (min-width: 992px){
-  
-.landing #nav-container .nav-title #logo {
-  margin-left: 5px;
-  font-size: 50px;
-}
-  .formModal input{
+@media only screen and (min-width: 992px) {
+  .landing #nav-container .nav-title #logo {
+    margin-left: 5px;
+    font-size: 50px;
+  }
+  .formModal input {
     width: 70%;
     padding: 10px;
   }
-  .formModal .loginBtn{
+  .formModal .loginBtn {
     width: 65%;
   }
 
   .innerFooter {
     width: 70%;
   }
-  
+
   .innerFooter > .reset {
     float: left;
   }
@@ -284,15 +444,93 @@ footer {
   .formModal > a h1 {
     margin: 30px 0;
   }
+  .userAccountCoverPage .accountInfo {
+    width: 40%;
+  }
+  .userAccountCoverPage .accountInfo .transactionInfo {
+    width: 60%;
+  }
+  /* .userAccountCoverPage h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  } */
+  .userAccountCoverPage h4 {
+    font-size: 25px;
+    padding: 0 0 20px 0;
+  }
   
+  .userAccountCoverPage #accountSection {
+    max-width: max-content;
+    width: 100%;
+    margin: 20px auto;
+    font-size: 25px;
+    line-height: 45px;
+  }
   
+  #accountSection ul li b{
+    padding: 0 5px;
+  }
+  .userAccountCoverPage #accountSection ul{
+    list-style: none;
+  }
+  .sidebar #logo{
+    color: var(--white);
+    font-size: 40px;
+    padding: 2px 10px;
+  }
+  nav span {
+    font-size: 25px;
+    font-weight: bolder;
+    color: #000;
+  }
+  #menuLogo {
+    display: none;
+  }
+  img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    padding: 10px 0; 
+  }
+  .landingProfile .menuItems {
+    display: inline-flex;
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+  
+  .sidebar {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 15%;
+    margin: 0 auto;
+    background: var(--primaryColor);
+    color: var(--white);
 
+  }
+  .sidebarItems {
+    padding-left: 15px;
+    line-height: 50px;
+  }
+  .sidebar img:hover {
+    opacity: 0.8;
+  }
+  .sidebarItems a:hover {
+    cursor: pointer;
+    color: #d9cec6;
+  }
+  .landingProfile h4 {
+    display: none;
+  }
+  /* .sidebar .userName:hover {
+    cursor: pointer;
+    color: #d9cec6;
+  } */
 }
 
 /* Large devices (large desktops, 1200px and up) */
-@media only screen and (min-width: 1200px){
-
+@media only screen and (min-width: 1200px) {
 }
 /* Reset- zero out the margin */
-
-
