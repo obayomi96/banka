@@ -12,7 +12,6 @@
         <div id="nav-container">                
             <h3 class="nav-title">
                 <i class="fas fa-piggy-bank" id="logo"></i>
-                banka.com
             </h3>
         </div>
     </nav>
@@ -21,24 +20,32 @@
             <h4>Create a banka.com account</h4>
             <form action="" id="loginForm">
                 <div>
-                    <input type="text" value="" class="formInput" placeholder="Account Name">   
+                    <input type="text" value="" class="formInput" placeholder="Account Name" required>   
                 </div>
                 <div>
-                        <input type="text" value="" class="formInput" placeholder="Account Number">   
+                        <input type="text" value="" class="formInput" placeholder="Account Number" required>   
                     </div>
                 <div>
-                        <input type="email" value="" class="formInput" placeholder="Current or Savings">   
+                        <!-- <input type="email" value="" class="formInput" placeholder="Current or Savings">    -->
+                        <select name="Account type" id="">
+                            <option value="Savings">Current account</option>
+                            <option value="Current">Savings account</option>
+                        </select>
                     </div>
                     <div>
-                            <input type="tel" value="" class="formInput" placeholder="Phone Number">   
+                            <input type="tel" value="" class="formInput" placeholder="Phone Number" required>   
                         </div>
                 <div> 
-                    <input type="password" name="password" class="formInput" placeholder="Account password">
+                    <input type="password" name="password" class="formInput" placeholder="Account password" required>
                 </div>
                 <div> 
-                        <input type="password" name="password" class="formInput" placeholder="Password Confirm">
+                        <input type="password" name="password" class="formInput" placeholder="Password Confirm" required>
                     </div>
                 <div class="loginBtn"><a href="userAccount.html">Create Account</a></div>
+                <div class="innerFooter">
+                        <span class="reset"><a href="../index.html">LOGOUT</a></span>
+                        <span class="create"><a href="index.html">SIGN IN</a></span>
+                    </div>
             </form>
         </div>
         <footer>Andela Developer Challenge - @ 2019</footer>
