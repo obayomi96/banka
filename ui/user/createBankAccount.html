@@ -25,26 +25,30 @@
                 <div>
                         <input type="text" value="" class="formInput" placeholder="Account Number" required>   
                     </div>
+                    <div>
+                            <input type="text" value="" class="formInput" placeholder="USER ID">   
+                        </div>
                 <div>
-                        <!-- <input type="email" value="" class="formInput" placeholder="Current or Savings">    -->
                         <select name="Account type" id="">
+                            <option value="Savings">Account type</option>
                             <option value="Savings">Current account</option>
                             <option value="Current">Savings account</option>
                         </select>
                     </div>
                     <div>
+                        <input type="email" value="" class="formInput" placeholder="Email" required>   
+                        </div>
+                    <div>
                             <input type="tel" value="" class="formInput" placeholder="Phone Number" required>   
                         </div>
-                <div> 
-                    <input type="password" name="password" class="formInput" placeholder="Account password" required>
-                </div>
-                <div> 
-                        <input type="password" name="password" class="formInput" placeholder="Password Confirm" required>
-                    </div>
+                        <div id="img">
+                            <label for="Image">Image upload<sup>*</sup></label>
+                                <input type="file" value="Image" class="formInput" accept="image/*">
+                            </div>
                 <div class="loginBtn"><a href="userAccount.html">Create Account</a></div>
                 <div class="innerFooter">
                         <span class="reset"><a href="../index.html">LOGOUT</a></span>
-                        <span class="create"><a href="index.html">SIGN IN</a></span>
+                        <span class="create"><a href="userAccount.html">USER ACCOUNT</a></span>
                     </div>
             </form>
         </div>

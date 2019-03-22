@@ -310,6 +310,14 @@ nav .innerNav {
   margin-bottom: 5px;
   font: "Roboto Slab", serif;
 }
+.formModal label{
+  float: left;
+  text-align: left;
+  margin-left: 10px;
+}
+.formModal #img{
+  color: #d9cec6;
+}
 
 .formModal .loginBtn {
   color: #d9cec6;
@@ -525,7 +533,20 @@ tr:nth-child(odd) {
   }
   .formModal select {
     padding: 10px;
-    width: 75%;
+    width: 74%;
+  }
+  .formModal #img{
+    padding: 10px;
+    width: 77%;
+    color: #d9cec6;
+  }
+  .formModal #img input {
+    margin-right: 10px;
+  }
+  .formModal label{
+    float: left;
+    text-align: left;
+    margin-left: 52px;
   }
   .formModal .loginBtn {
     width: 65%;
