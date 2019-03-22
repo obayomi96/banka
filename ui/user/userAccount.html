@@ -15,7 +15,8 @@
             </div>
                     <img src="../assets/images/profileImg.jpg" alt="Profile Image">
                     <!-- <small>ID: OB5466</small> -->
-                            <div><a href="#">My Transactions</a></div>
+                            <div><a href="userAccounttransactions.html">My Transactions</a></div>
+                            <div><a href="userAccount.html">My profile</a></div>
                             <div><a href="#">Edit profile</a></div>
                             <div><a href="#">Reset password</a></div>
                             <div><a href="../index.html">Logout</a></div>
@@ -32,7 +33,7 @@
     </nav>
 
     <div class="userInfo">
-        <h4>Account Details</h4>
+        <h4>ACCOUNT DETAILS</h4>
     </div>
      <div id="accountSection">
         <ul>
@@ -52,18 +53,48 @@
             <b>Status:</b> Active
         </li>
         <li>
-                <b>Current balance:</b> $2085.15
+                <b>Current balance:</b> $3237.06
             </li>
         </ul>
         <div class="accountInfo">
                 <div >
                     <div>Latest transactions</div><hr>
-                    <div class="transactionInfo"><a href="#">$50.7 Debit by banka.com</a></div>
-                    <div class="transactionInfo"><a href="#">$230.00 credit from Austin</a></div>
-                    <div class="transactionInfo"><a href="#">$14.00 debit by banka.com</a></div>
+                    <div class="bankAccountInfo">
+                            <table>
+                                    <tr>
+                                        <th>TYPE</th>
+                                        <th>FROM</th>
+                                        <th>TO</th>
+                                        <th>AMOUNT</th>
+                                        <th>VIEW</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Credit</td>
+                                        <td>Otoloye</td>
+                                        <td>Obayomi</td>
+                                        <td>$270.00</td>
+                                        <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debit</td>
+                                        <td>Obayomi</td>
+                                        <td>joan</td>
+                                        <td>$185.00</td>
+                                        <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debit</td>
+                                        <td>Obayomi</td>
+                                        <td>banka.com</td>
+                                        <td>$14.07 </td>
+                                        <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                    </tr> 
+                                </table>       
+                    </div>
+                <div class="viewAllBtn"><a href="userAccounttransactions.html">View all transactions</a></div>
+                    
                 </div>
-
-    </div>
+        </div>
     </div>
     <footer class="footer">Andela Developer Challenge - &copy 2019</footer>
 </div>
