@@ -350,6 +350,25 @@ nav .innerNav {
   float: right;
 }
 
+.pagination {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 18px;
+  margin-top: 25px;
+}
+
+.pagination > #left {
+  float: left;
+}
+.pagination > #right {
+  float: right;
+}
+.pagination a {
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+  margin: 20px;
+}
 footer {
   text-align: center;
   width: 100%;
@@ -399,7 +418,51 @@ footer {
 .bankAccountInfo .innerFooter > .create {
   float: right;
 }
-
+/* .filter div {
+  font-size: 30px;
+  padding: 4px;
+} */
+.search {
+    color: #343a40;
+    background: transparent;
+    border-color: #343a40;
+    padding: 5px;
+    border-radius: 2px;
+}
+.search:hover {
+  color: #fff;
+  background: #343a40;
+  transition: 500ms;
+}
+.userInfo .filter .searcher input {
+  width: 70%;
+}
+/* .userInfo .filter {
+  display: block;
+  width: 78%;
+  justify-content: center;
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+} */
+.userInfo .filter {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 15px;
+}
+.userInfo .filter .searcher {
+  width: 100%;
+}
+.searcher {
+  min-width: 100%;
+  margin: 8px auto;
+}
+.searcher input, .search {
+  padding: 5px;
+}
 /* #accountSection #bankAccountInfo {
   text-align: left;
   margin: 0 auto;
@@ -415,14 +478,14 @@ padding: 10px;
 text-decoration: none;
 color: var(--black);
 } */
-.userInfo .filter {
+/* .userInfo .filter {
   width: 100%;
   padding: 15px;
   text-align: left;
 }
 .userInfo .filter input {
   width: 120px;
-}
+} */
 #accountSection table {
   width: 85%;
   max-width: 85%;
@@ -586,7 +649,7 @@ tr:nth-child(odd) {
   }
 
   .userAccountCoverPage #accountSection {
-    max-width: max-content;
+    /* max-width: max-content; */
     width: 100%;
     margin: 20px auto;
     font-size: 20px;
@@ -596,18 +659,41 @@ tr:nth-child(odd) {
   #accountSection ul li b {
     padding: 0 5px;
   }
+  .userAccountCoverPage #accountSection .details {
+    width: 100%;
+    margin-left: 30%;
+    font-size: 20px;
+    line-height: 45px;
+  }
   .userAccountCoverPage #accountSection ul {
     list-style: none;
   }
   .userInfo .filter {
-    width: 100%;
-    padding: 10px;
+    display: inline-flex;
+    width: 78%;
+    justify-content: center;
+    margin: 0 auto;
     text-align: center;
     font-size: 20px;
   }
-  .userInfo .filter input {
-    width: 120px;
+  .searcher {
+    min-width: 50%;
   }
+  /* .userInfo .filter .searcher input {
+    width: 50%;
+  } */
+  .filter #filtr{
+  display: inline-flex;
+ font-size: 18px;
+ padding: 5px;
+}
+.userInfo .filter .searcher {
+  width: 50%;
+}
+.searcher {
+  min-width: 0;
+  margin: 8px 0;
+}
 
   .sidebar {
     position: absolute;
@@ -690,7 +776,7 @@ tr:nth-child(odd) {
     display: none;
   }
   #accountSection table {
-    width: 50%;
+    width: 80%;
     max-width: 85%;
     font-size: 15px;
     /* margin: 50px auto 0 auto; */
@@ -699,11 +785,17 @@ tr:nth-child(odd) {
     color: var(--primaryColor);
     margin: 0 auto;
     text-align: center;
-    font-size: 15px;
+    font-size: 20px;
   }
   th,
 td {
   padding: 8px;
+}
+#accountSection .bankAccountInfo {
+  /* overflow: auto; */
+  max-width: 80%;
+  margin: 0 auto;
+  /* min-width: 500px; */
 }
   .bankAccountInfo .innerFooter {
     width: 50%;
