@@ -34,7 +34,12 @@
 
     <div class="userInfo">
         <div class="filter">
-            Filter from: <input type="date">to: <input type="date">
+            <div class="searcher">
+                <input type="text" placeholder="Search transaction...">
+                <button class="search">Search</button>
+            </div>
+                <div id="filtr">
+                Filter: <input type="date" name="from"> to: <input type="date" name="to"></div>
         </div>
         <div id="accountSection">
                 <div class="bankAccountInfo">
@@ -52,6 +57,7 @@
                                     <th>FROM</th>
                                     <th>TO</th>
                                     <th>AMOUNT</th>
+                                    <th>DATE</th>
                                     <th>VIEW</th>
                                 </tr>
                                 <tr>
@@ -59,6 +65,7 @@
                                     <td>Otoloye</td>
                                     <td>Obayomi</td>
                                     <td>$270.00</td>
+                                    <td>Mar/20/2019</td>
                                     <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
                                 </tr>
                                 <tr>
@@ -66,6 +73,7 @@
                                     <td>Obayomi</td>
                                     <td>joan</td>
                                     <td>$185.00</td>
+                                    <td>Mar/02/2019</td>
                                     <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
                                 </tr>
                                 <tr>
@@ -73,6 +81,7 @@
                                     <td>Obayomi</td>
                                     <td>banka.com</td>
                                     <td>$14.07 </td>
+                                    <td>Dec/26/2018</td>
                                     <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
                                 </tr>
                                 <tr>
@@ -80,6 +89,7 @@
                                         <td>Anthony</td>
                                         <td>Obayomi</td>
                                         <td>$67.99 </td>
+                                        <td>Dec/04/2018</td>
                                         <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
                                     </tr>
                                     <tr>
@@ -87,6 +97,7 @@
                                         <td>Andela</td>
                                         <td>Obayomi</td>
                                         <td>$700.00 </td>
+                                        <td>Oct/24/2018</td>
                                         <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
                                     </tr>
                                     <tr>
@@ -94,12 +105,14 @@
                                         <td>Github</td>
                                         <td>Obayomi</td>
                                         <td>$2000.00 </td>
+                                        <td>April/11/2018</td>
 <td><a href="transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
                                         </tr> 
                             </table>  
-                            <div class="innerFooter">
-                                    <span class="reset"><a href="#">Previous</a></span>
-                                    <span class="create"><a href="#">Next</a></span>
+                            <div class="pagination">
+                                    <span class="left"><a href="#"><i class="fas fa-angle-left" id="left"></i></a></span>
+                                    <span> 1 of 14</span>
+                                    <span class="right"><a href="#"><i class="fas fa-angle-right" id="right"></i></a></span>
                                 </div>    
                 </div>
                 <footer class="footer">Andela Developer Challenge - &copy 2019</footer>
