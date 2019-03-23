@@ -753,6 +753,12 @@ tr:nth-child(odd) {
     margin: 0 auto;
     /* min-width: 500px; */
   }
+  #accountSection .user {
+    overflow: hidden;
+    max-width: 65%;
+    margin: 0 auto;
+    /* min-width: 500px; */
+  }
   .bankAccountInfo .innerFooter {
     width: 50%;
     margin: 0 auto;
