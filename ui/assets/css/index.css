@@ -178,10 +178,17 @@ nav #menuLogo {
   font-size: 15px;
   line-height: 30px;
 }
+.userAccountCoverPage #accountSection .details {
+  text-align: left;
+}
 .userAccountCoverPage #accountSection {
   text-align: left;
   margin: 0 auto;
   max-width: 80%;
+}
+div.bankAccountInfo.user {
+  margin: 0 auto;
+  width: 90% !important;
 }
 .userInfo h4 {
   margin: 0 auto;
@@ -373,7 +380,7 @@ footer {
 #accountSection .bankAccountInfo {
   overflow-x: auto;
   width: 100%;
-  /* min-width: 500px; */
+  margin: 0 auto;
 }
 .bankAccountInfo .innerFooter {
   width: 90%;
@@ -392,10 +399,6 @@ footer {
 .bankAccountInfo .innerFooter > .create {
   float: right;
 }
-/* .filter div {
-  font-size: 30px;
-  padding: 4px;
-} */
 .search {
   color: #343a40;
   background: transparent;
@@ -409,6 +412,7 @@ footer {
   transition: 500ms;
 }
 .userInfo .filter .searcher input {
+  border: 3px #ddd solid;
   width: 70%;
 }
 .userInfo .filter {
@@ -430,6 +434,37 @@ footer {
   padding: 5px;
 }
 
+/* --- Admin Searcher------ */
+.adminSearch {
+  background: var(--primaryColor);
+  color: var(--white);
+  padding: 7px;
+  border-radius: 2px;
+}
+.adminSearch:hover {
+  border: 1px #ddd solid;
+  color: var(--black);
+  background: #ddd;
+  cursor: pointer;
+  transition: 500ms;
+}
+/* .userInfo .filter input {
+  width: 70%;
+} */
+div.adminFilter {
+  display: inline-flex;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 15px;
+}
+.adminFilter input {
+  border: 3px #ddd solid;
+  padding: 5px;
+  width: 75%;
+}
+
+/* ------Admin searcher ends---- */
 #accountSection table {
   width: 100%;
   min-width: 700px;
@@ -591,13 +626,11 @@ tr:nth-child(odd) {
   }
   div.infoDiv {
     font-size: 20px;
-    /* margin-left: 10%; */
   }
   .userAccountCoverPage div.viewAllBtn {
     float: right;
     font-size: 20px;
-    padding-left: 52%;
-    /* padding: 10px; */
+    padding: 10px;
   }
   div.topDivs {
     width: 80%;
@@ -631,6 +664,9 @@ tr:nth-child(odd) {
     margin: 0 auto;
     text-align: center;
     font-size: 20px;
+  }
+  div.adminFilter {
+    justify-content: center !important;
   }
   .searcher {
     min-width: 50%;
@@ -676,16 +712,7 @@ tr:nth-child(odd) {
     width: 100%;
     /* line-height: 40px; */
     font-size: 25px;
-    /* border-bottom: var(--black) 1px solid; */
   }
-  /* .accountInfo a {
-    padding: 10px;
-    text-decoration: none;
-    color: var(--black);
-    text-align: left;
-    margin: 0 auto;
-    max-width: 80%;
-  } */
   nav span {
     font-size: 25px;
     font-weight: bolder;
@@ -733,9 +760,7 @@ tr:nth-child(odd) {
   }
   #accountSection table {
     width: 100%;
-    /* max-width: 85%; */
     font-size: 15px;
-    /* margin: 50px auto 0 auto; */
   }
   table td #tableInfo {
     color: var(--primaryColor);
@@ -765,10 +790,6 @@ tr:nth-child(odd) {
     font-size: 20px;
     margin-top: 25px;
   }
-  /* .viewAllBtn a {
-    font-size: 25px;
-    padding: 1px;
-  } */
   #accountSection .accBal {
     width: 50%;
     max-width: 50%;
@@ -778,10 +799,6 @@ tr:nth-child(odd) {
   table caption {
     font-size: 15px;
   }
-  /* .sidebar .userName:hover {
-    cursor: pointer;
-    color: #d9cec6;
-  } */
 }
 
 /* Large devices (large desktops, 1200px and up) */
