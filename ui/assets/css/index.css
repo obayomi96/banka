@@ -800,7 +800,6 @@ tr:nth-child(odd) {
     font-size: 15px;
   }
 }
-
 /* Large devices (large desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 }
