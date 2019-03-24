@@ -528,6 +528,132 @@ tr:nth-child(odd) {
   margin: 10px auto 20px auto;
   z-index: 2;
 }
+/* --- bank account record--- */
+#accountSection .accountOwnerInfo {
+  text-align: center;
+  display: block;
+  width: 100%
+}
+
+.ownerImg {
+  height: 90px;
+  width: 90px;
+  border: 2px #ddd solid;
+  border-radius: 100%;
+}
+.ownerImg:hover {
+  opacity: 0.8;
+}
+/* .ownerInfo {
+  border-radius: 2px;
+  border: 2px #ddd solid;
+} */
+.ownerInfo>ul {
+  text-align: left;
+}
+
+#accountSection .operations {
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
+.activate {
+  width: 100%;
+}
+.payment {
+  display: inline-flex;
+  justify-content: space-evenly;
+  padding: 10px;
+  width: 100%;
+}
+.payment .paymentInput {
+  font-size: 18px;
+  padding: 5px;
+  width: 45%;
+}
+.paymentBtn {
+  background: var(--primaryColor);
+  color: var(--white);
+  font-size: 15px;
+  /* padding: 5px; */
+  border-radius: 5px;
+  border: none;
+  width: 55px;
+}
+.paymentBtn:hover {
+  border: 1px #ddd solid;
+  color: var(--black);
+  background: #ddd;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+/* -----Toggle----- */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 31px;
+  font-size:20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primaryColor);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primaryColor);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/* --- bank account record ends--- */
 
 /* Mobile styling ends here */
 /* small devices */
@@ -798,6 +924,46 @@ tr:nth-child(odd) {
   }
   table caption {
     font-size: 15px;
+  }
+  #accountSection .accountOwnerInfo {
+    text-align: center;
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%
+  }
+  .ownerImg {
+    height: 200px;
+    width: 200px;
+    border: none;
+    border-radius: 50%;
+  }
+  .ownerImg:hover {
+    opacity: 0.8;
+  }
+  .ownerInfo {
+    width: 50%;
+    border: none;
+  }
+  .ownerInfo>ul {
+    text-align: left;
+    padding: 5px;
+  }
+  #accountSection .operations {
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .payment {
+    display: inline-flex;
+    justify-content: initial;
+    padding: 10px;
+    /* width: 100%; */
+  }
+  .paymentBtn {
+    border: 1px #ddd solid;
+  }
+  .switch {
+    line-height: 30px;
   }
 }
 /* Large devices (large desktops, 1200px and up) */
