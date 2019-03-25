@@ -134,13 +134,12 @@ nav #menuLogo {
 }
 
 .footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   margin-top: 15px;
   text-align: center;
-  /* position:fixed;
-  left:0px;
+  position:fixed;
+  /* left:0px;
   bottom:0px;
   height:30px;
   width:100%;
@@ -173,6 +172,7 @@ nav #menuLogo {
 /* ---- NAVIGATION END----- */
 
 .userAccountCoverPage {
+  height: calc(100vh- 20px);
   text-align: center;
   margin: 60px auto 0 auto;
   font-size: 15px;
@@ -356,7 +356,7 @@ footer {
   text-align: center;
   width: 100%;
   margin: 20px auto 0 auto;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   font-size: 10px;
   margin-top: 10px;
@@ -366,6 +366,7 @@ footer {
 /* ----USER ACCOUNT TRANSACTIONS PAGE---- */
 
 .transactionPage {
+  height: calc(100vh- 20px);
   text-align: center;
   margin: 100px auto 0 auto;
   font-size: 15px;
@@ -721,6 +722,9 @@ input:checked + .slider:before {
   color: #fff;
   background: #d40424;
   border-color: #d40424;
+}
+.transDes {
+  text-align: left;
 }
 /* --- bank account record ends--- */
 
