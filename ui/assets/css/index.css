@@ -576,10 +576,13 @@ tr:nth-child(odd) {
   background: var(--primaryColor);
   color: var(--white);
   font-size: 15px;
-  /* padding: 5px; */
+  margin-right: 15px;
   border-radius: 5px;
   border: none;
   width: 55px;
+}
+.paymentBtn2 {
+  margin-right: 35px;
 }
 .paymentBtn:hover {
   border: 1px #ddd solid;
@@ -652,6 +655,72 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+.deleteAccount {
+  width: 100%;
+  text-align: center;
+}
+.deleteBtn {
+  text-align: center;
+  width: 40%;
+  padding: 7px;
+  border: 1px #fff solid;
+  border-radius: 3px;
+  color: #fff;
+  background: #d40424;
+}
+.deleteBtn:hover {
+  opacity: 0.8;
+}
+.deleteAccountModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1;  /*Sit on top*/
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4);
+}
+.deleteModalContent {
+  text-align: left;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 80%;
+}
+.deleteModalContent>p {
+  line-height: 35px;
+}
+.confirmBtn {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.confirmbtn {
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 8px;
+}
+.confirmbtn:hover {
+  opacity: 0.8;
+}
+#deleteAccountBtn {
+  width: 80px;
+  color: #fff;
+  background: #3f464c;
+  border-color: #3f464c;
+}
+#cancelDeleteBtn {
+  width: 80px;
+  color: #fff;
+  background: #d40424;
+  border-color: #d40424;
 }
 /* --- bank account record ends--- */
 
@@ -960,10 +1029,22 @@ input:checked + .slider:before {
     /* width: 100%; */
   }
   .paymentBtn {
+    margin: 0;
     border: 1px #ddd solid;
+  }
+  .paymentBtn2 {
+    margin: 0;
   }
   .switch {
     line-height: 30px;
+  }
+  .deleteBtn {
+    font-size: 17px;
+    width: 30%;
+    padding: 10px;
+  }
+  .deleteModalContent {
+    width: 40%;
   }
 }
 /* Large devices (large desktops, 1200px and up) */
