@@ -14,4 +14,33 @@ const openSidebar = () => {
     });
 }
 openSidebar();
-// openSidebar end
+// openSidebar ENDS
+
+// Delete account confirm modal
+const deleteAccountPageBtn = document.querySelector('.deleteBtn');
+const deleteAccountModal = document.querySelector('.deleteAccountModal');
+const deleteModalContents = document.querySelector('.deleteModalContent');
+const confirmDeleteBtn = document.querySelector('#deleteAccountBtn');
+const cancelDeleteBtn = document.querySelector('#cancelDeleteBtn');
+
+const modalDisplayModalRemove = () => {
+    // Display modal
+    deleteAccountPageBtn.addEventListener('click', () => {
+        deleteAccountModal.style.display = 'block';
+    });
+    // Close modal
+    cancelDeleteBtn.addEventListener('click', () => {
+        deleteAccountModal.style.display = 'none';
+    });
+    // Closemodal onclick outiside modal content
+    deleteAccountModal.addEventListener('click', () => {
+        deleteAccountModal.style.display = 'none';
+    });
+    // Close modal and redirect to Admin dashboard after deleting account
+    confirmDeleteBtn.addEventListener('click', () => {
+        deleteAccountModal.style.display = 'none';
+        window.location = '../admin/adminDashboard.html';
+    });
+}
+modalDisplayModalRemove();
+// Delete account confirm modal ENDS
