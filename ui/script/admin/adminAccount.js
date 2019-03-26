@@ -39,7 +39,7 @@ const modalDisplayModalRemove = () => {
     // Close modal and redirect to Admin dashboard after deleting account
     confirmDeleteBtn.addEventListener('click', () => {
         deleteAccountModal.style.display = 'none';
-        window.location = '../admin/adminDashboard.html';
+        window.location = '../admin/allbankAccounts.html';
     });
 }
 modalDisplayModalRemove();

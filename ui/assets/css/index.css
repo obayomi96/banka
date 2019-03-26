@@ -132,20 +132,6 @@ nav #menuLogo {
   float: left;
   justify-content: left;
 }
-
-.footer {
-  bottom: 0;
-  width: 100%;
-  margin-top: 15px;
-  text-align: center;
-  position:fixed;
-  /* left:0px;
-  bottom:0px;
-  height:30px;
-  width:100%;
-  z-index: -100; */
-}
-
 /* --- USER ACCOUNT PAGE END--- */
 
 .accountInfo {
@@ -352,16 +338,6 @@ font-size: 20px;
   font-size: 20px;
   margin: 20px;
 }
-footer {
-  text-align: center;
-  width: 100%;
-  margin: 20px auto 0 auto;
-  position: fixed;
-  bottom: 0;
-  font-size: 10px;
-  margin-top: 10px;
-}
-
 /* End of navigation styling */
 /* ----USER ACCOUNT TRANSACTIONS PAGE---- */
 
@@ -545,10 +521,6 @@ tr:nth-child(odd) {
 .ownerImg:hover {
   opacity: 0.8;
 }
-/* .ownerInfo {
-  border-radius: 2px;
-  border: 2px #ddd solid;
-} */
 .ownerInfo>ul {
   text-align: left;
 }
@@ -726,6 +698,14 @@ input:checked + .slider:before {
 .transDes {
   text-align: left;
 }
+footer {
+  text-align: center;
+  width: 100%;
+  margin: 20px auto 0 auto;
+  position: fixed;
+  bottom: 0;
+  font-size: 10px;
+}
 /* --- bank account record ends--- */
 
 /* Mobile styling ends here */
@@ -870,9 +850,6 @@ input:checked + .slider:before {
   .searcher {
     min-width: 50%;
   }
-  /* .userInfo .filter .searcher input {
-    width: 50%;
-  } */
   .filter #filtr {
     display: inline-flex;
     font-size: 18px;
