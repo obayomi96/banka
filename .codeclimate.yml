@@ -1,0 +1,14 @@
+version: "2"
+exclude_paths:
+- tests/**
+- node_modules/**
+- coverage/**
+- .nyc_output/
+file-lines:
+  enabled: false
+return-statements:
+  enabled: false
+similar-code:
+  enabled: false
+identical-code:
+  enabled: false
