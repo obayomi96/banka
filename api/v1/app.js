@@ -1,9 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const expressValidator = require('express-validator');
-const routes = require('./routes');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import expressValidator from 'express-validator';
+import routes from './routes';
 
 const app = express();
 
@@ -18,10 +18,9 @@ app.use('/api/v1/', routes);
 
 // Error handling
 app.use('*', (req, res) => {
-    res.status(404).json({
-        msg: 'Opps!!, the page you are looking for cannot be found',
-    });
+  res.status(404).json({
+    msg: 'Opps!!, the page you are looking for cannot be found',
+  });
 });
 
-// export default app;
-module.exports = app;
+export default app;
