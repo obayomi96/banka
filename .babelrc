@@ -1,0 +1,13 @@
+{
+    "env": {
+      "test": {
+        "plugins": ["istanbul"]
+      }
+    },
+    "presets": ["@babel/env"],
+    "plugins": [
+      "@babel/plugin-transform-literals",
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-transform-spread"
+    ]
+  }
