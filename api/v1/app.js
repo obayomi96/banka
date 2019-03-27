@@ -1,9 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const expressValidator = require('express-validator');
-const routes = require('./routes');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import expressValidator from 'express-validator';
+import routes from './routes';
 
 const app = express();
 
@@ -23,5 +23,4 @@ app.use('*', (req, res) => {
   });
 });
 
-// export default app;
-module.exports = app;
+export default app;
