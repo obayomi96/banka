@@ -9,7 +9,7 @@ node_js:
 #   - psql -c 'create database storetestdb;' -U postgres
 #   - psql -U postgres -d storetestdb -a -f store.sql
 
-# script:
-#   - npm test
+script:
+  - npm test
 
 # after_script: npm run coverage
