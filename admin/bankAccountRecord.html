@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Banka</title>
+    <link type="text/css" rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebarItems">
+            <div id="innerNav">
+                    <i class="fas fa-piggy-bank" id="logo"></i>
+            </div>
+                    <img src="../assets/images/profileImg.jpg" alt="Profile Image">
+                    <div><a href="adminDashboard.html">Dashboard</a></div>
+                    <div><a href="allBankAccounts.html">User accounts</a></div>
+                    <div><a href="allBankTransactions.html">Bank Transactions</a></div>
+                    <div><a href="createAdminAccount.html">Create admin account</a></div>
+                    <div><a href="changepassword.html">Change password</a></div>
+                    <div><a href="../index.html">Logout</a></div>
+    </div>
+    </div>
+    <div class="userAccountCoverPage">
+        <nav class="landingProfile">
+            <div><h4>
+                banka.com</h4>
+            </div>
+            <div>
+                    <i class="fas fa-bars" id="menuLogo"></i>
+            </div>   
+        </nav>
+         <div id="accountSection">
+             <div class="accountOwnerInfo">
+                    <div class="ownerImage">
+                            <img src="../assets/images/profileImg.jpg" alt="" class="ownerImg">
+                        </div>
+                 <div class="ownerInfo">
+                     <ul>
+                         <li>Account name: Obayomi Martins O.</li>
+                         <li>Account number: 22399029393</li>
+                         <li>Account type: Savings</li>
+                         <li>Account status: Active</li>
+                         <li>Current balance: $3,550.05</li>
+                         <li>Account email: obayomi@gmail.com</li>
+                         <li>Telephone: 07084929485</li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="operations">
+                 <div class="activate">
+                     <b>Activate/Deactivate account:</b>
+                     <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                          </label>
+                 </div>
+                 <div class="payment">
+                    <input type="number" placeholder="Payment" class="paymentInput">
+                        <button class="paymentBtn paymentBtn1">Credit</button>
+                        <button class="paymentBtn paymentBtn2">Debit</button>
+                 </div>
+             </div>
+            <div class="accountInfo">
+                    <div>
+                            <div>
+                        <div class="bankAccountInfo">
+                                <table>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>View</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Credit</td>
+                                            <td>Otoloye</td>
+                                            <td>Obayomi</td>
+                                            <td>$270.00</td>
+                                            <td>Mar/20/2019</td>
+                                            <td><a href="../user/transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Debit</td>
+                                            <td>Obayomi</td>
+                                            <td>joan</td>
+                                            <td>$185.00</td>
+                                            <td>Feb/12/2019</td>
+                                            <td><a href="../user/transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                                <td>Credit</td>
+                                                <td>felix</td>
+                                                <td>Obayomi</td>
+                                                <td>$25.50</td>
+                                                <td>Jan/29/2019</td>
+                                                <td><a href="../user/transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                    <td>Debit</td>
+                                                    <td>Obayomi</td>
+                                                    <td>Nelson</td>
+                                                    <td>$75.00</td>
+                                                    <td>Jan/02/2019</td>
+                                                    <td><a href="../user/transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                                </tr>
+                                        <tr>
+                                            <td>Credit</td>
+                                            <td>Father X-mas</td>
+                                            <td>Obayomi</td>
+                                            <td>$100.00 </td>
+                                            <td>Dec/25/2018</td>
+                                            <td><a href="../user/transactionDetails.html"><i class="fas fa-info-circle" id="tableInfo"></i></a></td>
+                                        </tr> 
+                                    </table>       
+                                    <div class="pagination">
+                                            <span class="left"><a href="#"><i class="fas fa-angle-left" id="left"></i></a></span>
+                                            <span> 1 of 14</span>
+                                            <span class="right"><a href="#"><i class="fas fa-angle-right" id="right"></i></a></span>
+                                        </div>
+                                        <div class="deleteAccount">
+                                            <button class="deleteBtn">Delete Account</button>
+                                        </div>
+                                        <div class="deleteAccountModal">
+                                            <div class="deleteModalContent">
+                                                <p>All records and access to this account will be lost. This operation cannot be undone, are you sure you want to continue?</p>
+                                                <div class="confirmBtn">
+                                                    <button class="confirmbtn" id="deleteAccountBtn">Yes</button>
+                                                    <button class="confirmbtn" id="cancelDeleteBtn">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="deleteAccountModal deleteAccountModal2">
+                                            <!-- <div class="deleteModalContent deleteModalContent2">
+                                                <div class="confirmBtn">
+                                                    <button class="confirmbtn" id="deleteAccountBtn">Yes</button>
+                                                    <button class="confirmbtn" id="cancelDeleteBtn">Cancel</button>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>        
+    </div>
+    <!-- <footer class="footer">Andela Developer Challenge - &copy 2019</footer> -->
+    <script src="../script/admin/adminAccount.js"></script>
+    </body>
+    </html>
