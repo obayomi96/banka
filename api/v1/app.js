@@ -18,9 +18,9 @@ app.use('/api/v1/', routes);
 
 // Error handling
 app.use('*', (req, res) => {
-    res.status(404).json({
-        msg: 'Opps!!, the page you are looking for cannot be found',
-    });
+  res.status(404).json({
+    msg: 'Opps!!, the page you are looking for cannot be found',
+  });
 });
 
 // export default app;
