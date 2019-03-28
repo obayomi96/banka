@@ -5,7 +5,7 @@ const UsersData = [
     firstName: 'Martins',
     lastName: 'Obayomi',
     password: 'user1pw',
-    type: 'admin', // client or staff
+    type: 'staff', // client or staff
     isAdmin: true // must be a staff user account
   },
   {
