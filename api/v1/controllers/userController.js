@@ -1,5 +1,6 @@
 // import jwt from 'jsonwebtoken';
 import users from '../data/users';
+import auth from '../auth/authenticate';
 
 const userController = {
   // Signup API endoint
@@ -21,11 +22,14 @@ const userController = {
       type,
       isAdmin
     };
+    const token = auth.generateToken({ email: user.email, type });
+
     users.push(user);
     console.log(users);
-    return res.status(200).json({
+    return res.status(201).json({
       status: true,
       data: {
+        token,
         id: user.id,
         firstname: user.firstname,
         lastname: user.lastname,

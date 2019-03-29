@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import expressValidator from 'express-validator';
-import routes from './routes';
+import routes from './routes/indexRouter';
 
 const app = express();
 
