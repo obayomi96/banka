@@ -18,6 +18,7 @@ module.exports = {
     "consistent-return": 0,
     "import/no-unresolved": 0,
     "comma-dangle": 0,
+    "no-console": 0,
     "linebreak-style": ["error", "windows"]
   }
 };
