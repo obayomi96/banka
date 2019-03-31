@@ -19,7 +19,7 @@ const user = {
 describe(`GET ${apiEndPoint}`, () => {
   it('Should load', (done) => {
     request
-      .get('/api/v1/')
+      .get(apiEndPoint)
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
@@ -40,6 +40,27 @@ describe(`POST ${usersEndPoint}/signup`, () => {
         expect(res.status).to.equal(201);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('data');
+        done();
+      });
+  });
+});
+
+describe(`POST ${usersEndPoint}/signin`, () => {
+  it('Should login a valid user', (done) => {
+    const login = {
+      email: 'emmatexi@gmail.com',
+      password: 'user4pw'
+    };
+    request
+      .post(`${usersEndPoint}/signin`)
+      .set('content-type', 'Application/json')
+      .send(login)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.have.property('data');
+        expect(res.body.data).to.be.an('object');
+        expect(res.body.data).to.have.property('token');
         done();
       });
   });

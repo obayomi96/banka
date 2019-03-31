@@ -3,7 +3,7 @@ import users from '../data/users';
 import auth from '../auth/authenticate';
 
 const userController = {
-  // Signup API endoint
+  // User Signup API endoint
   signUp(req, res) {
     const id = users.length + 1;
     const email = 'oluwaseun@gmail.com';
@@ -36,7 +36,29 @@ const userController = {
         email: user.email,
       }
     });
-  } // Signup API endpoint ends
+  }, // Signup API endpoint ends
+
+  // User Signin API endpoint
+  signIn(req, res) {
+    const { body: { email, password } } = req;
+    const validUser = users.filter(eachUser => eachUser.email === email && eachUser.password === password);
+    if (validUser.length) {
+      delete validUser[0].password;
+      const token = auth.generateToken({ user: validUser[0] });
+      console.log(validUser);
+      return res.status(200).json({
+        status: true,
+        data: {
+          token,
+          user: validUser[0]
+        }
+      });
+    }
+    return res.status(401).json({
+      status: false,
+      msg: 'Authentication failed'
+    });
+  }
 };
 
 export default userController;
