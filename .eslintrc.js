@@ -19,6 +19,7 @@ module.exports = {
     "import/no-unresolved": 0,
     "comma-dangle": 0,
     "no-console": 0,
-    "linebreak-style": ["error", "windows"]
+    "linebreak-style": ["error", "windows"],
+    "max-len": ["error", { "code": 200 }]
   }
 };
