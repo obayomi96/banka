@@ -5,20 +5,17 @@ import auth from '../auth/authenticate';
 const userController = {
   // User Signup API endoint
   signUp(req, res) {
+    const userInfoInput = { ...req.body };
     const id = users.length + 1;
-    const email = 'oluwaseun@gmail.com';
-    const firstname = 'Oluwaseun';
-    const lastname = 'Christopher';
-    const password = 'userPW';
     const type = 'client';
     const isAdmin = false;
 
     const user = {
       id,
-      email,
-      firstname,
-      lastname,
-      password,
+      email: userInfoInput.email,
+      firstname: userInfoInput.firstname,
+      lastname: userInfoInput.lastname,
+      password: userInfoInput.password,
       type,
       isAdmin
     };
