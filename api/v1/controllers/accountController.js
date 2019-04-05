@@ -1,7 +1,7 @@
 import accounts from '../data/accounts';
 
 const accountController = {
-
+  // Create bank account
   createAccount(req, res) {
     const { body: { initialDeposit, type } } = req;
     const id = accounts.length + 1;
@@ -28,6 +28,26 @@ const accountController = {
         type: account.type,
         openingBalance: account.balance,
       },
+    });
+  },
+
+  // Deactivate & Activate account (status)
+  accountStatus(req, res) {
+    const { status } = req.body;
+    const { accountNumber } = req.params;
+    const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
+    if (validAccount) {
+      return res.status(200).json({
+        status: true,
+        data: {
+          accountNumber,
+          status
+        }
+      });
+    }
+    return res.status(404).json({
+      status: true,
+      error: `Account ${accountNumber} does not exist`
     });
   }
 };

@@ -29,6 +29,7 @@ describe(`GET ${apiEndPoint}`, () => {
       });
   });
 });
+
 describe('Users auth Tests', () => {
   describe(`POST ${usersEndPoint}signup`, () => {
     it('Should create a new user', (done) => {
@@ -94,6 +95,31 @@ describe('Accounts Tests', () => {
               expect(res.body).to.be.an('object');
               expect(res.body).to.have.property('data');
               expect(res.body.data).to.have.an('object');
+              done();
+            });
+        });
+    });
+  });
+  describe(`PATCH ${accountEndPoint}:accountNumber`, () => {
+    it('Should change an account status', (done) => {
+      const login = {
+        email: 'martinsoluwaseun47@gmail.com',
+        password: 'user1pw'
+      };
+      request
+        .post(`${usersEndPoint}/signin`)
+        .send(login)
+        .end((usrLoginErr, usrLoginRes) => {
+          const token = `Bearer ${usrLoginRes.body.data.token}`;
+          request.patch(`${accountEndPoint}38399436393`)
+            .set('Authorization', token)
+            .send({ status: 'Active' })
+            .end((err, res) => {
+              expect(res.status).to.equal(200);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('data');
+              expect(res.body.data).to.have.an('object');
+              expect(res.body.data).to.have.property('status');
               done();
             });
         });

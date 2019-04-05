@@ -9,9 +9,7 @@ const server = http.createServer(app);
 
 server.listen(port, (err) => {
   if (err) {
-    // eslint-disable-next-line no-console
     return console.log('Server failed to start!');
   }
-  // eslint-disable-next-line no-console
   console.log(`Server started on http://localhost:${port}`);
 });
