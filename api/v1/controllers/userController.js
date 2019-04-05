@@ -22,7 +22,6 @@ const userController = {
     const token = auth.generateToken({ email: user.email, type });
 
     users.push(user);
-    console.log(users);
     return res.status(201).json({
       status: true,
       data: {
@@ -41,8 +40,7 @@ const userController = {
     const validUser = users.filter(eachUser => eachUser.email === email && eachUser.password === password);
     if (validUser.length) {
       delete validUser[0].password;
-      const token = auth.generateToken({ user: validUser[0] });
-      console.log(validUser);
+      const token = auth.generateToken(validUser[0]);
       return res.status(200).json({
         status: true,
         data: {
