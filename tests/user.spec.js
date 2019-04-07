@@ -35,7 +35,7 @@ describe('Users auth Tests', () => {
     it('Should create a new user', (done) => {
       request
         .post(`${usersEndPoint}signup`)
-        .set('content-type', 'Application/json')
+        .set('content-type', 'application/json')
         .send(user)
         .end((err, res) => {
           if (err) return done(err);
@@ -55,7 +55,7 @@ describe('Users auth Tests', () => {
       };
       request
         .post(`${usersEndPoint}signin`)
-        .set('content-type', 'Application/json')
+        .set('content-type', 'application/json')
         .send(login)
         .end((err, res) => {
           if (err) return done(err);
@@ -107,11 +107,12 @@ describe('Accounts Tests', () => {
         password: 'user1pw'
       };
       request
-        .post(`${usersEndPoint}/signin`)
+        .post(`${usersEndPoint}signin`)
         .send(login)
         .end((usrLoginErr, usrLoginRes) => {
           const token = `Bearer ${usrLoginRes.body.data.token}`;
-          request.patch(`${accountEndPoint}38399436393`)
+          request
+            .patch(`${accountEndPoint}3839943693`)
             .set('Authorization', token)
             .send({ status: 'Active' })
             .end((err, res) => {
@@ -120,6 +121,30 @@ describe('Accounts Tests', () => {
               expect(res.body).to.have.property('data');
               expect(res.body.data).to.have.an('object');
               expect(res.body.data).to.have.property('status');
+              done();
+            });
+        });
+    });
+  });
+  describe(`DELETE ${accountEndPoint}:accountNumber`, () => {
+    it('Should delete an account successfully', (done) => {
+      const login = {
+        email: 'martinsoluwaseun47@gmail.com',
+        password: 'user1pw'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((usrLoginErr, usrLoginRes) => {
+          const token = `Bearer ${usrLoginRes.body.data.token}`;
+          request
+            .delete(`${accountEndPoint}2239002933`)
+            .set('content-type', 'application/json')
+            .set('Authorization', token)
+            .send({ accountNumber: 2239002933 })
+            .end((err, res) => {
+              expect(res.status).to.equal(200);
+              expect(res.body).to.have.property('msg');
               done();
             });
         });

@@ -1,7 +1,7 @@
 const Accounts = [
   {
     id: 1,
-    accountNumber: 23399039390,
+    accountNumber: 2339903939,
     createdOn: new Date(),
     owner: 2, // user id
     type: 'Current', // savings or current
@@ -10,7 +10,7 @@ const Accounts = [
   },
   {
     id: 2,
-    accountNumber: 22390029393,
+    accountNumber: 2239002933,
     createdOn: new Date(),
     owner: 1, // user id
     type: 'Current', // savings or current
@@ -19,7 +19,7 @@ const Accounts = [
   },
   {
     id: 3,
-    accountNumber: 22119028793,
+    accountNumber: 2211902893,
     createdOn: new Date(),
     owner: 3, // user id
     type: 'Savings', // savings or current
@@ -28,7 +28,7 @@ const Accounts = [
   },
   {
     id: 4,
-    accountNumber: 38399436393,
+    accountNumber: 3839943693,
     createdOn: new Date(),
     owner: 4, // user id
     type: 'Current', // savings or current
