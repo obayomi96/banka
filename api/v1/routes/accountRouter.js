@@ -8,4 +8,6 @@ router.post('/createAccount', authenticateUser.verifyUser, accountController.cre
 
 router.patch('/:accountNumber', authenticateUser.verifyAdmin, accountController.accountStatus);
 
+router.delete('/:accountNumber', authenticateUser.verifyAdmin, accountController.deleteAccount);
+
 export default router;

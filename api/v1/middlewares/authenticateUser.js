@@ -11,7 +11,7 @@ const authenticateUsers = {
     } catch (error) {
       return res.status(401).send({
         status: res.statusCode,
-        error: 'Authentication failed',
+        error: 'Authentication failed'
       });
     }
   },
@@ -31,7 +31,7 @@ const authenticateUsers = {
     } catch (error) {
       return res.status(401).send({
         status: res.statusCode,
-        error: 'Authentiction failed',
+        error: 'Authentiction failed'
       });
     }
   },
@@ -50,7 +50,7 @@ const authenticateUsers = {
       return next();
     } catch (error) {
       return res.status(401).send({
-        status: false,
+        status: res.statusCode,
         error: 'Authentication failed'
       });
     }
