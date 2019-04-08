@@ -1,6 +1,7 @@
 import express from 'express';
 import userRouter from './userRouter';
 import accountRouter from './accountRouter';
+import transactionRouter from './transactionRouter';
 
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.get('/', (req, res) => {
 
 router.use('/auth', userRouter);
 router.use('/accounts', accountRouter);
+router.use('/transactions', transactionRouter);
 
 export default router;
