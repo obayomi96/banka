@@ -6,6 +6,7 @@ const request = supertest(app);
 const apiEndPoint = '/api/v1/';
 const usersEndPoint = `${apiEndPoint}auth/`;
 const accountEndPoint = `${apiEndPoint}accounts/`;
+const transactionEndPoint = `${apiEndPoint}transactions/`;
 
 const user = {
   id: 5,
@@ -145,6 +146,35 @@ describe('Accounts Tests', () => {
             .end((err, res) => {
               expect(res.status).to.equal(200);
               expect(res.body).to.have.property('msg');
+              done();
+            });
+        });
+    });
+  });
+  describe(`POST ${transactionEndPoint}:accountNumber/credit`, () => {
+    it('SHould credit an account successfully', (done) => {
+      const login = {
+        email: 'anthony.a@gmail.com',
+        password: 'user2pw'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((usrLoginErr, usrLoginRes) => {
+          const token = `Bearer ${usrLoginRes.body.data.token}`;
+          request
+            .post(`${transactionEndPoint}3839943693/credit`)
+            .set('content-type', 'application/json')
+            .set('Authorization', token)
+            .send({ amount: 1000.45 })
+            .end((err, res) => {
+              expect(res.status).to.equal(201);
+              expect(res.body).to.have.property('data');
+              expect(res.body.data).to.be.an('object');
+              expect(res.body.data).to.have.property('transactionId');
+              expect(res.body.data).to.have.property('cashier');
+              expect(res.body.data).to.have.property('transactionType');
+              expect(res.body.data).to.have.property('accountBalance');
               done();
             });
         });
