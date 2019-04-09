@@ -1,8 +1,13 @@
 import accounts from '../data/accounts';
 
-const accountController = {
-  // Create bank account
-  createAccount(req, res) {
+export default class AccountController {
+  /**
+    * @method createAccount
+    * @description Creates a new bank account
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static createAccount(req, res) {
     const { body: { initialDeposit, type } } = req;
     const id = accounts.length + 1;
     const accNoGen = Math.floor(Math.random() * 10000000000);
@@ -29,10 +34,15 @@ const accountController = {
         openingBalance: account.balance,
       },
     });
-  },
+  }
 
-  // Deactivate & Activate account (status)
-  accountStatus(req, res) {
+  /**
+    * @method accountStatus
+    * @description changes the account status by activating or deactivating it
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static accountStatus(req, res) {
     const { status } = req.body;
     const { accountNumber } = req.params;
     const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
@@ -49,10 +59,15 @@ const accountController = {
       status: true,
       error: `Account ${accountNumber} does not exist`
     });
-  },
+  }
 
-  // Delete account
-  deleteAccount(req, res) {
+  /**
+    * @method deleteAccount
+    * @description Deletes a specific account
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static deleteAccount(req, res) {
     const { accountNumber } = req.params;
     const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
     if (!validAccount) {
@@ -72,6 +87,4 @@ const accountController = {
       }
     });
   }
-};
-
-export default accountController;
+}
