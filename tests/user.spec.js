@@ -180,4 +180,33 @@ describe('Accounts Tests', () => {
         });
     });
   });
+  describe(`POST ${transactionEndPoint}:accountNumber/debit`, () => {
+    it('Should debit an account successfully', (done) => {
+      const login = {
+        email: 'anthony.a@gmail.com',
+        password: 'user2pw'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((usrLoginErr, usrLoginRes) => {
+          const token = `Bearer ${usrLoginRes.body.data.token}`;
+          request
+            .post(`${transactionEndPoint}3839943693/debit`)
+            .set('content-type', 'application/json')
+            .set('Authorization', token)
+            .send({ ammount: 150.75 })
+            .end((err, res) => {
+              expect(res.status).to.equal(201);
+              expect(res.body).to.have.property('data');
+              expect(res.body.data).to.be.an('object');
+              expect(res.body.data).to.have.property('transactionId');
+              expect(res.body.data).to.have.property('cashier');
+              expect(res.body.data).to.have.property('transactionType');
+              expect(res.body.data).to.have.property('accountBalance');
+              done();
+            });
+        });
+    });
+  });
 });
