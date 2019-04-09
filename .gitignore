@@ -63,3 +63,8 @@ typings/
 dist
 
 .gitkeep
+
+.coveralls.yml
+
+.codeclimate.yml
+
