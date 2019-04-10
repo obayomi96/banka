@@ -110,10 +110,31 @@ const creditAccount = [
     return next();
   }
 ];
+
+const debitAccount = [
+  check('amount').not().isEmpty().withMessage('Please input an amount to debit this account'),
+  check('amount').isNumeric().withMessage('Please input a valid amount to debit this account'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(401).json({
+        status: 401,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
+
 export default {
   userSignup,
   userSignin,
   createAccount,
   accountStatus,
-  creditAccount
+  creditAccount,
+  debitAccount
 };
