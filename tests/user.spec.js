@@ -193,6 +193,66 @@ describe('Accounts Tests', () => {
             });
         });
     });
+    it('Should return 401 if account type and initial deposit fields are empty', (done) => {
+      const userInput = {
+        type: '',
+        initialDeposit: ''
+      };
+      request
+        .post(`${accountEndPoint}createAccount`)
+        .send(userInput)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if account type field is empty', (done) => {
+      const userInput = {
+        type: '',
+        initialDeposit: '120.00'
+      };
+      request
+        .post(`${accountEndPoint}createAccount`)
+        .send(userInput)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if initial deposit field is empty', (done) => {
+      const userInput = {
+        type: 'savings',
+        initialDeposit: ''
+      };
+      request
+        .post(`${accountEndPoint}createAccount`)
+        .send(userInput)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if initial deposit is not a numeric value', (done) => {
+      const userInput = {
+        type: 'savings',
+        initialDeposit: 'depo#sit'
+      };
+      request
+        .post(`${accountEndPoint}createAccount`)
+        .send(userInput)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
   });
   describe(`PATCH ${accountEndPoint}:accountNumber`, () => {
     it('Should change an account status', (done) => {
@@ -208,7 +268,7 @@ describe('Accounts Tests', () => {
           request
             .patch(`${accountEndPoint}3839943693`)
             .set('Authorization', token)
-            .send({ status: 'Active' })
+            .send({ status: 'active' })
             .end((err, res) => {
               expect(res.status).to.equal(200);
               expect(res.body).to.be.an('object');
@@ -217,6 +277,28 @@ describe('Accounts Tests', () => {
               expect(res.body.data).to.have.property('status');
               done();
             });
+        });
+    });
+    it('Should return 401 if account status is not specified', (done) => {
+      request
+        .patch(`${accountEndPoint}3839943693`)
+        .send({})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if account status is not active or dormant', (done) => {
+      request
+        .patch(`${accountEndPoint}3839943693`)
+        .send({ status: 'someText' })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
         });
     });
   });
