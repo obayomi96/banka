@@ -346,7 +346,7 @@ describe('Accounts Tests', () => {
     });
   });
   describe(`POST ${transactionEndPoint}:accountNumber/credit`, () => {
-    it('SHould credit an account successfully', (done) => {
+    it('Should credit an account successfully', (done) => {
       const login = {
         email: 'anthony.a@gmail.com',
         password: 'user2pw'
@@ -371,6 +371,28 @@ describe('Accounts Tests', () => {
               expect(res.body.data).to.have.property('accountBalance');
               done();
             });
+        });
+    });
+    it('Should return 401 if amount field is empty', (done) => {
+      request
+        .post(`${transactionEndPoint}3839943693/credit`)
+        .send({})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if amount is not a numeric value', (done) => {
+      request
+        .post(`${transactionEndPoint}3839943693/credit`)
+        .send({ amount: 'cycle43!' })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
         });
     });
   });
