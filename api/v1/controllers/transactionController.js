@@ -1,9 +1,14 @@
 import transactions from '../data/transactions';
 import accounts from '../data/accounts';
 
-const transactionController = {
-  // Credit user account
-  creditAccount(req, res) {
+export default class TransactionController {
+  /**
+    * @method creditAccount
+    * @description credit a specific account
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static creditAccount(req, res) {
     const { amount } = req.body;
     const { accountNumber } = req.params;
     const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
@@ -39,10 +44,15 @@ const transactionController = {
         accountBalance: `New balance $${transaction.newBalance}`
       }
     });
-  },
+  }
 
-  // Debit user account
-  debitAccount(req, res) {
+  /**
+    * @method creditAccount
+    * @description credit a specific account
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static debitAccount(req, res) {
     const { amount } = req.body;
     const { accountNumber } = req.params;
     const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
@@ -78,6 +88,4 @@ const transactionController = {
       }
     });
   }
-};
-
-export default transactionController;
+}
