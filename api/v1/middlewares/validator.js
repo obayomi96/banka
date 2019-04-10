@@ -1,4 +1,4 @@
-import { check, validationResult } from 'express-validator/check';
+import { check, validationResult, oneOf } from 'express-validator/check';
 
 const userSignup = [
   check('firstname').not().isEmpty().withMessage('First field name is required'),
@@ -44,10 +44,15 @@ const userSignin = [
   }
 ];
 
+const typeMessage = 'Account type must be current or savings';
 const createAccount = [
   check('initialDeposit').not().isEmpty().withMessage('You need an initial deposit to create an account'),
   check('initialDeposit').isNumeric().withMessage('Please enter a valid amount in digit'),
   check('type').not().isEmpty().withMessage('Please specify the type of account you want to create'),
+  oneOf([
+    check('type').equals('savings'),
+    check('type').equals('current')
+  ], typeMessage),
   (req, res, next) => {
     const errors = validationResult(req);
     const errorMsg = [];
@@ -63,4 +68,32 @@ const createAccount = [
     return next();
   }
 ];
-export default { userSignup, userSignin, createAccount };
+
+const statMessage = 'Account status must be dormant or active';
+const accountStatus = [
+  check('status').not().isEmpty().withMessage('Please specify new account status'),
+  oneOf([
+    check('status').equals('dormant'),
+    check('status').equals('active')
+  ], statMessage),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(401).json({
+        status: 401,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
+export default {
+  userSignup,
+  userSignin,
+  createAccount,
+  accountStatus
+};

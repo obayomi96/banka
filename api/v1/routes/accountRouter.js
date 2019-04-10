@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/createAccount', inputValidator.createAccount, authenticateUser.verifyUser, accountController.createAccount);
 
-router.patch('/:accountNumber', authenticateUser.verifyAdmin, accountController.accountStatus);
+router.patch('/:accountNumber', inputValidator.accountStatus, authenticateUser.verifyAdmin, accountController.accountStatus);
 
 router.delete('/:accountNumber', authenticateUser.verifyAdmin, accountController.deleteAccount);
 
