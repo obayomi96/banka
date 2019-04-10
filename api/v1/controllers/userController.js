@@ -1,10 +1,14 @@
-// import jwt from 'jsonwebtoken';
 import users from '../data/users';
 import auth from '../auth/authenticate';
 
-const userController = {
-  // User Signup API endoint
-  signUp(req, res) {
+export default class UserController {
+  /**
+    * @method signUp
+    * @description controller for the user signup API endpoint
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static signUp(req, res) {
     const userInfoInput = { ...req.body };
     const id = users.length + 1;
     const type = 'client';
@@ -32,15 +36,18 @@ const userController = {
         email: user.email,
       }
     });
-  }, // Signup API endpoint ends
+  }
 
-  // User Signin API endpoint
-  signIn(req, res) {
+  /**
+    * @method signIn
+    * @description controller for the user signin API endpoint
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static signIn(req, res) {
     const { body: { email, password } } = req;
     const validUser = users.find(eachUser => eachUser.email === email && eachUser.password === password);
     if (validUser) {
-      // copy user details and delete password
-      // delete validUser[0].password;
       const token = auth.generateToken(validUser);
       return res.status(200).json({
         status: true,
@@ -55,6 +62,4 @@ const userController = {
       msg: 'Authentication failed'
     });
   }
-};
-
-export default userController;
+}

@@ -8,16 +8,6 @@ const usersEndPoint = `${apiEndPoint}auth/`;
 const accountEndPoint = `${apiEndPoint}accounts/`;
 const transactionEndPoint = `${apiEndPoint}transactions/`;
 
-const user = {
-  id: 5,
-  email: 'oluwaseun@gmail.com',
-  firstname: 'Oluwaseun',
-  lastname: 'Christopher',
-  password: 'userPW',
-  type: 'client',
-  isAdmin: false
-};
-
 describe(`GET ${apiEndPoint}`, () => {
   it('Should load', (done) => {
     request
@@ -34,6 +24,15 @@ describe(`GET ${apiEndPoint}`, () => {
 describe('Users auth Tests', () => {
   describe(`POST ${usersEndPoint}signup`, () => {
     it('Should create a new user', (done) => {
+      const user = {
+        id: 5,
+        email: 'oluwaseun@gmail.com',
+        firstname: 'Oluwaseun',
+        lastname: 'Christopher',
+        password: 'userPW',
+        type: 'client',
+        isAdmin: false
+      };
       request
         .post(`${usersEndPoint}signup`)
         .set('content-type', 'application/json')
@@ -43,6 +42,70 @@ describe('Users auth Tests', () => {
           expect(res.status).to.equal(201);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('data');
+          done();
+        });
+    });
+    it('Should return 401 if firstname is empty', (done) => {
+      const user = {
+        lastname: 'Christopher',
+        email: 'oluwaseun@mail.com',
+        password: 'userPW'
+      };
+      request
+        .post(`${usersEndPoint}signup`)
+        .send(user)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if lastname is empty', (done) => {
+      const user = {
+        firstname: 'Oluwaseun',
+        email: 'oluwaseun@mail.com',
+        password: 'userPW'
+      };
+      request
+        .post(`${usersEndPoint}signup`)
+        .send(user)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if email is empty', (done) => {
+      const user = {
+        firstname: 'Oluwaseun',
+        lastname: 'Christopher',
+        password: 'userPW'
+      };
+      request
+        .post(`${usersEndPoint}signup`)
+        .send(user)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if password is empty', (done) => {
+      const user = {
+        firstname: 'Oluwaseun',
+        lastname: 'Christopher',
+        email: 'oluwaseun@mail.com'
+      };
+      request
+        .post(`${usersEndPoint}signup`)
+        .send(user)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
           done();
         });
     });
@@ -64,6 +127,36 @@ describe('Users auth Tests', () => {
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('token');
+          done();
+        });
+    });
+    it('Should return 401 if email field is empty', (done) => {
+      const login = {
+        email: '',
+        password: 'user4pw'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if password field is empty', (done) => {
+      const login = {
+        email: 'emmatexi@gmail.com',
+        password: ''
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
           done();
         });
     });
