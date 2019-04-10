@@ -25,5 +25,42 @@ const userSignup = [
   }
 ];
 
+const userSignin = [
+  check('email').not().isEmpty().withMessage('Email field is required'),
+  check('password').not().isEmpty().withMessage('Password field is required'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(401).json({
+        status: 401,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
 
-export default userSignup;
+const createAccount = [
+  check('initialDeposit').not().isEmpty().withMessage('You need an initial deposit to create an account'),
+  check('initialDeposit').isNumeric().withMessage('Please enter a valid amount in digit'),
+  check('type').not().isEmpty().withMessage('Please specify the type of account you want to create'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(401).json({
+        status: 401,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
+export default { userSignup, userSignin, createAccount };
