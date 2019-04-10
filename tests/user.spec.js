@@ -268,7 +268,7 @@ describe('Accounts Tests', () => {
           request
             .patch(`${accountEndPoint}3839943693`)
             .set('Authorization', token)
-            .send({ status: 'Active' })
+            .send({ status: 'active' })
             .end((err, res) => {
               expect(res.status).to.equal(200);
               expect(res.body).to.be.an('object');
@@ -277,6 +277,28 @@ describe('Accounts Tests', () => {
               expect(res.body.data).to.have.property('status');
               done();
             });
+        });
+    });
+    it('Should return 401 if account status is not specified', (done) => {
+      request
+        .patch(`${accountEndPoint}3839943693`)
+        .send({})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if account status is not active or dormant', (done) => {
+      request
+        .patch(`${accountEndPoint}3839943693`)
+        .send({ status: 'someText' })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
         });
     });
   });
@@ -299,6 +321,25 @@ describe('Accounts Tests', () => {
             .end((err, res) => {
               expect(res.status).to.equal(200);
               expect(res.body).to.have.property('msg');
+              done();
+            });
+        });
+    });
+    it('Should return 404 if account is not found', (done) => {
+      const login = {
+        email: 'martinsoluwaseun47@gmail.com',
+        password: 'user1pw'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((usrLoginErr, usrLoginRes) => {
+          const token = `Bearer ${usrLoginRes.body.data.token}`;
+          request
+            .delete(`${accountEndPoint}1234567890`)
+            .set('Authorization', token)
+            .end((err, res) => {
+              expect(res.status).to.equal(404);
               done();
             });
         });
