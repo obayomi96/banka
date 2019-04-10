@@ -130,6 +130,36 @@ describe('Users auth Tests', () => {
           done();
         });
     });
+    it('Should return 401 if email field is empty', (done) => {
+      const login = {
+        email: '',
+        password: 'user4pw'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 401 if password field is empty', (done) => {
+      const login = {
+        email: 'emmatexi@gmail.com',
+        password: ''
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          done();
+        });
+    });
   });
 });
 
