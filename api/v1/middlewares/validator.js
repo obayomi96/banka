@@ -91,6 +91,7 @@ const accountStatus = [
     return next();
   }
 ];
+
 export default {
   userSignup,
   userSignin,
