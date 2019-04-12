@@ -23,6 +23,9 @@ Currently-
 # Pivotal Tracker
 banka project is broken down into smaller tasks with Pivotal Tracker board for project management. The link to the relevant Pivotal Tracker board is (https://www.pivotaltracker.com/n/projects/2319910)
 
+# API Endpoint
+The API can be hosted at (https://obayomi-banka.herokuapp.com/api/v1/)
+
 # UI Templates
 The application is hosted online on gh-pages at (https://obayomi96.github.io/banka)
 
@@ -42,12 +45,67 @@ The application is hosted online on gh-pages at (https://obayomi96.github.io/ban
 <li> Admin can create staff and admin user accounts.</li>
 </ul>
 
-<!-- # Getting Started
+# Getting Started
 ## Installation
-- Clone the repository at (https://github.com/obayomi96/banka)
+- Clone the repository
 - run npm install
-- run npm run start-dev then navigate to localhost:9000 on POSTMAN
-- install POSTMAN app to test API Endpoints (https://www.getpostman.com/apps) -->
+- run npm run start-dev
+- Navigate to localhost:9000 on POSTMAN
+- install POSTMAN app to test API Endpoints (https://www.getpostman.com/apps)
+
+# API Endpoint routes
+<table>
+  <tr>
+    <td>HTTP VERB</td>
+    <td>ENDPOINT</td>
+    <td>TASK</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/api/v1/auth/signup</td>
+    <td>Create user account</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/api/v1/auth/signin</td>
+    <td>Login a user</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/api/v1/accounts/</td>
+    <td>Create a bank account</td>
+  </tr>
+  <tr>
+    <td>PATCH</td>
+    <td>/api/v1/accounts/<account-Number></td>
+    <td>Update an account status</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td>/api/v1/accounts/<account-number></td>
+    <td>Delete a specific account</td>
+  </tr>
+    <tr>
+    <td>POST</td>
+    <td>/api/v1/transactins/<account-number>/debit</td>
+    <td>Debit a bank account</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>api/v1/transactins/<account-number>/credit</td>
+    <td>credit a bank account</td>
+  </tr>
+    <tr>
+    <td>POST</td>
+    <td>/api/v1/auth/signup</td>
+    <td>Register a user</td>
+  </tr>
+   <tr>
+    <td>POST</td>
+    <td>/api/v1/auth/login</td>
+    <td>Login a user</td>
+  </tr>
+  </table>
 
 # Author
 - Martins Obayomi
