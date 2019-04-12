@@ -27,7 +27,7 @@ export default class UserController {
 
     users.push(user);
     return res.status(201).json({
-      status: true,
+      status: res.statusCode,
       data: {
         token,
         id: user.id,
@@ -50,15 +50,18 @@ export default class UserController {
     if (validUser) {
       const token = auth.generateToken(validUser);
       return res.status(200).json({
-        status: true,
+        status: res.statusCode,
         data: {
           token,
-          user: validUser
+          id: validUser.id,
+          firstname: validUser.firstName,
+          lastname: validUser.lastName,
+          email: validUser.email
         }
       });
     }
     return res.status(401).json({
-      status: false,
+      status: res.statusCode,
       msg: 'Authentication failed'
     });
   }

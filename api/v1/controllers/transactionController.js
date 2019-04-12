@@ -38,7 +38,7 @@ export default class TransactionController {
       data: {
         transactionId: transaction.id,
         accountNumber,
-        amount: transaction.amount,
+        amount: `$${transaction.amount}`,
         cashier: transaction.cashier,
         transactionType: transaction.type,
         accountBalance: `New balance $${transaction.newBalance}`
@@ -81,7 +81,7 @@ export default class TransactionController {
       data: {
         transactionId: transaction.id,
         accountNumber,
-        amount: transaction.amount,
+        amount: `$${transaction.amount}`,
         cashier: transaction.cashier,
         transactionType: transaction.type,
         accountBalance: `New Balance $${transaction.newBalance}`

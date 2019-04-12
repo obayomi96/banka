@@ -24,7 +24,7 @@ export default class AccountController {
     };
     accounts.push(account);
     return res.status(201).json({
-      status: true,
+      status: res.statusCode,
       data: {
         accountNumber: account.accountNumber,
         firstname: req.user.firstname,
@@ -48,7 +48,7 @@ export default class AccountController {
     const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
     if (validAccount) {
       return res.status(200).json({
-        status: true,
+        status: res.statusCode,
         data: {
           accountNumber,
           status
@@ -56,7 +56,7 @@ export default class AccountController {
       });
     }
     return res.status(404).json({
-      status: true,
+      status: res.statusCode,
       error: `Account ${accountNumber} does not exist`
     });
   }
@@ -72,7 +72,7 @@ export default class AccountController {
     const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
     if (!validAccount) {
       return res.status(404).json({
-        status: false,
+        status: res.statusCode,
         error: `Account ${accountNumber} does not exist`
       });
     }
@@ -82,7 +82,7 @@ export default class AccountController {
         accounts.splice(indexNumber, 1);
         return res.status(200).json({
           status: res.statusCode,
-          msg: `Account ${accountNumber} is successfully deleted!`
+          msg: 'Account successfully deleted!'
         });
       }
     });

@@ -164,7 +164,7 @@ describe('Users auth Tests', () => {
 });
 
 describe('Accounts Tests', () => {
-  describe(`POST ${accountEndPoint}createAccount`, () => {
+  describe(`POST ${accountEndPoint}`, () => {
     it('Should create a bank account', (done) => {
       const login = {
         email: 'franca@gmail.com',
@@ -180,7 +180,7 @@ describe('Accounts Tests', () => {
             initialDeposit: 50.50
           };
           request
-            .post(`${accountEndPoint}createAccount`)
+            .post(`${accountEndPoint}`)
             .set('Authorization', token)
             .send(usrInput)
             .end((err, res) => {
@@ -199,7 +199,7 @@ describe('Accounts Tests', () => {
         initialDeposit: ''
       };
       request
-        .post(`${accountEndPoint}createAccount`)
+        .post(`${accountEndPoint}`)
         .send(userInput)
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -214,7 +214,7 @@ describe('Accounts Tests', () => {
         initialDeposit: '120.00'
       };
       request
-        .post(`${accountEndPoint}createAccount`)
+        .post(`${accountEndPoint}`)
         .send(userInput)
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -229,7 +229,7 @@ describe('Accounts Tests', () => {
         initialDeposit: ''
       };
       request
-        .post(`${accountEndPoint}createAccount`)
+        .post(`${accountEndPoint}`)
         .send(userInput)
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -244,7 +244,7 @@ describe('Accounts Tests', () => {
         initialDeposit: 'depo#sit'
       };
       request
-        .post(`${accountEndPoint}createAccount`)
+        .post(`${accountEndPoint}`)
         .send(userInput)
         .end((err, res) => {
           expect(res.status).to.equal(401);
