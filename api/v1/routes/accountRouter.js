@@ -5,7 +5,7 @@ import inputValidator from '../middlewares/validator';
 
 const router = express.Router();
 
-router.post('/createAccount', inputValidator.createAccount, authenticateUser.verifyUser, accountController.createAccount);
+router.post('/', inputValidator.createAccount, authenticateUser.verifyUser, accountController.createAccount);
 
 router.patch('/:accountNumber', inputValidator.accountStatus, authenticateUser.verifyAdmin, accountController.accountStatus);
 
