@@ -54,8 +54,8 @@ export default class UserController {
         data: {
           token,
           id: validUser.id,
-          firstname: validUser.firstName,
-          lastname: validUser.lastName,
+          firstname: validUser.firstname,
+          lastname: validUser.lastname,
           email: validUser.email
         }
       });
