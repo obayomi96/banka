@@ -4,14 +4,14 @@
   "description": "A light-weight core banking application",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=lcov --reporter=text mocha --require @babel/polyfill --require @babel/register ./tests/*.spec.js --exit",
+    "test": "nyc --reporter=lcov --reporter=text mocha --require @babel/polyfill --require @babel/register server/tests/*.spec.js --exit",
     "coverage": "npm run test && nyc report --reporter=text-lcov | coveralls",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "nyc": "nyc --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls",
     "start": "node dist/index.js",
     "postinstall": "npm run build",
-    "start-dev": "nodemon --exec babel-node --presets=@babel/env api/v1/index.js",
-    "build": "rm -rf ./dist && babel api/v1 --out-dir dist"
+    "start-dev": "nodemon --exec babel-node --presets=@babel/env server/index.js",
+    "build": "rm -rf ./dist && babel server/app.js --out-dir dist"
   },
   "repository": {
     "type": "git",

@@ -38,60 +38,8 @@ const modalDisplayModalRemove = () => {
   // Close modal and redirect to Admin dashboard after deleting account
   confirmDeleteBtn.addEventListener('click', () => {
     deleteAccountModal.style.display = 'none';
-    window.location = '../admin/allbankAccounts.html';
+    window.location = '../admin/allBankAccounts.html';
   });
 };
 modalDisplayModalRemove();
 // Delete account confirm modal ENDS
-
-// Credit and Debit account confirm
-// const paymentAmount = document.querySelector('.paymentInput').value;
-// const creditBtn = document.querySelector('.paymentBtn1');
-// const debitBtn = document.querySelector('.paymentBtn2');
-// const deleteAccountModal2 = document.querySelector('.deleteAccountModal2');
-// const deleteModalContent2 = document.querySelector('.deleteModalContent2');
-
-// const displayPaymentModal = () => {
-//   // Display modal
-//   creditBtn.addEventListener('click', () => {
-//     deleteModalContent2.innerHTML += `<p>Credit account Obayomi $${paymentAmount} ?</p>
-//     <div class="confirmBtn">
-//         <button class="confirmbtn" id="deleteAccountBtn">Yes</button>
-//         <button class="confirmbtn" id="cancelDeleteBtn">Cancel</button>
-//     </div>`;
-//     deleteAccountModal2.style.display = 'block';
-//   });
-//   // Close modal
-//   cancelDeleteBtn.addEventListener('click', () => {
-//     deleteAccountModal2.style.dislay = 'none';
-//   });
-//   deleteAccountModal2.addEventListener('click', () => {
-//     deleteAccountModal2.style.display = 'none';
-//   });
-//   // credit account and close modal
-//   confirmDeleteBtn.addEventListener('click', () => {
-//     deleteModalContent2.innerHTML += `<h3>Account Credited with $${paymentAmount} !</h3>`;
-//     window.location = '..admin/bankAccountRecord.html';
-//   });
-//   debitBtn.addEventListener('click', () => {
-//     deleteModalContent2.innerHTML = `<p>Debit account Obayomi $${paymentAmount} ?</p>
-//     <div class="confirmBtn">
-//         <button class="confirmbtn" id="deleteAccountBtn">Yes</button>
-//         <button class="confirmbtn" id="cancelDeleteBtn">Cancel</button>
-//     </div>`;
-//     deleteAccountModal2.style.display = 'block';
-//   });
-//   // Close modal
-//   cancelDeleteBtn.addEventListener('click', () => {
-//     deleteAccountModal2.style.dislay = 'none';
-//   });
-//   deleteAccountModal2.addEventListener('click', () => {
-//     deleteAccountModal2.style.display = 'none';
-//   });
-//   // credit account and close modal
-//   confirmDeleteBtn.addEventListener('click', () => {
-//     deleteModalContent2.innerHTML = `<h3>Account Debited with $${paymentAmount} !</h3>`;
-//     window.location = '..admin/bankAccountRecord.html';
-//   });
-// };
-// displayPaymentModal();
