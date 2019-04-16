@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 </head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Banka</title>
-    <link type="text/css" rel="stylesheet" href="../assets/css/index.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
@@ -17,25 +18,23 @@
     </nav>
     <div class="loginCoverPage">
         <div class="formModal">
-            <a href="#"><h1>Change password</h1></a>
+            <a href="index.html"><h1>banka.com</h1></a>
             <form action="" id="loginForm">
-                    <div> 
-                            <input type="password" name="password" class="formInput" placeholder="Old password">
-                        </div>
-                <div> 
-                    <input type="password" name="password" class="formInput" placeholder="New password">
+                <div>
+                    <input type="text" value="" class="formInput" placeholder="Enter your email" required>   
                 </div>
                 <div> 
-                        <input type="password" name="password" class="formInput" placeholder="New password confirm">
-                    </div>
-                <div class="loginBtn"><a href="index.html">Change password</a></div>
+                    <input type="password" name="password" class="formInput" placeholder="Enter your password" required>
+                </div>
+                <div class="loginBtn"><a href="user/createBankAccount.html">Login</a></div>
                 <div class="innerFooter">
-                    <span class="reset"><a href="../resetPassword.html">RESET PASSWORD</a></span>
-                    <span class="create"><a href="adminDashboard.html">ADMIN DASHBOARD</a></span>
+                    <span class="reset"><a href="resetPassword.html">RESET PASSWORD</a></span>
+                    <span class="create"><a href="signup.html">CREATE AN ACCOUNT</a></span>
                 </div>
             </form>
         </div>
+        <hr>
     </div>
-    <footer>Andela Developer Challenge - &copy 2019</footer>
+    <footer>Andela Developer Challenge - @ 2019</footer>
 </body>
 </html>
