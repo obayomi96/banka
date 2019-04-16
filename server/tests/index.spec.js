@@ -17,4 +17,3 @@ describe(`GET ${apiEndPoint}`, () => {
       });
   });
 });
-

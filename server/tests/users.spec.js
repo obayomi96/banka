@@ -27,11 +27,9 @@ describe('Users auth Tests', () => {
           expect(res.status).to.equal(201);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('data');
-          expect(res.body.data).to.have.property('token');
-          expect(res.body.data).to.have.property('id');
-          expect(res.body.data).to.have.property('firstname');
-          expect(res.body.data).to.have.property('lastname');
-          expect(res.body.data).to.have.property('email');
+          expect(res.body.data.firstname).to.equal(user.firstname);
+          expect(res.body.data.lastname).to.equal(user.lastname);
+          expect(res.body.data.email).to.equal(user.email);
           done();
         });
     });
@@ -117,10 +115,8 @@ describe('Users auth Tests', () => {
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('token');
-          expect(res.body.data).to.have.property('id');
-          expect(res.body.data).to.have.property('firstname');
-          expect(res.body.data).to.have.property('lastname');
-          expect(res.body.data).to.have.property('email');
+          expect(res.body.data.email).to.equal(login.email);
+          expect(res.body.data.password).to.equal(login.user4pw);
           done();
         });
     });
