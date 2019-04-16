@@ -16,8 +16,8 @@ const userSignup = [
       errors.array().forEach((error) => {
         errorMsg.push(error.msg);
       });
-      return res.status(401).json({
-        status: 401,
+      return res.status(400).json({
+        status: 400,
         error: errorMsg
       });
     }
@@ -35,8 +35,8 @@ const userSignin = [
       errors.array().forEach((error) => {
         errorMsg.push(error.msg);
       });
-      return res.status(401).json({
-        status: 401,
+      return res.status(400).json({
+        status: 400,
         error: errorMsg
       });
     }
@@ -60,8 +60,8 @@ const createAccount = [
       errors.array().forEach((error) => {
         errorMsg.push(error.msg);
       });
-      return res.status(401).json({
-        status: 401,
+      return res.status(400).json({
+        status: 400,
         error: errorMsg
       });
     }
@@ -83,8 +83,8 @@ const accountStatus = [
       errors.array().forEach((error) => {
         errorMsg.push(error.msg);
       });
-      return res.status(401).json({
-        status: 401,
+      return res.status(400).json({
+        status: 400,
         error: errorMsg
       });
     }
@@ -102,8 +102,8 @@ const creditAccount = [
       errors.array().forEach((error) => {
         errorMsg.push(error.msg);
       });
-      return res.status(401).json({
-        status: 401,
+      return res.status(400).json({
+        status: 400,
         error: errorMsg
       });
     }
@@ -121,8 +121,8 @@ const debitAccount = [
       errors.array().forEach((error) => {
         errorMsg.push(error.msg);
       });
-      return res.status(401).json({
-        status: 401,
+      return res.status(400).json({
+        status: 400,
         error: errorMsg
       });
     }

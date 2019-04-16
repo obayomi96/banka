@@ -165,6 +165,10 @@ nav #menuLogo {
   line-height: 30px;
 }
 .userAccountCoverPage #accountSection .details {
+  background: #ddd !important;
+    border-radius: 4px;
+    margin-bottom: 50px;
+    border: 1px black solid;
   text-align: left;
 }
 .userAccountCoverPage #accountSection {
@@ -442,7 +446,7 @@ div.adminFilter {
 }
 
 /* ------Admin searcher ends---- */
-#accountSection table {
+#accountSection .user> table {
   width: 100%;
   min-width: 700px;
   margin: 10px auto 20px auto;
@@ -499,11 +503,10 @@ tr:nth-child(odd) {
   cursor: pointer;
   transition: 500ms;
 }
-#accountSection .accBal {
+.accBal {
   width: 90%;
-  max-width: 90%;
   margin: 10px auto 20px auto;
-  z-index: 2;
+  /* z-index: 2; */
 }
 /* --- bank account record--- */
 #accountSection .accountOwnerInfo {
@@ -746,6 +749,16 @@ footer {
 
 /* Medium devices (desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .transactionPage, .userAccountCoverPage {
+    width: calc(100% - 15%);
+    margin-left: 15%;
+  }
+  .transactionPage{
+    margin-top: 150px;
+  }
+  #accountSection {
+    margin-top: 100px !important;
+  }
   .landing #nav-container .nav-title #logo {
     margin-left: 5px;
     font-size: 50px;
@@ -826,22 +839,18 @@ footer {
     padding: 0 5px;
   }
   .userAccountCoverPage #accountSection .details {
-    width: 100%;
-    margin-left: 30%;
+    width: 80%;
+    margin-left: 10%;
     font-size: 20px;
     line-height: 45px;
   }
   .userAccountCoverPage #accountSection ul {
-    clear: both;
-    float: left;
     list-style: none;
   }
   .userInfo .filter {
     display: inline-flex;
     width: 78%;
-    justify-content: center;
-    margin: 0 auto;
-    text-align: center;
+    margin: 0 16%;
     font-size: 20px;
   }
   div.adminFilter {
@@ -851,9 +860,8 @@ footer {
     min-width: 50%;
   }
   .filter #filtr {
-    display: inline-flex;
     font-size: 18px;
-    padding: 5px;
+    padding: 8px 7px;
   }
   .userInfo .filter .searcher {
     width: 50%;
@@ -966,9 +974,8 @@ footer {
     font-size: 20px;
     margin-top: 25px;
   }
-  #accountSection .accBal {
-    width: 50%;
-    max-width: 50%;
+  .accBal {
+    width: 50% !important;
     margin: 10px auto 20px auto;
     z-index: 2;
   }
@@ -993,6 +1000,9 @@ footer {
   .ownerInfo {
     width: 50%;
     border: none;
+    background: #ddd;
+    border-radius: 4px;
+    border: 1px black solid;
   }
   .ownerInfo>ul {
     text-align: left;

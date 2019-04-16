@@ -23,7 +23,12 @@ export default class UserController {
       type,
       isAdmin
     };
-    const token = auth.generateToken({ email: user.email, type });
+    const token = auth.generateToken({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      type
+    });
 
     users.push(user);
     return res.status(201).json({
