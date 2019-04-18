@@ -27,7 +27,7 @@ export default class TransactionController {
       cashier: req.user.id,
       amount: parseFloat(amount),
       oldBalance: validAccount.balance,
-      newBalance: parseFloat((validAccount.balance + parseFloat(amount)).toFixed(2))
+      newBalance: parseFloat((validAccount.balance + parseFloat(amount)))
     };
 
     validAccount.balance = transaction.newbalance;
@@ -38,10 +38,10 @@ export default class TransactionController {
       data: {
         transactionId: transaction.id,
         accountNumber,
-        amount: `$${transaction.amount}`,
+        amount: transaction.amount,
         cashier: transaction.cashier,
         transactionType: transaction.type,
-        accountBalance: `New balance $${transaction.newBalance}`
+        accountBalance: `Balance: ${transaction.newBalance}`
       }
     });
   }
@@ -81,10 +81,10 @@ export default class TransactionController {
       data: {
         transactionId: transaction.id,
         accountNumber,
-        amount: `$${transaction.amount}`,
+        amount: transaction.amount,
         cashier: transaction.cashier,
         transactionType: transaction.type,
-        accountBalance: `New Balance $${transaction.newBalance}`
+        accountBalance: `Balance: ${transaction.newBalance}`
       }
     });
   }

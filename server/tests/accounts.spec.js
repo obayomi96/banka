@@ -169,24 +169,5 @@ describe(`POST ${accountEndPoint}`, () => {
             });
         });
     });
-    it('Should return 404 if account is not found', (done) => {
-      const login = {
-        email: 'martinsoluwaseun47@gmail.com',
-        password: 'user1pw'
-      };
-      request
-        .post(`${usersEndPoint}signin`)
-        .send(login)
-        .end((usrLoginErr, usrLoginRes) => {
-          const token = `Bearer ${usrLoginRes.body.data.token}`;
-          request
-            .delete(`${accountEndPoint}1234567890`)
-            .set('Authorization', token)
-            .end((err, res) => {
-              expect(res.status).to.equal(404);
-              done();
-            });
-        });
-    });
   });
 });
