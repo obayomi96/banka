@@ -28,7 +28,7 @@ describe(`POST ${transactionEndPoint}:accountNumber/credit`, () => {
             expect(res.status).to.equal(201);
             expect(res.body).to.have.property('data');
             expect(res.body.data).to.be.an('object');
-            expect(res.body.data.amount).to.equal(`$${amount}`);
+            expect(res.body.data.amount).to.equal(amount);
             done();
           });
       });
@@ -77,7 +77,7 @@ describe(`POST ${transactionEndPoint}:accountNumber/debit`, () => {
             expect(res.status).to.equal(201);
             expect(res.body).to.have.property('data');
             expect(res.body.data).to.be.an('object');
-            expect(res.body.data.amount).to.equal(`$${amount}`);
+            expect(res.body.data.amount).to.equal(amount);
             done();
           });
       });

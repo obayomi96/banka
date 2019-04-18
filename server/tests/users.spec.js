@@ -33,6 +33,24 @@ describe('Users auth Tests', () => {
           done();
         });
     });
+    it('Should return 409 if user email already exist', (done) => {
+      const user = {
+        firstname: 'Oluwaseun',
+        lastname: 'Christopher',
+        email: 'anthony.a@gmail.com',
+        password: 'userPW'
+      };
+      request
+        .post(`${usersEndPoint}signup`)
+        .send(user)
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('error');
+          expect(res.body.error).to.equal('User already exist!');
+          done();
+        });
+    });
     it('Should return 400 if firstname is empty', (done) => {
       const user = {
         lastname: 'Christopher',
@@ -147,6 +165,22 @@ describe('Users auth Tests', () => {
           expect(res.status).to.equal(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('error');
+          done();
+        });
+    });
+    it('Should return 400 if the user is not Authenticated', (done) => {
+      const login = {
+        email: 'whatever@email.com',
+        password: 'whateverPW'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('msg');
+          expect(res.body.msg).to.equal('Authentication failed');
           done();
         });
     });

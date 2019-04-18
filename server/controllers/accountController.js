@@ -20,7 +20,7 @@ export default class AccountController {
       owner,
       type,
       status: 'draft',
-      balance: initialDeposit
+      balance: parseFloat(initialDeposit)
     };
     accounts.push(account);
     return res.status(201).json({
