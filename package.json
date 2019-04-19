@@ -20,7 +20,6 @@
   "keywords": [
     "andela",
     "banka",
-    "bank",
     "nodejs",
     "express",
     "api",
@@ -39,7 +38,6 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/plugin-transform-spread": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
     "@babel/register": "^7.0.0",
     "babel-plugin-istanbul": "^5.1.0",
     "chai": "^4.2.0",
@@ -58,10 +56,12 @@
   },
   "dependencies": {
     "@babel/cli": "^7.1.5",
+    "@babel/preset-env": "^7.1.6",
     "@babel/runtime": "^7.1.5",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "cuid": "^2.1.6",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
