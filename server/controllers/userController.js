@@ -1,5 +1,6 @@
 import users from '../data/users';
 import auth from '../auth/authenticate';
+import exists from '../helpers/exists';
 
 export default class UserController {
   /**
@@ -13,6 +14,13 @@ export default class UserController {
     const id = users.length + 1;
     const type = 'client';
     const isAdmin = false;
+    const emailExist = exists.emailExist(userInfoInput.email, false);
+    if (emailExist) {
+      return res.status(409).json({
+        status: res.statusCode,
+        error: 'User already exist!',
+      });
+    }
 
     const user = {
       id,
@@ -65,7 +73,7 @@ export default class UserController {
         }
       });
     }
-    return res.status(401).json({
+    return res.status(400).json({
       status: res.statusCode,
       msg: 'Authentication failed'
     });
