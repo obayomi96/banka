@@ -1,8 +1,6 @@
 import bcrypt from 'bcrypt';
 import uuidv4 from 'uuid/v4';
 import auth from '../auth/authenticate';
-// import users from '../data/users';
-// import exists from '../helpers/exists';
 import client from '../models/index';
 
 export default class UserController {
