@@ -2,22 +2,10 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
-// const connectionString = 'postgres://postgres:pg1996@localhost:5432/banka';
-const {
-  DATABASE_USER,
-  DATABASE_HOST,
-  DATABASE_DB,
-  DB_PORT,
-  DB_PASSWORD
-} = process.env;
 
-const client = new Pool({
-  user: DATABASE_USER,
-  host: DATABASE_HOST,
-  database: DATABASE_DB,
-  password: DB_PASSWORD,
-  port: DB_PORT
-});
+const connectionString = process.env.NODE_ENV === 'test' ? process.env.DATABASE_URL : process.env.TEST_DATABASE_URL;
+
+const client = new Pool({ connectionString });
 
 client.connect((err) => {
   if (!err) return console.log('DB connected');
