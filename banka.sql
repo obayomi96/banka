@@ -14,7 +14,7 @@
 
 CREATE TABLE accounts (
     id character varying(250) NOT NULL,
-    accountnumber integer NOT NULL,
+    accountnumber character varying(250) NOT NULL,
     createdon date NOT NULL,
     owner character varying(250) NOT NULL,
     type character varying(250) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE transactions (
     id character varying(250) NOT NULL,
     createdon date NOT NULL,
     type character varying(250) NOT NULL,
-    accountnumber integer NOT NULL,
+    accountnumber character varying(250) NOT NULL,
     cashier integer NOT NULL,
     amount real NOT NULL,
     oldbalance real NOT NULL,
