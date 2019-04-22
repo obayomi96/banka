@@ -1,6 +1,9 @@
-import users from '../data/users';
+import bcrypt from 'bcrypt';
+import uuidv4 from 'uuid/v4';
 import auth from '../auth/authenticate';
-import exists from '../helpers/exists';
+// import users from '../data/users';
+// import exists from '../helpers/exists';
+import client from '../models/index';
 
 export default class UserController {
   /**
@@ -9,45 +12,54 @@ export default class UserController {
     * @param {object} req - The Request Object
     * @param {object} res - The Response Object
     */
-  static signUp(req, res) {
-    const userInfoInput = { ...req.body };
-    const id = users.length + 1;
-    const type = 'client';
-    const isAdmin = false;
-    const emailExist = exists.emailExist(userInfoInput.email, false);
-    if (emailExist) {
-      return res.status(409).json({
-        status: res.statusCode,
-        error: 'User already exist!',
-      });
-    }
-
-    const user = {
-      id,
-      email: userInfoInput.email,
-      firstname: userInfoInput.firstname,
-      lastname: userInfoInput.lastname,
-      password: userInfoInput.password,
-      type,
-      isAdmin
-    };
-    const token = auth.generateToken({
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      type
-    });
-
-    users.push(user);
-    return res.status(201).json({
-      status: res.statusCode,
-      data: {
-        token,
-        id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
+  static async signUp(req, res) {
+    const {
+      firstname,
+      lastname,
+      email,
+      password
+    } = req.body;
+    const hashed = await bcrypt.hashSync(password, 10);
+    const userId = uuidv4();
+    const user = [
+      userId,
+      firstname,
+      lastname,
+      email,
+      hashed,
+      'client',
+      false
+    ];
+    await client.query('SELECT 1 FROM users WHERE email = $1', [email], (err, data) => {
+      if (data.rowCount > 0) {
+        return res.status(409).json({
+          status: res.statusCode,
+          msg: 'User already exists!'
+        });
       }
+      const token = auth.generateToken({ user });
+      const query = 'INSERT INTO users (id, firstname, lastname, email, password, type, isAdmin) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+      client.query(query, user, (insertErr) => {
+        if (insertErr) {
+          return res.status(500).json({
+            msg: 'Internal server error'
+          });
+        }
+        return res.status(201).json({
+          status: res.statusCode,
+          data: {
+            token,
+            id: user[0],
+            firstname: user[1],
+            lastname: user[2],
+            email: user[3],
+            password: user[4],
+            type: user[5],
+            isAdmin: user[6]
+          },
+          msg: 'Account created successfully!'
+        });
+      });
     });
   }
 
@@ -57,25 +69,43 @@ export default class UserController {
     * @param {object} req - The Request Object
     * @param {object} res - The Response Object
     */
-  static signIn(req, res) {
+  static async signIn(req, res) {
     const { body: { email, password } } = req;
-    const validUser = users.find(eachUser => eachUser.email === email && eachUser.password === password);
-    if (validUser) {
-      const token = auth.generateToken(validUser);
-      return res.status(200).json({
-        status: res.statusCode,
-        data: {
-          token,
-          id: validUser.id,
-          firstname: validUser.firstname,
-          lastname: validUser.lastname,
-          email: validUser.email
+    const query = 'SELECT * FROM users WHERE email=$1';
+    client.query(query, [email], (err, data) => {
+      if (data.rowCount > 0) {
+        const compare = bcrypt.compareSync(password, data.rows[0].password);
+        if (!compare) {
+          return res.status(404).json({
+            status: 404,
+            error: 'Invalid email or password'
+          });
         }
+        const user = {
+          id: data.rows[0].id,
+          email: data.rows[0].email,
+          firstname: data.rows[0].firstname,
+          lastname: data.rows[0].lastname,
+          type: data.rows[0].type,
+          isAdmin: data.rows[0].isadmin
+        };
+        const token = auth.generateToken(user);
+        return res.status(200).json({
+          status: res.statusCode,
+          data: {
+            token,
+            id: data.rows[0].id,
+            firstname: data.rows[0].firstname,
+            latename: data.rows[0].lastname,
+            email: data.rows[0].email,
+          },
+          msg: `Login success!, welcome ${user.firstname}`
+        });
+      }
+      return res.status(404).json({
+        status: res.statusCode,
+        msg: 'User not found'
       });
-    }
-    return res.status(400).json({
-      status: res.statusCode,
-      msg: 'Authentication failed'
     });
   }
 }
