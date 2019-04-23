@@ -59,7 +59,7 @@
     "@babel/cli": "^7.1.5",
     "@babel/preset-env": "^7.1.6",
     "@babel/runtime": "^7.1.5",
-    "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "cuid": "^2.1.6",
