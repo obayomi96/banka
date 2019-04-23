@@ -5,7 +5,7 @@ import app from '../app';
 
 const request = supertest(app);
 const apiEndPoint = '/api/v1/';
-const usersEndPoint = `${apiEndPoint}auth/`;
+// const usersEndPoint = `${apiEndPoint}auth/`;
 const accountEndPoint = `${apiEndPoint}accounts/`;
 
 describe(`POST ${accountEndPoint}`, () => {

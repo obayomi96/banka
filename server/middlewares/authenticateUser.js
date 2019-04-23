@@ -67,7 +67,7 @@ export default class AuthenticateUsers {
       req.user = decoded;
       if (!req.user.isAdmin) {
         return res.status(403).send({
-          status: true,
+          status: res.statusCode,
           error: 'The endpoint you are requesting is not authorized to you'
         });
       }

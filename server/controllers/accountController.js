@@ -26,8 +26,6 @@ export default class AccountController {
       parseFloat(initialDeposit)
     ];
     await client.query('SELECT 1 FROM accounts WHERE owner = $1', [owner], (err, data) => {
-      console.log('err', err);
-      console.log('data', data);
       if (data.rowCount > 0) {
         return res.status(409).json({
           status: res.statusCode,
@@ -46,7 +44,6 @@ export default class AccountController {
         openingbalance: account[6]
       };
       client.query(query, account, (insertErr) => {
-        console.log('insertErr', insertErr);
         if (insertErr) {
           return res.status(500).json({
             msg: 'Internal server error'
@@ -75,22 +72,33 @@ export default class AccountController {
     * @param {object} req - The Request Object
     * @param {object} res - The Response Object
     */
-  static accountStatus(req, res) {
+  static async accountStatus(req, res) {
     const { status } = req.body;
     const { accountNumber } = req.params;
-    const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
-    if (validAccount) {
-      return res.status(200).json({
-        status: res.statusCode,
-        data: {
-          accountNumber,
-          status
+
+    await client.query('SELECT 1 FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
+      if (data.rowCount === 0) {
+        return res.status(404).json({
+          status: res.statusCode,
+          msg: 'Account not found'
+        });
+      }
+      const query = 'UPDATE accounts SET status = $1 WHERE accountnumber = $2';
+      client.query(query, [status, accountNumber], (updateErr) => {
+        if (updateErr) {
+          return res.status(500).json({
+            msg: 'internal server error'
+          });
         }
+        return res.status(200).json({
+          status: res.statusCode,
+          data: {
+            accountNumber,
+            status
+          },
+          msg: 'Account status updated successfully'
+        });
       });
-    }
-    return res.status(404).json({
-      status: res.statusCode,
-      error: `Account ${accountNumber} does not exist`
     });
   }
 
