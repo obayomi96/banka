@@ -12,15 +12,15 @@
 -- Name: accounts; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE accounts (
-    id character varying(250) NOT NULL,
-    accountnumber character varying(250) NOT NULL,
-    createdon date NOT NULL,
-    owner character varying(250) NOT NULL,
-    type character varying(250) NOT NULL,
-    status character varying(250) NOT NULL,
-    balance real NOT NULL
-);
+ CREATE TABLE IF NOT EXISTS accounts(
+    id SERIAL PRIMARY KEY,
+    accountnumber BIGINT UNIQUE NOT NULL,
+    createdon TIMESTAMP NOT NULL,
+    owner INTEGER REFERENCES users(id),
+    type VARCHAR(50) NOT NULL,
+    status VARCHAR(50) DEFAULT 'draft',
+    balance NUMERIC(250, 2) DEFAULT 0.00
+  );
 
 
 --
@@ -28,16 +28,16 @@ CREATE TABLE accounts (
 -- Name: transactions; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE transactions (
-    id character varying(250) NOT NULL,
-    createdon date NOT NULL,
-    type character varying(250) NOT NULL,
-    accountnumber character varying(250) NOT NULL,
-    cashier integer NOT NULL,
-    amount real NOT NULL,
-    oldbalance real NOT NULL,
-    newbalance real NOT NULL
-);
+CREATE TABLE IF NOT EXISTS transactions(
+    id SERIAL PRIMARY KEY,
+    createdon TIMESTAMP NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    accountnumber BIGINT REFERENCES accounts("accountNumber") ON DELETE CASCADE,
+    cashier INTEGER REFERENCES users(id),
+    amount NUMERIC(250, 2) NOT NULL,
+    oldbalance NUMERIC(250, 2) NOT NULL,
+    newbalance NUMERIC(250, 2) NOT NULL
+  ); 
 
 
 --
@@ -45,15 +45,15 @@ CREATE TABLE transactions (
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE users (
-    id character varying(250) NOT NULL,
-    firstname character varying(250) NOT NULL,
-    lastname character varying(250) NOT NULL,
-    email character varying(250) NOT NULL,
-    password character varying(250) NOT NULL,
-    type character varying(250) NOT NULL,
-    isadmin boolean NOT NULL
-);
+CREATE TABLE IF NOT EXISTS users(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(250) UNIQUE NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    password VARCHAR(250) NOT NULL,
+    type VARCHAR(50) DEFAULT 'client',
+    isadmin BOOLEAN DEFAULT NULL
+  );
 
 --
 -- TOC entry 2697 (class 2606 OID 49208)
@@ -61,7 +61,7 @@ CREATE TABLE users (
 --
 
 ALTER TABLE ONLY transactions
-    ADD CONSTRAINT transactions_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT cashier FOREIGN KEY (cashier) REFERENCES users(id);
 
 
 --

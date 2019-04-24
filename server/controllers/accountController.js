@@ -1,5 +1,5 @@
 import uuidv4 from 'uuid/v4';
-import client from '../models/index';
+import client from '../migrations/db';
 
 export default class AccountController {
   /**
@@ -44,6 +44,7 @@ export default class AccountController {
       };
       client.query(query, account, (insertErr) => {
         if (insertErr) {
+          console.log('insertAccountErr', insertErr);
           return res.status(500).json({
             msg: 'Internal server error'
           });

@@ -12,6 +12,7 @@
     "postinstall": "npm run build",
     "start-dev": "nodemon --exec babel-node --presets=@babel/env server/index.js",
     "initDb": "- psql -U plzdlwpz -f banka.sql",
+    "migrations": "babel-node server/migrations/dropTables && babel-node server/migrations/droptcreateTablesables && babel-node server/migrations/seed",
     "build": "rm -rf ./dist && babel server --out-dir dist"
   },
   "repository": {
@@ -67,6 +68,7 @@
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "pg": "^7.10.0",
     "uuid": "^3.3.2"
