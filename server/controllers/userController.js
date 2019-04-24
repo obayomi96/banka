@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import uuidv4 from 'uuid/v4';
 import auth from '../auth/authenticate';
-import client from '../models/index';
+import client from '../migrations/db';
 
 export default class UserController {
   /**

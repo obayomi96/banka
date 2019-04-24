@@ -1,7 +1,7 @@
 import http from 'http';
 import dotenv from 'dotenv';
 import app from './app';
-import './models/index';
+import './migrations/db';
 
 dotenv.config();
 
