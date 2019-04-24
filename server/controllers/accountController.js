@@ -1,6 +1,5 @@
 import uuidv4 from 'uuid/v4';
 import client from '../models/index';
-import accounts from '../data/accounts';
 
 export default class AccountController {
   /**
@@ -108,24 +107,28 @@ export default class AccountController {
     * @param {object} req - The Request Object
     * @param {object} res - The Response Object
     */
-  static deleteAccount(req, res) {
+  static async deleteAccount(req, res) {
     const { accountNumber } = req.params;
-    const validAccount = accounts.find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
-    if (!validAccount) {
-      return res.status(404).json({
-        status: res.statusCode,
-        error: `Account ${accountNumber} does not exist`
-      });
-    }
-    accounts.forEach((account) => {
-      if (account.accountNumber === parseInt(accountNumber, 10)) {
-        const indexNumber = accounts.indexOf(account);
-        accounts.splice(indexNumber, 1);
-        return res.status(200).json({
+    await client.query('SELECT 1 FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
+      if (data.rowCount === 0) {
+        return res.status(404).json({
           status: res.statusCode,
-          msg: 'Account successfully deleted!'
+          msg: 'Account not found'
         });
       }
+      const query = 'DELETE FROM accounts WHERE accountnumber = $1';
+      client.query(query, [accountNumber], (deleteErr) => {
+        console.log('deleteErr', deleteErr);
+        if (deleteErr) {
+          return res.status(500).json({
+            msg: 'Internal server error'
+          });
+        }
+        return res.status(200).json({
+          status: res.statusCode,
+          msg: 'Account deleted successfully!'
+        });
+      });
     });
   }
 }
