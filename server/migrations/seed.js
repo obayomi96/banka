@@ -1,19 +1,18 @@
-import bcryptjs from 'bcryptjs';
 import moment from 'moment';
 import query from './index';
 
 const queryString = `
   INSERT INTO users ("firstName", "lastName", email, password, type, "isAdmin") 
-  VALUES ('martins', 'obayomi', 'martinsoluwaseun47@gmail.com', '${bcryptjs.hashSync('password')}', 'staff', true),
-         ('seun', 'chris', 'chris.s@gmail.com', '${bcryptjs.hashSync('password')}', 'staff', false);
+  VALUES ('martins', 'obayomi', 'martinsoluwaseun47@gmail.com', 'martinsPW', 'staff', true),
+         ('seun', 'chris', 'chris.s@gmail.com', ''chrisPW', 'staff', false);
          
   INSERT INTO users ("firstName", "lastName", email, password) 
-  VALUES ('Lara', 'kemi', 'larak.k@gmail.com', '${bcryptjs.hashSync('password')}'),
-         ('john', 'smith', 'jsmith@gmail.com', '${bcryptjs.hashSync('password')}'),
-         ('nick', 'doe', 'ndoe@gmail.com', '${bcryptjs.hashSync('password')}'),
-         ('brad', 'dan', 'brad@gmail.com', '${bcryptjs.hashSync('password')}');
+  VALUES ('Lara', 'kemi', 'larak.k@gmail.com', 'laraPW'),
+         ('john', 'smith', 'jsmith@gmail.com', 'jsmithPW'),
+         ('nick', 'doe', 'ndoe@gmail.com', 'nickPW'),
+         ('brad', 'dan', 'brad@gmail.com', 'bradPW');
          
-  INSERT INTO accounts("accountNumber", "createdOn", owner, type, status, balance) 
+  INSERT INTO accounts("accountnumber", "createdOn", owner, type, status, balance) 
   VALUES(178964523, '${moment(new Date())}', 3, 'savings', 'active', 500.54),
         (759681530, '${moment(new Date())}', 7, 'current', 'active', 550.25),
         (325125869, '${moment(new Date())}', 5, 'current', 'dormant', 420.45),

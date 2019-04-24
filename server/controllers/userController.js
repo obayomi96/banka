@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import uuidv4 from 'uuid/v4';
 import auth from '../auth/authenticate';
 import client from '../migrations/db';
 
@@ -18,9 +17,7 @@ export default class UserController {
       password
     } = req.body;
     const hashed = await bcrypt.hashSync(password, 10);
-    const userId = uuidv4();
     const user = [
-      userId,
       firstname,
       lastname,
       email,
@@ -28,8 +25,7 @@ export default class UserController {
       'client',
       false
     ];
-    await client.query('SELECT 1 FROM users WHERE email = $1', [email], (err, data) => {
-      console.log('data', data);
+    await client.query('SELECT * FROM users WHERE email = $1', [email], (err, data) => {
       if (data.rowCount > 0) {
         return res.status(409).json({
           status: res.statusCode,
@@ -37,7 +33,7 @@ export default class UserController {
         });
       }
       const token = auth.generateToken({ user });
-      const query = 'INSERT INTO users (id, firstname, lastname, email, password, type, isAdmin) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+      const query = 'INSERT INTO users (firstname, lastname, email, password, type, isAdmin) VALUES ($1, $2, $3, $4, $5, $6)';
       client.query(query, user, (insertErr) => {
         if (insertErr) {
           return res.status(500).json({
@@ -48,13 +44,12 @@ export default class UserController {
           status: res.statusCode,
           data: {
             token,
-            id: user[0],
-            firstname: user[1],
-            lastname: user[2],
-            email: user[3],
-            password: user[4],
-            type: user[5],
-            isAdmin: user[6]
+            firstname: user[0],
+            lastname: user[1],
+            email: user[2],
+            password: user[3],
+            type: user[4],
+            isAdmin: user[5]
           },
           msg: 'Account created successfully!'
         });

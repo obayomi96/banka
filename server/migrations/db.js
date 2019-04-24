@@ -6,8 +6,7 @@ dotenv.config();
 const connectionString = process.env.NODE_ENV === 'test' ? process.env.TEST_DATABASE_URL : process.env.DATABASE_URL;
 
 const client = new Pool({
-  connectionString,
-  ssl: true
+  connectionString
 });
 
 client.connect((err) => {
