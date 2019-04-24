@@ -29,6 +29,7 @@ export default class UserController {
       false
     ];
     await client.query('SELECT 1 FROM users WHERE email = $1', [email], (err, data) => {
+      console.log('data', data);
       if (data.rowCount > 0) {
         return res.status(409).json({
           status: res.statusCode,
