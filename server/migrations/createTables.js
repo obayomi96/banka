@@ -28,7 +28,7 @@ const queryString = `
     amount NUMERIC(250, 2) NOT NULL,
     "oldbalance" NUMERIC(250, 2) NOT NULL,
     "newbalance" NUMERIC(250, 2) NOT NULL
-  );  
+  );
 `;
 
 query(queryString);

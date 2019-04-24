@@ -13,8 +13,7 @@ export default class TransactionController {
   static async creditAccount(req, res) {
     const { amount } = req.body;
     const { accountNumber } = req.params;
-    await client.query('SELECT 1 FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
-      console.log('data', data);
+    await client.query('SELECT * FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
@@ -27,17 +26,14 @@ export default class TransactionController {
         new Date(),
         'credit',
         accountNumber,
-        47,
+        req.user.id,
         parseFloat(amount),
         data.rows[0].balance,
-        parseFloat((data.rows[0].balance + parseFloat(amount)))
+        parseFloat((data.rows[0].balance + parseFloat(amount))).toFixed(2)
       ];
-      console.log('req.user', req.user);
-      console.log('req.user.id', req.user.id);
 
       const query = 'UPDATE accounts SET balance = $1 WHERE accountnumber = $2';
       client.query(query, [transaction[6], transaction[3]], (updateErr) => {
-        console.log('updateErr', updateErr);
         if (updateErr) {
           return res.status(500).json({
             msg: 'Internal server error'
@@ -45,7 +41,6 @@ export default class TransactionController {
         }
         const transactionQuery = 'INSERT INTO transactions (id, createdon, type, accountnumber, cashier, amount, oldbalance, newbalance) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
         client.query(transactionQuery, transaction, (insertErr) => {
-          console.log('insertTransErr', insertErr);
           if (insertErr) {
             return res.status(500).json({
               msg: 'Internal server error'

@@ -24,7 +24,7 @@ export default class AccountController {
       'draft',
       parseFloat(initialDeposit)
     ];
-    await client.query('SELECT 1 FROM accounts WHERE owner = $1', [owner], (err, data) => {
+    await client.query('SELECT * FROM accounts WHERE owner = $1', [owner], (err, data) => {
       if (data.rowCount > 0) {
         return res.status(409).json({
           status: res.statusCode,
@@ -44,7 +44,6 @@ export default class AccountController {
       };
       client.query(query, account, (insertErr) => {
         if (insertErr) {
-          console.log('insertAccountErr', insertErr);
           return res.status(500).json({
             msg: 'Internal server error'
           });
@@ -76,7 +75,7 @@ export default class AccountController {
     const { status } = req.body;
     const { accountNumber } = req.params;
 
-    await client.query('SELECT 1 FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
+    await client.query('SELECT * FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
@@ -110,7 +109,7 @@ export default class AccountController {
     */
   static async deleteAccount(req, res) {
     const { accountNumber } = req.params;
-    await client.query('SELECT 1 FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
+    await client.query('SELECT * FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
@@ -119,7 +118,6 @@ export default class AccountController {
       }
       const query = 'DELETE FROM accounts WHERE accountnumber = $1';
       client.query(query, [accountNumber], (deleteErr) => {
-        console.log('deleteErr', deleteErr);
         if (deleteErr) {
           return res.status(500).json({
             msg: 'Internal server error'
