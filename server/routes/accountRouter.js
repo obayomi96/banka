@@ -13,4 +13,6 @@ router.delete('/:accountNumber', authenticateUser.verifyAdmin, accountController
 
 router.get('/:accountNumber', authenticateUser.verifyUser, accountController.viewAccount);
 
+router.get('/', authenticateUser.verifyUser, accountController.viewAllAccounts);
+
 export default router;

@@ -12,7 +12,7 @@ export default class AccountController {
     const { body: { initialDeposit, type } } = req;
     const accNoGen = Math.floor(Math.random() * 1000000000).toString();
     const accountNumber = accNoGen;
-    const owner = req.user.id;
+    const owner = req.user.email;
 
     const accountId = uuidv4();
     const account = [
@@ -142,6 +142,7 @@ export default class AccountController {
     await client.query('SELECT * FROM accounts WHERE accountNumber = $1', [accountNumber], (err, data) => {
       if (req.user.type !== 'client') {
         return res.status(403).json({
+          status: res.statusCode,
           msg: 'You are forbidden to view this endpoint'
         });
       }
@@ -178,6 +179,34 @@ export default class AccountController {
             balance: accountDetails[1]
           }
         });
+      });
+    });
+  }
+
+  /**
+    * @method viewAllAccounts
+    * @description Admin/staff viewAllAccounts
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static async viewAllAccounts(req, res) {
+    if (req.user.type !== 'staff' || req.user.isAdmin !== true) {
+      return res.status(403).json({
+        status: res.statusCode,
+        msg: 'You are fobidden to view this endpoint'
+      });
+    }
+    const query = 'SELECT * FROM accounts';
+    await client.query(query, (err, data) => {
+      if (data.rowCount === 0) {
+        return res.status(404).json({
+          status: res.statusCode,
+          msg: 'No Accounts found'
+        });
+      }
+      return res.status(200).json({
+        status: res.statusCode,
+        data: data.rows,
       });
     });
   }
