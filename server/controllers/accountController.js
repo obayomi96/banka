@@ -196,16 +196,24 @@ export default class AccountController {
         msg: 'You are fobidden to view this endpoint'
       });
     }
-    const query = 'SELECT * FROM accounts';
-    const activeAccountsQuery = 'SELECT * FROM accounts WHERE status = $1';
+    // const query = 'SELECT * FROM accounts ';
+    let query = 'SELECT * FROM accounts, users WHERE accounts.owner = users.id';
     const { status } = req.query;
     if (status) {
-      await client.query(activeAccountsQuery, [status], (err, data) => {
-        console.log('activeErr', err);
-        if (data.rowCount > 0) {
+      query += ' AND status = $1';
+      await client.query(query, [status], (queryErr, queryData) => {
+        const accountDetails = queryData.rows.map(each => ({
+          createdOn: each.createdon,
+          accountNumber: each.accountnumber,
+          ownerEmail: each.email,
+          type: each.type,
+          status: each.status,
+          balance: each.balance
+        }));
+        if (queryData.rowCount > 0) {
           return res.status(200).json({
             status: res.statusCode,
-            data: data.rows[0]
+            data: accountDetails
           });
         }
         return res.status(404).json({
@@ -221,11 +229,56 @@ export default class AccountController {
             msg: 'No Accounts found'
           });
         }
+        const accountDetails = data.rows.map(each => ({
+          createdOn: each.createdon,
+          accountNumber: each.accountnumber,
+          ownerEmail: each.email,
+          type: each.type,
+          status: each.status,
+          balance: each.balance
+        }));
         return res.status(200).json({
           status: res.statusCode,
-          data: data.rows
+          data: accountDetails
         });
       });
     }
+  }
+
+  /**
+    * @method getTransactionHistory
+    * @description user can  view all transaction history
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static async getTransactionHistory(req, res) {
+    const { accountNumber } = req.params;
+    const { type } = req.user;
+    if (type !== 'client') {
+      return res.status(403).json({
+        status: res.statusCode,
+        msg: 'You are forbidden to view this endpoint'
+      });
+    }
+    await client.query('SELECT * FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
+      if (data.rowCount === 0) {
+        return res.status(404).json({
+          status: res.statusCode,
+          msg: 'Account not found'
+        });
+      }
+      const query = 'SELECT * FROM transactions WHERE accountnumber = $1';
+      client.query(query, [accountNumber], (selectErr, transactions) => {
+        if (selectErr) {
+          return res.status(500).json({
+            msg: 'Internal server error'
+          });
+        }
+        return res.status(200).json({
+          status: res.statusCode,
+          data: transactions.rows
+        });
+      });
+    });
   }
 }

@@ -15,4 +15,6 @@ router.get('/:accountNumber', authenticateUser.verifyUser, accountController.vie
 
 router.get('/', authenticateUser.verifyUser, accountController.viewAllAccounts);
 
+router.get('/:accountNumber/transactions', authenticateUser.verifyUser, accountController.getTransactionHistory);
+
 export default router;
