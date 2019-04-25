@@ -119,4 +119,35 @@ export default class TransactionController {
       });
     });
   }
+
+  /**
+    * @method creditAccount
+    * @description credit a specific account
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static async getSpecificTransaction(req, res) {
+    const { transactionId } = req.params;
+
+    const { type } = req.user;
+    if (type !== 'staff') {
+      return res.status(403).json({
+        status: res.statusCode,
+        msg: 'You are forbidden to view this endpoint'
+      });
+    }
+    const query = 'SELECT * FROM transactions WHERE id = $1';
+    await client.query(query, [transactionId], (err, data) => {
+      if (data.rowCount > 0) {
+        return res.status(200).json({
+          status: res.statusCode,
+          data: data.rows[0]
+        });
+      }
+      return res.status(404).json({
+        status: res.statusCode,
+        msg: 'transaction not found'
+      });
+    });
+  }
 }
