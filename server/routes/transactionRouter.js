@@ -9,4 +9,6 @@ router.post('/:accountNumber/credit', inputValidator.creditAccount, authenticate
 
 router.post('/:accountNumber/debit', authenticateUser.verifyStaff, inputValidator.debitAccount, transactionController.debitAccount);
 
+router.get('/:transactionId', authenticateUser.verifyUser, transactionController.getSpecificTransaction);
+
 export default router;
