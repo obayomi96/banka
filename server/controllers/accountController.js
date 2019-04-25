@@ -130,4 +130,55 @@ export default class AccountController {
       });
     });
   }
+
+  /**
+    * @method viewAccount
+    * @description User viewaccount details
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    */
+  static async viewAccount(req, res) {
+    const { accountNumber } = req.params;
+    await client.query('SELECT * FROM accounts WHERE accountNumber = $1', [accountNumber], (err, data) => {
+      if (req.user.type !== 'client') {
+        return res.status(403).json({
+          msg: 'You are forbidden to view this endpoint'
+        });
+      }
+      if (data.rowCount === 0) {
+        return res.status(404).json({
+          status: res.statusCode,
+          msg: 'Account not found'
+        });
+      }
+      const accountDetails = [
+        data.rows[0].id,
+        data.rows[0].balance,
+        req.user.id,
+        data.rows[0].createdon,
+        data.rows[0].type,
+        req.user.email,
+        data.rows[0].status,
+      ];
+      const query = 'SELECT * FROM accounts WHERE accountnumber = $1';
+      client.query(query, [accountNumber], (selectErr) => {
+        if (selectErr) {
+          return res.status(500).json({
+            msg: 'Internal server error'
+          });
+        }
+        return res.status(200).json({
+          status: res.statusCode,
+          data: {
+            createdOn: accountDetails[3],
+            accountNumber,
+            ownerEmail: accountDetails[5],
+            type: accountDetails[4],
+            status: accountDetails[6],
+            balance: accountDetails[1]
+          }
+        });
+      });
+    });
+  }
 }
