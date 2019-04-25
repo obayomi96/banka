@@ -38,7 +38,6 @@ export default class UserController {
       const token = auth.generateToken({ user });
       const query = 'INSERT INTO users (id, firstname, lastname, email, password, type, isAdmin) VALUES ($1, $2, $3, $4, $5, $6, $7)';
       client.query(query, user, (insertErr) => {
-        console.log('inserErr', insertErr);
         if (insertErr) {
           return res.status(500).json({
             msg: 'Internal server error'

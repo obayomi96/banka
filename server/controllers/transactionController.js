@@ -121,8 +121,8 @@ export default class TransactionController {
   }
 
   /**
-    * @method creditAccount
-    * @description credit a specific account
+    * @method getSpecificTransaction
+    * @description Get a specific transaction
     * @param {object} req - The Request Object
     * @param {object} res - The Response Object
     */
@@ -130,7 +130,7 @@ export default class TransactionController {
     const { transactionId } = req.params;
 
     const { type } = req.user;
-    if (type !== 'staff') {
+    if (type !== 'client') {
       return res.status(403).json({
         status: res.statusCode,
         msg: 'You are forbidden to view this endpoint'
