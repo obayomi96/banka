@@ -197,17 +197,35 @@ export default class AccountController {
       });
     }
     const query = 'SELECT * FROM accounts';
-    await client.query(query, (err, data) => {
-      if (data.rowCount === 0) {
+    const activeAccountsQuery = 'SELECT * FROM accounts WHERE status = $1';
+    const { status } = req.query;
+    if (status) {
+      await client.query(activeAccountsQuery, [status], (err, data) => {
+        console.log('activeErr', err);
+        if (data.rowCount > 0) {
+          return res.status(200).json({
+            status: res.statusCode,
+            data: data.rows[0]
+          });
+        }
         return res.status(404).json({
           status: res.statusCode,
           msg: 'No Accounts found'
         });
-      }
-      return res.status(200).json({
-        status: res.statusCode,
-        data: data.rows,
       });
-    });
+    } else {
+      await client.query(query, (err, data) => {
+        if (data.rowCount === 0) {
+          return res.status(404).json({
+            status: res.statusCode,
+            msg: 'No Accounts found'
+          });
+        }
+        return res.status(200).json({
+          status: res.statusCode,
+          data: data.rows
+        });
+      });
+    }
   }
 }
