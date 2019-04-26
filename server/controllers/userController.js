@@ -3,7 +3,7 @@ import client from '../migrations/db';
 export default class UserController {
   /**
     * @method getAllAccountByUser
-    * @description get all accounts a user has a specific account
+    * @description get all accounts owned by a specific user
     * @param {object} req - The Request Object
     * @param {object} res - The Response Object
     */
@@ -28,7 +28,8 @@ export default class UserController {
       if (data.rowCount > 0) {
         return res.status(200).json({
           status: res.statusCode,
-          data: accountDetails
+          data: accountDetails,
+          msg: 'All accounts owned by this user'
         });
       }
       return res.status(404).json({

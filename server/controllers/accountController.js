@@ -173,7 +173,8 @@ export default class AccountController {
             type: accountDetails[4],
             status: accountDetails[6],
             balance: accountDetails[1]
-          }
+          },
+          msg: 'User account details'
         });
       });
     });
