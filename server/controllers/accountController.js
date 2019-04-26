@@ -12,7 +12,7 @@ export default class AccountController {
     const { body: { initialDeposit, type } } = req;
     const accNoGen = Math.floor(Math.random() * 1000000000).toString();
     const accountNumber = accNoGen;
-    const owner = req.user.email;
+    const owner = req.user.id;
 
     const accountId = uuidv4();
     const account = [
@@ -25,43 +25,39 @@ export default class AccountController {
       parseFloat(initialDeposit)
     ];
     await client.query('SELECT * FROM accounts WHERE owner = $1', [owner], (err, data) => {
-      if (data.rowCount > 0) {
-        return res.status(409).json({
-          status: res.statusCode,
-          msg: 'You have an existing bank account!'
+      if (!data.rowCount || data.rowCount) {
+        const query = 'INSERT INTO accounts (id, accountnumber, owner, createdon, type, status, balance) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+        const accountData = {
+          id: accountId,
+          accountNumber: account[1],
+          firstname: req.user.firstname,
+          lastname: req.user.lastname,
+          email: req.user.email,
+          type: account[4],
+          status: account[5],
+          openingbalance: account[6]
+        };
+        client.query(query, account, (insertErr) => {
+          if (insertErr) {
+            return res.status(500).json({
+              msg: 'Internal server error'
+            });
+          }
+          return res.status(201).json({
+            status: res.statusCode,
+            data: {
+              id: account[0],
+              accountNumber: account[1],
+              firstname: accountData.firstname,
+              lastname: accountData.lastname,
+              email: accountData.email,
+              type: accountData.type,
+              openingbalance: accountData.openingbalance
+            },
+            msg: 'Account created successfully'
+          });
         });
       }
-      const query = 'INSERT INTO accounts (id, accountnumber, owner, createdon, type, status, balance) VALUES ($1, $2, $3, $4, $5, $6, $7)';
-      const accountData = {
-        id: accountId,
-        accountNumber: account[1],
-        firstname: req.user.firstname,
-        lastname: req.user.lastname,
-        email: req.user.email,
-        type: account[4],
-        status: account[5],
-        openingbalance: account[6]
-      };
-      client.query(query, account, (insertErr) => {
-        if (insertErr) {
-          return res.status(500).json({
-            msg: 'Internal server error'
-          });
-        }
-        return res.status(201).json({
-          status: res.statusCode,
-          data: {
-            id: account[0],
-            accountNumber: account[1],
-            firstname: accountData.firstname,
-            lastname: accountData.lastname,
-            email: accountData.email,
-            type: accountData.type,
-            openingbalance: accountData.openingbalance
-          },
-          msg: 'Account created successfully'
-        });
-      });
     });
   }
 

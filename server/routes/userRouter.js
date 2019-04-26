@@ -1,13 +1,9 @@
 import express from 'express';
+import authenticateUser from '../middlewares/authenticateUser';
 import userController from '../controllers/userController';
-import inputValidator from '../middlewares/validator';
 
 const router = express.Router();
 
-// User sign up route
-router.post('/signup', inputValidator.userSignup, userController.signUp);
-
-// User sign in route
-router.post('/signin', inputValidator.userSignin, userController.signIn);
+router.get('/:userEmail/accounts', authenticateUser.verifyUser, userController.getAllAccountByUser);
 
 export default router;
