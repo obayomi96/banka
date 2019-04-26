@@ -12,7 +12,7 @@ const query = async (queryString) => {
   });
   pool.query(queryString)
     .then((res) => {
-      console.log(res);
+      console.log('queryRes', res);
       pool.end();
     })
     .catch((err) => {

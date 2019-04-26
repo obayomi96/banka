@@ -11,7 +11,6 @@
     "start": "node dist/index.js",
     "postinstall": "npm run build",
     "start-dev": "nodemon --exec babel-node --presets=@babel/env server/index.js",
-    "initDb": "- psql -U plzdlwpz -f banka.sql",
     "migrations": "babel-node server/migrations/dropTables && babel-node server/migrations/droptcreateTablesables && babel-node server/migrations/seed",
     "build": "rm -rf ./dist && babel server --out-dir dist"
   },

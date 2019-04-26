@@ -71,11 +71,12 @@ export default class UserController {
     const { body: { email, password } } = req;
     const query = 'SELECT * FROM users WHERE email=$1';
     client.query(query, [email], (err, data) => {
+      console.log('err', err);
       if (data.rowCount > 0) {
         const compare = bcrypt.compareSync(password, data.rows[0].password);
         if (!compare) {
           return res.status(404).json({
-            status: 404,
+            status: res.statusCode,
             error: 'Invalid email or password'
           });
         }

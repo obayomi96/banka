@@ -9,12 +9,12 @@ router.post('/', inputValidator.createAccount, authenticateUser.verifyUser, acco
 
 router.patch('/:accountNumber', inputValidator.accountStatus, authenticateUser.verifyAdmin, accountController.accountStatus);
 
-router.delete('/:accountNumber', authenticateUser.verifyAdmin, accountController.deleteAccount);
+router.delete('/:accountNumber', inputValidator.deleteAccount, authenticateUser.verifyAdmin, accountController.deleteAccount);
 
-router.get('/:accountNumber', authenticateUser.verifyUser, accountController.viewAccount);
+router.get('/:accountNumber', inputValidator.accountNumberParams, authenticateUser.verifyUser, accountController.viewAccount);
 
 router.get('/', authenticateUser.verifyUser, accountController.viewAllAccounts);
 
-router.get('/:accountNumber/transactions', authenticateUser.verifyUser, accountController.getTransactionHistory);
+router.get('/:accountNumber/transactions', inputValidator.accountNumberParams, authenticateUser.verifyUser, accountController.getTransactionHistory);
 
 export default router;
