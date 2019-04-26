@@ -22,16 +22,16 @@ describe('Users auth Tests', () => {
     //     .end((err, res) => {
     //       if (err) return done(err);
     //       expect(res.status).to.equal(201);
-    //       expect(res.body).to.be.an('object');
+    //       expect(res.body).to.be.a('array');
     //       expect(res.body).to.have.property('data');
-    //       expect(res.body.data).to.have.property('id');
-    //       expect(res.body.data).to.have.property('token');
-    //       expect(res.body.data).to.have.property('msg');
-    //       expect(res.body.data.msg).to.equal('Account created successfully!');
-    //       expect(res.body.data.firstname).to.equal(user.firstname);
-    //       expect(res.body.data.lastname).to.equal(user.lastname);
-    //       expect(res.body.data.email).to.equal(user.email);
-    //       expect(res.body.data.password).to.equal(user.password);
+    //       expect(res.body.data[0]).to.have.property('id');
+    //       expect(res.body.data[0]).to.have.property('token');
+    //       expect(res.body.data[0]).to.have.property('msg');
+    //       expect(res.body.data[0].msg).to.equal('Account created successfully!');
+    //       expect(res.body.data[0].firstname).to.equal(user.firstname);
+    //       expect(res.body.data[0].lastname).to.equal(user.lastname);
+    //       expect(res.body.data[0].email).to.equal(user.email);
+    //       expect(res.body.data[0].password).to.equal(user.password);
     //       done();
     //     });
     // });
@@ -47,7 +47,7 @@ describe('Users auth Tests', () => {
     //     .send(user)
     //     .end((err, res) => {
     //       expect(res.status).to.equal(409);
-    //       expect(res.body).to.be.an('object');
+    //       expect(res.body).to.be.a('array');
     //       expect(res.body).to.have.property('msg');
     //       expect(res.body.msg).to.equal('User already exists!');
     //       done();
