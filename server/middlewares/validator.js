@@ -165,7 +165,6 @@ const deleteAccount = [
 
 const accountNumberParams = [
   param('accountNumber').isNumeric().withMessage('Invalid! account number can only be a numeric value'),
-  param('accountNumber').not().isAlphanumeric().withMessage('Invalid! account number can only be a numeric value'),
   (req, res, next) => {
     const errors = validationResult(req);
     const errorMsg = [];
