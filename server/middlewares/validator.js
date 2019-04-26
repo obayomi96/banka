@@ -1,4 +1,9 @@
-import { check, validationResult, oneOf } from 'express-validator/check';
+import {
+  check,
+  param,
+  validationResult,
+  oneOf
+} from 'express-validator/check';
 
 const userSignup = [
   check('firstname').not().isEmpty().withMessage('First field name is required'),
@@ -27,6 +32,7 @@ const userSignup = [
 
 const userSignin = [
   check('email').not().isEmpty().withMessage('Email field is required'),
+  check('email').isEmail().trim().withMessage('Please use a valid email address'),
   check('password').not().isEmpty().withMessage('Password field is required'),
   (req, res, next) => {
     const errors = validationResult(req);
@@ -69,13 +75,15 @@ const createAccount = [
   }
 ];
 
-const statMessage = 'Account status must be dormant or active';
+const statusMessage = 'Account status must be dormant or active';
 const accountStatus = [
+  param('accountNumber').not().isEmpty().withMessage('Please parse an account number as params'),
+  param('accountNumber').isNumeric().withMessage('Invalid! account number can only be a numeric value'),
   check('status').not().isEmpty().withMessage('Please specify new account status'),
   oneOf([
     check('status').equals('dormant'),
     check('status').equals('active')
-  ], statMessage),
+  ], statusMessage),
   (req, res, next) => {
     const errors = validationResult(req);
     const errorMsg = [];
@@ -95,6 +103,9 @@ const accountStatus = [
 const creditAccount = [
   check('amount').not().isEmpty().withMessage('Please input an amount to credit this account'),
   check('amount').isNumeric().withMessage('Please input a valid amount to credit this account'),
+  check('amount').isLength({ min: 0 }).withMessage('Amount cannot be lower than 0.00'),
+  param('accountNumber').not().isEmpty().withMessage('Please parse an account number as params'),
+  param('accountNumber').isNumeric().withMessage('Invalid! account number can only be a numeric value'),
   (req, res, next) => {
     const errors = validationResult(req);
     const errorMsg = [];
@@ -113,7 +124,84 @@ const creditAccount = [
 
 const debitAccount = [
   check('amount').not().isEmpty().withMessage('Please input an amount to debit this account'),
-  check('amount').isNumeric().withMessage('Please input a valid amount to debit this account'),
+  check('amount').isFloat().withMessage('Please input a valid amount to debit this account'),
+  check('amount').isLength({ min: 0 }).withMessage('Amount cannot be lower than 0.00'),
+  param('accountNumber').not().isEmpty().withMessage('Please parse an account number as params'),
+  param('accountNumber').isNumeric().withMessage('Invalid! account number can only be a numeric value'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(400).json({
+        status: 400,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
+
+const deleteAccount = [
+  param('accountNumber').not().isEmpty().withMessage('Please parse an account number as param'),
+  param('accountNumber').isNumeric().withMessage('Invalid! account number can only be a numeric value'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(400).json({
+        status: 400,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
+
+const accountNumberParams = [
+  param('accountNumber').isNumeric().withMessage('Invalid! account number can only be a numeric value'),
+  param('accountNumber').not().isAlphanumeric().withMessage('Invalid! account number can only be a numeric value'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(400).json({
+        status: 400,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
+
+const emailParams = [
+  param('userEmail').isEmail().trim().withMessage('Please use a valid email address'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errorMsg = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        errorMsg.push(error.msg);
+      });
+      return res.status(400).json({
+        status: 400,
+        error: errorMsg
+      });
+    }
+    return next();
+  }
+];
+
+const transactionIdParams = [
+  param('transactionId').not().isEmpty().withMessage('Please parse valid a transactionId'),
   (req, res, next) => {
     const errors = validationResult(req);
     const errorMsg = [];
@@ -136,5 +224,9 @@ export default {
   createAccount,
   accountStatus,
   creditAccount,
-  debitAccount
+  debitAccount,
+  deleteAccount,
+  accountNumberParams,
+  emailParams,
+  transactionIdParams
 };

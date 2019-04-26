@@ -8,51 +8,51 @@ const usersEndPoint = `${apiEndPoint}auth/`;
 
 describe('Users auth Tests', () => {
   describe(`POST ${usersEndPoint}signup`, () => {
-    // it('Should create a new user', (done) => {
-    //   const user = {
-    //     email: 'newUsr@mail.com',
-    //     firstname: 'newUsrFirstname',
-    //     lastname: 'newUsrLastname',
-    //     password: 'newUsrPW'
-    //   };
-    //   request
-    //     .post(`${usersEndPoint}signup`)
-    //     .set('content-type', 'application/json')
-    //     .send(user)
-    //     .end((err, res) => {
-    //       if (err) return done(err);
-    //       expect(res.status).to.equal(201);
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body).to.have.property('data');
-    //       expect(res.body.data).to.have.property('id');
-    //       expect(res.body.data).to.have.property('token');
-    //       expect(res.body.data).to.have.property('msg');
-    //       expect(res.body.data.msg).to.equal('Account created successfully!');
-    //       expect(res.body.data.firstname).to.equal(user.firstname);
-    //       expect(res.body.data.lastname).to.equal(user.lastname);
-    //       expect(res.body.data.email).to.equal(user.email);
-    //       expect(res.body.data.password).to.equal(user.password);
-    //       done();
-    //     });
-    // });
-    // it('Should return 409 if user email already exist', (done) => {
-    //   const user = {
-    //     firstname: 'Oluwaseun',
-    //     lastname: 'Christopher',
-    //     email: 'new@email.com',
-    //     password: 'userPW'
-    //   };
-    //   request
-    //     .post(`${usersEndPoint}signup`)
-    //     .send(user)
-    //     .end((err, res) => {
-    //       expect(res.status).to.equal(409);
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body).to.have.property('msg');
-    //       expect(res.body.msg).to.equal('User already exists!');
-    //       done();
-    //     });
-    // });
+    it('Should create a new user', (done) => {
+      const user = {
+        email: 'newUsr@mail.com',
+        firstname: 'newUsrFirstname',
+        lastname: 'newUsrLastname',
+        password: 'newUsrPW'
+      };
+      request
+        .post(`${usersEndPoint}signup`)
+        .set('content-type', 'application/json')
+        .send(user)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(201);
+          expect(res.body).to.be.a('array');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data[0]).to.have.property('id');
+          expect(res.body.data[0]).to.have.property('token');
+          expect(res.body.data[0]).to.have.property('msg');
+          expect(res.body.data[0].msg).to.equal('Account created successfully!');
+          expect(res.body.data[0].firstname).to.equal(user.firstname);
+          expect(res.body.data[0].lastname).to.equal(user.lastname);
+          expect(res.body.data[0].email).to.equal(user.email);
+          expect(res.body.data[0].password).to.equal(user.password);
+          done();
+        });
+    });
+    it('Should return 409 if user email already exist', (done) => {
+      const user = {
+        firstname: 'Oluwaseun',
+        lastname: 'Christopher',
+        email: 'new@email.com',
+        password: 'userPW'
+      };
+      request
+        .post(`${usersEndPoint}signup`)
+        .send(user)
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.body).to.be.a('array');
+          expect(res.body).to.have.property('msg');
+          expect(res.body.msg).to.equal('User already exists!');
+          done();
+        });
+    });
     it('Should return 400 if firstname is empty', (done) => {
       const user = {
         lastname: 'Christopher',
