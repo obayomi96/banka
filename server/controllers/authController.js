@@ -29,7 +29,7 @@ export default class UserController {
       false
     ];
     await client.query('SELECT * FROM users WHERE email = $1', [email], (err, data) => {
-      if (data.rowCount > 0) {
+      if (data && data.rowCount > 0) {
         return res.status(409).json({
           status: res.statusCode,
           msg: 'User already exists!'
@@ -39,6 +39,7 @@ export default class UserController {
       const query = 'INSERT INTO users (id, firstname, lastname, email, password, type, isAdmin) VALUES ($1, $2, $3, $4, $5, $6, $7)';
       client.query(query, user, (insertErr) => {
         if (insertErr) {
+          console.log(insertErr);
           return res.status(500).json({
             msg: 'Internal server error'
           });

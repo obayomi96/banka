@@ -7,12 +7,12 @@ import pool from './db';
   * @returns {*} nothing
   */
 const query = async (queryString) => {
+  console.log(queryString);
   pool.on('connect', () => {
     console.log('connected to the db');
   });
   pool.query(queryString)
-    .then((res) => {
-      console.log('queryRes', res);
+    .then(() => {
       pool.end();
     })
     .catch((err) => {
@@ -22,6 +22,7 @@ const query = async (queryString) => {
 
   pool.on('remove', () => {
     console.log('client removed');
+    process.exit();
   });
 };
 
