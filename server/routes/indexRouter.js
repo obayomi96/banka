@@ -1,7 +1,8 @@
 import express from 'express';
-import userRouter from './userRouter';
+import authRouter from './authRouter';
 import accountRouter from './accountRouter';
 import transactionRouter from './transactionRouter';
+import userRouter from './userRouter';
 
 const router = express.Router();
 
@@ -12,8 +13,9 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use('/auth', userRouter);
+router.use('/auth', authRouter);
 router.use('/accounts', accountRouter);
 router.use('/transactions', transactionRouter);
+router.use('/users', userRouter);
 
 export default router;
