@@ -41,7 +41,6 @@
     "@babel/plugin-transform-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/register": "^7.0.0",
-    "@babel/runtime": "^7.1.5",
     "babel-plugin-istanbul": "^5.1.0",
     "chai": "^4.2.0",
     "codeclimate-test-reporter": "^0.5.1",
@@ -60,6 +59,7 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.5",
     "@babel/polyfill": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
