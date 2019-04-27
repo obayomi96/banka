@@ -39,7 +39,6 @@ export default class UserController {
       const query = 'INSERT INTO users (id, firstname, lastname, email, password, type, isAdmin) VALUES ($1, $2, $3, $4, $5, $6, $7)';
       client.query(query, user, (insertErr) => {
         if (insertErr) {
-          console.log(insertErr);
           return res.status(500).json({
             msg: 'Internal server error'
           });
@@ -72,7 +71,6 @@ export default class UserController {
     const { body: { email, password } } = req;
     const query = 'SELECT * FROM users WHERE email=$1';
     client.query(query, [email], (err, data) => {
-      console.log('err', err);
       if (data.rowCount > 0) {
         const compare = bcrypt.compareSync(password, data.rows[0].password);
         if (!compare) {
@@ -96,7 +94,7 @@ export default class UserController {
             token,
             id: data.rows[0].id,
             firstname: data.rows[0].firstname,
-            latename: data.rows[0].lastname,
+            lastname: data.rows[0].lastname,
             email: data.rows[0].email,
           },
           msg: `Login success!, welcome ${user.firstname}`

@@ -1,10 +1,10 @@
-import { expect } from 'chai';
-import supertest from 'supertest';
-import app from '../app';
+// import { expect } from 'chai';
+// import supertest from 'supertest';
+// import app from '../app';
 
-const request = supertest(app);
+// const request = supertest(app);
 const apiEndPoint = '/api/v1/';
-const usersEndPoint = `${apiEndPoint}auth/`;
+// const usersEndPoint = `${apiEndPoint}auth/`;
 const transactionEndPoint = `${apiEndPoint}transactions/`;
 
 describe(`POST ${transactionEndPoint}:accountNumber/credit`, () => {
