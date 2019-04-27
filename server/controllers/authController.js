@@ -19,7 +19,7 @@ export default class UserController {
     } = req.body;
     const hashed = await bcrypt.hashSync(password, 10);
     const id = uuidv4();
-    const user = [
+    const userData = [
       id,
       firstname,
       lastname,
@@ -28,6 +28,15 @@ export default class UserController {
       'client',
       false
     ];
+    const user = {
+      id: userData[0],
+      firstname: userData[1],
+      lastname: userData[2],
+      email: userData[3],
+      password: userData[4],
+      type: userData[5],
+      isadmin: userData[6]
+    };
     await client.query('SELECT * FROM users WHERE email = $1', [email], (err, data) => {
       if (data && data.rowCount > 0) {
         return res.status(409).json({
@@ -35,9 +44,9 @@ export default class UserController {
           msg: 'User already exists!'
         });
       }
-      const token = auth.generateToken({ user });
+      const token = auth.generateToken(user);
       const query = 'INSERT INTO users (id, firstname, lastname, email, password, type, isAdmin) VALUES ($1, $2, $3, $4, $5, $6, $7)';
-      client.query(query, user, (insertErr) => {
+      client.query(query, userData, (insertErr) => {
         if (insertErr) {
           return res.status(500).json({
             msg: 'Internal server error'
@@ -47,13 +56,13 @@ export default class UserController {
           status: res.statusCode,
           data: {
             token,
-            id: user[0],
-            firstname: user[1],
-            lastname: user[2],
-            email: user[3],
-            password: user[4],
-            type: user[5],
-            isAdmin: user[6]
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            password: user.password,
+            type: user.type,
+            isAdmin: user.isadmin
           },
           msg: 'Account created successfully!'
         });

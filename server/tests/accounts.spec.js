@@ -5,53 +5,56 @@ import app from '../app';
 
 const request = supertest(app);
 const apiEndPoint = '/api/v1/';
-// const usersEndPoint = `${apiEndPoint}auth/`;
+const usersEndPoint = `${apiEndPoint}auth/`;
 const accountEndPoint = `${apiEndPoint}accounts/`;
 
 describe(`POST ${accountEndPoint}`, () => {
-  // it('Should create a bank account', (done) => {
-  //   const login = {
-  //     email: 'franca@gmail.com',
-  //     password: 'user3pw'
-  //   };
-  //   request
-  //     .post(`${usersEndPoint}signin`)
-  //     .send(login)
-  //     .end((usrLoginErr, usrLoginRes) => {
-  //       const token = `Bearer ${usrLoginRes.body.data.token}`;
-  //       const usrInput = {
-  //         type: 'current',
-  //         initialDeposit: 50.50
-  //       };
-  //       request
-  //         .post(`${accountEndPoint}`)
-  //         .set('Authorization', token)
-  //         .send(usrInput)
-  //         .end((err, res) => {
-  //           if (err) return done(err);
-  //           expect(res.status).to.equal(201);
-  //           expect(res.body).to.have.property('status');
-  //           expect(res.body.status).to.equal(201);
-  //           expect(res.body).to.have.property('data');
-  //           expect(res.body.data).to.be.an('object');
-  //           expect(res.body.data).to.have.property('id');
-  //           expect(res.body.data.id).to.be.a('string');
-  //           expect(res.body.data).to.have.property('accountNumber');
-  //           expect(res.body.data.accountNumber).to.be.a('number');
-  //           expect(res.body.data).to.have.property('firstname');
-  //           expect(res.body.data.firstName).to.be.a('string');
-  //           expect(res.body.data).to.have.property('lastname');
-  //           expect(res.body.data.lastName).to.be.a('string');
-  //           expect(res.body.data).to.have.property('email');
-  //           expect(res.body.data.email).to.be.a('string');
-  //           expect(res.body.data).to.have.property('type');
-  //           expect(res.body.data.type).to.be.a('string');
-  //           expect(res.body.data.openingBalance).to.equal(usrInput.initialDeposit);
-  //           expect(res.body.data.type).to.equal(usrInput.type);
-  //           done();
-  //         });
-  //     });
-  // });
+  it('Should create a bank account', (done) => {
+    const signup = {
+      firstname: 'testfirstname',
+      lastname: 'testlastname',
+      email: 'test@mail.com',
+      password: 'testPW'
+    };
+    request
+      .post(`${usersEndPoint}signup`)
+      .send(signup)
+      .end((usrLoginErr, usrLoginRes) => {
+        const token = `Bearer ${usrLoginRes.body.data.token}`;
+        const usrInput = {
+          type: 'current',
+          initialDeposit: 50.50
+        };
+        request
+          .post(`${accountEndPoint}`)
+          .set('Authorization', token)
+          .send(usrInput)
+          .end((err, res) => {
+            if (err) return done(err);
+            expect(res.status).to.equal(201);
+            expect(res.body).to.have.property('status');
+            expect(res.body.status).to.equal(201);
+            expect(res.body).to.have.property('data');
+            expect(res.body.data).to.be.an('object');
+            expect(res.body.data).to.have.property('id');
+            expect(res.body.data.id).to.be.a('string');
+            expect(res.body.data).to.have.property('accountNumber');
+            expect(res.body.data.accountNumber).to.be.a('string');
+            expect(res.body.data).to.have.property('firstname');
+            expect(res.body.data.firstname).to.be.a('string');
+            expect(res.body.data.firstname).to.equal(signup.firstname);
+            expect(res.body.data).to.have.property('lastname');
+            expect(res.body.data.lastname).to.be.a('string');
+            expect(res.body.data.lastname).to.equal(signup.lastname).to.be.a('string');
+            expect(res.body.data.email).to.equal(signup.email);
+            expect(res.body.data).to.have.property('type');
+            expect(res.body.data.type).to.be.a('string');
+            expect(res.body.data).to.have.property('openingbalance');
+            expect(res.body.data.openingbalance).to.equal(usrInput.initialDeposit);
+            done();
+          });
+      });
+  });
   it('Should return 400 if account type and initial deposit fields are empty', (done) => {
     const userInput = {
       type: '',
