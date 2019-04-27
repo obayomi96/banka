@@ -21,17 +21,23 @@ describe('Users auth Tests', () => {
         .send(user)
         .end((err, res) => {
           if (err) return done(err);
-          console.log(res.body);
           expect(res.status).to.equal(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body.status).to.equal(201);
           expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.an('object');
           expect(res.body).to.have.property('msg');
           expect(res.body.msg).to.equal('Account created successfully!');
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('token');
           expect(res.body.data).to.have.property('id');
-          expect(res.body.data.firstname).to.equal(user.firstname);
-          expect(res.body.data.lastname).to.equal(user.lastname);
-          expect(res.body.data.email).to.equal(user.email);
+          expect(res.body.data.id).to.be.a('string');
+          expect(res.body.data).to.have.property('email');
+          expect(res.body.data.email).to.be.a('string');
+          expect(res.body.data).to.have.property('firstname');
+          expect(res.body.data.firstname).to.be.a('string');
+          expect(res.body.data).to.have.property('lastname');
+          expect(res.body.data.lastname).to.be.a('string');
           done();
         });
     });
@@ -119,26 +125,33 @@ describe('Users auth Tests', () => {
   });
 
   describe(`POST ${usersEndPoint}signin`, () => {
-    // it('Should login a valid user', (done) => {
-    //   const login = {
-    //     email: 'emmatexi@gmail.com',
-    //     password: 'user4pw'
-    //   };
-    //   request
-    //     .post(`${usersEndPoint}signin`)
-    //     .set('content-type', 'application/json')
-    //     .send(login)
-    //     .end((err, res) => {
-    //       if (err) return done(err);
-    //       expect(res.status).to.equal(200);
-    //       expect(res.body).to.have.property('data');
-    //       expect(res.body.data).to.be.an('object');
-    //       expect(res.body.data).to.have.property('token');
-    //       expect(res.body.data.email).to.equal(login.email);
-    //       expect(res.body.data.password).to.equal(login.user4pw);
-    //       done();
-    //     });
-    // });
+    it('Should login a valid user', (done) => {
+      const login = {
+        email: 'newUsr@mail.com',
+        password: 'newUsrPW'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .set('content-type', 'application/json')
+        .send(login)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body).to.be.a('object');
+          expect(res.body.status).to.equal(200);
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.a('object');
+          expect(res.body.data).to.have.property('token');
+          expect(res.body.data.token).to.be.a('string');
+          expect(res.body.data).to.have.property('firstname');
+          expect(res.body.data.firstname).to.be.a('string');
+          expect(res.body.data).to.have.property('lastname');
+          expect(res.body.data.lastname).to.be.a('string');
+          expect(res.body.data).to.have.property('email');
+          expect(res.body.data.email).to.be.a('string');
+          done();
+        });
+    });
     it('Should return 400 if email field is empty', (done) => {
       const login = {
         email: '',
@@ -169,21 +182,21 @@ describe('Users auth Tests', () => {
           done();
         });
     });
-    // it('Should return 400 if the user is not Authenticated', (done) => {
-    //   const login = {
-    //     email: 'whatever@email.com',
-    //     password: 'whateverPW'
-    //   };
-    //   request
-    //     .post(`${usersEndPoint}signin`)
-    //     .send(login)
-    //     .end((err, res) => {
-    //       expect(res.status).to.equal(400);
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body).to.have.property('msg');
-    //       expect(res.body.msg).to.equal('Authentication failed');
-    //       done();
-    //     });
-    // });
+    it('Should return 404 if the user is not found', (done) => {
+      const login = {
+        email: 'whatever@email.com',
+        password: 'whateverPW'
+      };
+      request
+        .post(`${usersEndPoint}signin`)
+        .send(login)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('msg');
+          expect(res.body.msg).to.equal('User not found');
+          done();
+        });
+    });
   });
 });
