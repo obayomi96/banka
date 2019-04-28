@@ -116,17 +116,19 @@ describe(`POST ${accountEndPoint}`, () => {
       });
   });
   describe(`PATCH ${accountEndPoint}:accountNumber`, () => {
-    // it('Should change an account status', (done) => {
-    //   const login = {
-    //     email: 'martinsoluwaseun47@gmail.com',
-    //     password: 'user1pw'
+    // it('Should update an account status', (done) => {
+    //   const signup = {
+    //     firstname: 'testfirstname',
+    //     lastname: 'testlastname',
+    //     email: 'test@mail.com',
+    //     password: 'testPW'
     //   };
     //   request
-    //     .post(`${usersEndPoint}signin`)
-    //     .send(login)
-    //     .end((usrLoginErr, usrLoginRes) => {
-    //       const token = `Bearer ${usrLoginRes.body.data.token}`;
-    //       const status = 'active';
+    //     .post(`${usersEndPoint}signup`)
+    //     .send(signup)
+    //     .end((usrSignupErr, usrSignupRes) => {
+    //       const token = `Bearer ${usrSignupRes.body.data.token}`;
+    //       const status = { status: 'active' };
     //       request
     //         .patch(`${accountEndPoint}3839943693`)
     //         .set('Authorization', token)
