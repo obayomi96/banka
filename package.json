@@ -4,7 +4,7 @@
   "description": "A light-weight core banking application",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test npm run migrations && nyc --reporter=lcov --reporter=text mocha --require @babel/polyfill --require @babel/register server/tests/*.spec.js --timeout 10000 --exit",
+    "test": "npm run migrations && cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --require @babel/polyfill --require @babel/register server/tests/*.spec.js --timeout 10000 --exit",
     "coverage": "npm run test && nyc report --reporter=text-lcov | coveralls",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "nyc": "nyc --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls",

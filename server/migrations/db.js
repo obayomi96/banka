@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.NODE_ENV === 'dev' ? process.env.DATABASE_URL : process.env.TEST_DATABASE_URL;
-
+const connectionString = process.env.NODE_ENV === 'test' ? process.env.TEST_DATABASE_URL : process.env.DATABASE_URL;
+console.log('conStr', connectionString);
+console.log('nodeEnv', process.env.NODE_ENV);
 const client = new Pool({
   connectionString
 });

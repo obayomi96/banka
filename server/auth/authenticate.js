@@ -13,7 +13,7 @@ export default class Auth {
     * @returns {string} token- jwt token
     */
   static generateToken(payload) {
-    const token = jwt.sign(payload, secretKey, { expiresIn: '2 days' });
+    const token = jwt.sign(payload, secretKey, { expiresIn: '5 days' });
     return token;
   }
 

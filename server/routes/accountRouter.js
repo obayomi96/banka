@@ -13,7 +13,7 @@ router.delete('/:accountNumber', inputValidator.deleteAccount, authenticateUser.
 
 router.get('/:accountNumber', inputValidator.accountNumberParams, authenticateUser.verifyUser, accountController.viewAccount);
 
-router.get('/', inputValidator.queryStatusEndpoint, authenticateUser.verifyUser, accountController.viewAllAccounts);
+router.get('/', authenticateUser.verifyUser, accountController.viewAllAccounts);
 
 router.get('/:accountNumber/transactions', inputValidator.accountNumberParams, authenticateUser.verifyUser, accountController.getTransactionHistory);
 

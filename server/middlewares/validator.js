@@ -53,8 +53,6 @@ const userSignin = [
 
 const typeMessage = 'Account type must be current or savings';
 const createAccount = [
-  check('initialDeposit').not().isEmpty().withMessage('You need an initial deposit to create an account'),
-  check('initialDeposit').isNumeric().trim().withMessage('Please enter a valid amount in digit'),
   check('type').not().isEmpty().withMessage('Please specify the type of account you want to create'),
   oneOf([
     check('type').equals('savings'),

@@ -3,6 +3,7 @@ import authRouter from './authRouter';
 import accountRouter from './accountRouter';
 import transactionRouter from './transactionRouter';
 import userRouter from './userRouter';
+import docsRouter from './docsRouter';
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.get('/', (req, res) => {
   });
 });
 
+router.use('/docs', docsRouter);
 router.use('/auth', authRouter);
 router.use('/accounts', accountRouter);
 router.use('/transactions', transactionRouter);
