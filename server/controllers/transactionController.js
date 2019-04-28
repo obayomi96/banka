@@ -27,7 +27,7 @@ export default class TransactionController {
         req.user.id,
         parseFloat(amount),
         data.rows[0].balance,
-        parseFloat((data.rows[0].balance + parseFloat(amount))).toFixed(2)
+        parseFloat((data.rows[0].balance + parseFloat(amount)))
       ];
 
       const query = 'UPDATE accounts SET balance = $1 WHERE accountnumber = $2';
@@ -49,10 +49,10 @@ export default class TransactionController {
             data: {
               transactionId: transaction[0],
               accountNumber: transaction[3],
-              amount: transaction[5],
+              amount: transaction[5].toFixed(2),
               cashier: transaction[4],
               transactionType: transaction[2],
-              accountBalance: transaction[7]
+              accountBalance: transaction[7].toFixed(2)
             },
             msg: 'Transaction Successfull'
           });
@@ -108,10 +108,10 @@ export default class TransactionController {
             data: {
               transactionId: transaction[0],
               accountNumber: transaction[3],
-              amount: transaction[5],
+              amount: transaction[5].toFixed(2),
               cashier: transaction[4],
               transactionType: transaction[2],
-              accountBalance: transaction[7]
+              accountBalance: transaction[7].toFixed(2)
             },
             msg: 'Transaction Successfull'
           });
@@ -130,7 +130,7 @@ export default class TransactionController {
     const { transactionId } = req.params;
 
     const { type } = req.user;
-    if (type !== 'client') {
+    if (type !== 'client' || type !== 'staff') {
       return res.status(403).json({
         status: res.statusCode,
         msg: 'You are forbidden to view this endpoint'

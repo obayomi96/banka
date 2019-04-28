@@ -9,7 +9,7 @@ export default class AccountController {
     * @param {object} res - The Response Object
     */
   static async createAccount(req, res) {
-    const { body: { initialDeposit, type } } = req;
+    const { type } = req.body;
     const accNoGen = Math.floor(Math.random() * 1000000000).toString();
     const accountNumber = accNoGen;
     const owner = req.user.id;
@@ -22,7 +22,7 @@ export default class AccountController {
       new Date(),
       type,
       'draft',
-      parseFloat(initialDeposit)
+      0.00
     ];
     await client.query('SELECT * FROM accounts WHERE owner = $1', [owner], (err, data) => {
       if (!data.rowCount || data.rowCount) {
@@ -52,7 +52,7 @@ export default class AccountController {
               lastname: accountData.lastname,
               email: accountData.email,
               type: accountData.type,
-              openingbalance: accountData.openingbalance
+              openingbalance: accountData.openingbalance.toFixed(2)
             },
             msg: 'Account created successfully'
           });
@@ -172,7 +172,7 @@ export default class AccountController {
             ownerEmail: accountDetails[5],
             type: accountDetails[4],
             status: accountDetails[6],
-            balance: accountDetails[1]
+            balance: accountDetails[1].toFixed(2)
           },
           msg: 'User account details'
         });
@@ -205,7 +205,7 @@ export default class AccountController {
           ownerEmail: each.email,
           type: each.type,
           status: each.status,
-          balance: each.balance
+          balance: each.balance.toFixed(2)
         }));
         if (queryData.rowCount > 0) {
           return res.status(200).json({
@@ -232,7 +232,7 @@ export default class AccountController {
           ownerEmail: each.email,
           type: each.type,
           status: each.status,
-          balance: each.balance
+          balance: each.balance.toFixed(2)
         }));
         return res.status(200).json({
           status: res.statusCode,
@@ -251,7 +251,7 @@ export default class AccountController {
   static async getTransactionHistory(req, res) {
     const { accountNumber } = req.params;
     const { type } = req.user;
-    if (type !== 'client') {
+    if (type !== 'client' || type !== 'staff') {
       return res.status(403).json({
         status: res.statusCode,
         msg: 'You are forbidden to view this endpoint'
