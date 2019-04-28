@@ -13,11 +13,15 @@ deposit money
 <a href="#Features">Features</a>
 <a href="#Installations">Installation</a>
 
+## Technologies
+
 Currently-
  - HyperText Mark-up Language (HTML)
  - Cascading Style Sheet (CSS)
  - Vanilla javaScript (ES6)
  - Node.js (Express framework)
+ - PostgresSQL (Dataase)
+ - Mocha Test Framework
 
 # Pivotal Tracker
 banka project is broken down into smaller tasks with Pivotal Tracker board for project management. The link to the relevant Pivotal Tracker board is (https://www.pivotaltracker.com/n/projects/2319910)
@@ -27,6 +31,9 @@ The API can be hosted at (https://obayomi-banka.herokuapp.com/api/v1/)
 
 # UI Templates
 The application is hosted online on gh-pages at (https://obayomi96.github.io/banka)
+
+# API documentation
+The applicaton's API is documented online with Postman at (https://documenter.getpostman.com/view/6846646/S1LpZWfz)
 
 # Features
 <ul>
