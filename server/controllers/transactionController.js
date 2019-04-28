@@ -86,7 +86,7 @@ export default class TransactionController {
         req.user.id,
         parseFloat(amount),
         data.rows[0].balance,
-        parseFloat((data.rows[0].balance - parseFloat(amount))).toFixed(2)
+        parseFloat((data.rows[0].balance - parseFloat(amount)))
       ];
 
       const query = 'UPDATE accounts SET balance = $1 WHERE accountnumber = $2';
