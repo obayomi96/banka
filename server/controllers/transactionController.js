@@ -128,9 +128,8 @@ export default class TransactionController {
     */
   static async getSpecificTransaction(req, res) {
     const { transactionId } = req.params;
-
-    const { type } = req.user;
-    if (type !== 'client' || type !== 'staff') {
+    const { type } = req.user.type;
+    if (type !== 'client' && type !== 'staff') {
       return res.status(403).json({
         status: res.statusCode,
         msg: 'You are forbidden to view this endpoint'

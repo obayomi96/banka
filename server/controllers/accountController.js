@@ -250,8 +250,7 @@ export default class AccountController {
     */
   static async getTransactionHistory(req, res) {
     const { accountNumber } = req.params;
-    const { type } = req.user;
-    if (type !== 'client' || type !== 'staff') {
+    if (req.user.type !== 'client') {
       return res.status(403).json({
         status: res.statusCode,
         msg: 'You are forbidden to view this endpoint'
@@ -271,9 +270,15 @@ export default class AccountController {
             msg: 'Internal server error'
           });
         }
-        return res.status(200).json({
+        if (transactions.length > 0) {
+          return res.status(200).json({
+            status: res.statusCode,
+            data: transactions.rows
+          });
+        }
+        return res.status(404).json({
           status: res.statusCode,
-          data: transactions.rows
+          msg: 'No transactions found'
         });
       });
     });
