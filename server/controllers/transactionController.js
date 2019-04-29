@@ -128,7 +128,7 @@ export default class TransactionController {
     */
   static async getSpecificTransaction(req, res) {
     const { transactionId } = req.params;
-    const { type } = req.user.type;
+    const { type } = req.user;
     if (type !== 'client' && type !== 'staff') {
       return res.status(403).json({
         status: res.statusCode,
