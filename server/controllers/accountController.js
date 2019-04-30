@@ -40,7 +40,7 @@ export default class AccountController {
         client.query(query, account, (insertErr) => {
           if (insertErr) {
             return res.status(500).json({
-              msg: 'Internal server error'
+              message: 'Internal server error'
             });
           }
           return res.status(201).json({
@@ -54,7 +54,7 @@ export default class AccountController {
               type: accountData.type,
               openingbalance: accountData.openingbalance.toFixed(2)
             },
-            msg: 'Account created successfully'
+            message: 'Account created successfully'
           });
         });
       }
@@ -75,7 +75,7 @@ export default class AccountController {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'Account not found'
+          message: 'Account not found'
         });
       }
       const query = 'UPDATE accounts SET status = $1 WHERE accountnumber = $2';
@@ -91,7 +91,7 @@ export default class AccountController {
             accountNumber,
             status
           },
-          msg: 'Account status updated successfully'
+          message: 'Account status updated successfully'
         });
       });
     });
@@ -109,19 +109,19 @@ export default class AccountController {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'Account not found'
+          message: 'Account not found'
         });
       }
       const query = 'DELETE FROM accounts WHERE accountnumber = $1';
       client.query(query, [accountNumber], (deleteErr) => {
         if (deleteErr) {
           return res.status(500).json({
-            msg: 'Internal server error'
+            message: 'Internal server error'
           });
         }
         return res.status(200).json({
           status: res.statusCode,
-          msg: 'Account deleted successfully!'
+          message: 'Account deleted successfully!'
         });
       });
     });
@@ -139,13 +139,13 @@ export default class AccountController {
       if (req.user.type !== 'client') {
         return res.status(403).json({
           status: res.statusCode,
-          msg: 'You are forbidden to view this endpoint'
+          message: 'You are forbidden to view this endpoint'
         });
       }
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'Account not found'
+          message: 'Account not found'
         });
       }
       const accountDetails = [
@@ -161,7 +161,7 @@ export default class AccountController {
       client.query(query, [accountNumber], (selectErr) => {
         if (selectErr) {
           return res.status(500).json({
-            msg: 'Internal server error'
+            message: 'Internal server error'
           });
         }
         return res.status(200).json({
@@ -174,7 +174,7 @@ export default class AccountController {
             status: accountDetails[6],
             balance: accountDetails[1].toFixed(2)
           },
-          msg: 'User account details'
+          message: 'User account details'
         });
       });
     });
@@ -190,7 +190,7 @@ export default class AccountController {
     if (req.user.type !== 'staff' || req.user.isAdmin !== true) {
       return res.status(403).json({
         status: res.statusCode,
-        msg: 'You are fobidden to view this endpoint'
+        message: 'You are fobidden to view this endpoint'
       });
     }
     // const query = 'SELECT * FROM accounts ';
@@ -215,7 +215,7 @@ export default class AccountController {
         }
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'No Accounts found'
+          message: 'No Accounts found'
         });
       });
     } else {
@@ -223,7 +223,7 @@ export default class AccountController {
         if (data.rowCount === 0) {
           return res.status(404).json({
             status: res.statusCode,
-            msg: 'No Accounts found'
+            message: 'No Accounts found'
           });
         }
         const accountDetails = data.rows.map(each => ({
@@ -253,21 +253,21 @@ export default class AccountController {
     if (req.user.type !== 'client') {
       return res.status(403).json({
         status: res.statusCode,
-        msg: 'You are forbidden to view this endpoint'
+        message: 'You are forbidden to view this endpoint'
       });
     }
     await client.query('SELECT * FROM accounts WHERE accountnumber = $1', [accountNumber], (err, data) => {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'Account not found'
+          message: 'Account not found'
         });
       }
       const query = 'SELECT * FROM transactions WHERE accountnumber = $1';
       client.query(query, [accountNumber], (selectErr, transactions) => {
         if (selectErr) {
           return res.status(500).json({
-            msg: 'Internal server error'
+            message: 'Internal server error'
           });
         }
         if (transactions.length > 0) {
@@ -278,7 +278,7 @@ export default class AccountController {
         }
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'No transactions found'
+          message: 'No transactions found'
         });
       });
     });
