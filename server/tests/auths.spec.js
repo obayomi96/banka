@@ -26,7 +26,7 @@ describe('Users auth Tests', () => {
           expect(res.body.status).to.equal(201);
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.be.an('object');
-          expect(res.body).to.have.property('msg');
+          expect(res.body).to.have.property('message');
           expect(res.body.msg).to.equal('Account created successfully!');
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('token');
@@ -53,7 +53,7 @@ describe('Users auth Tests', () => {
         .send(user)
         .end((err, res) => {
           expect(res.status).to.equal(409);
-          expect(res.body).to.have.property('msg');
+          expect(res.body).to.have.property('message');
           expect(res.body.msg).to.equal('User already exists!');
           done();
         });
@@ -193,7 +193,7 @@ describe('Users auth Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('msg');
+          expect(res.body).to.have.property('message');
           expect(res.body.msg).to.equal('User not found');
           done();
         });

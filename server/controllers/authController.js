@@ -41,7 +41,7 @@ export default class UserController {
       if (data && data.rowCount > 0) {
         return res.status(409).json({
           status: res.statusCode,
-          msg: 'User already exists!'
+          message: 'User already exists!'
         });
       }
       const token = auth.generateToken(user);
@@ -49,7 +49,7 @@ export default class UserController {
       client.query(query, userData, (insertErr) => {
         if (insertErr) {
           return res.status(500).json({
-            msg: 'Internal server error'
+            message: 'Internal server error'
           });
         }
         return res.status(201).json({
@@ -60,11 +60,10 @@ export default class UserController {
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
-            password: user.password,
             type: user.type,
             isAdmin: user.isadmin
           },
-          msg: 'Account created successfully!'
+          message: 'Account created successfully!'
         });
       });
     });
@@ -106,12 +105,12 @@ export default class UserController {
             lastname: data.rows[0].lastname,
             email: data.rows[0].email,
           },
-          msg: `Login success!, welcome ${user.firstname}`
+          message: `Login success!, welcome ${user.firstname}`
         });
       }
       return res.status(404).json({
         status: res.statusCode,
-        msg: 'User not found'
+        message: 'User not found'
       });
     });
   }

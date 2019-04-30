@@ -12,7 +12,7 @@ export default class UserController {
     if (req.user.type !== 'staff' || req.user.isAdmin !== true) {
       return res.status(403).json({
         status: res.statusCode,
-        msg: 'You are fobidden to view this endpoint'
+        message: 'You are fobidden to view this endpoint'
       });
     }
     const query = 'SELECT * FROM accounts, users WHERE accounts.owner = users.id AND email = $1';
@@ -29,12 +29,12 @@ export default class UserController {
         return res.status(200).json({
           status: res.statusCode,
           data: accountDetails,
-          msg: 'All accounts owned by this user'
+          message: 'All accounts owned by this user'
         });
       }
       return res.status(404).json({
         status: res.statusCode,
-        msg: 'No accounts found'
+        message: 'No accounts found'
       });
     });
   }

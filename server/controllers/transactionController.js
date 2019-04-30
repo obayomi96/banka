@@ -15,7 +15,7 @@ export default class TransactionController {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'Account not found'
+          message: 'Account not found'
         });
       }
       const transId = uuidv4();
@@ -34,14 +34,14 @@ export default class TransactionController {
       client.query(query, [transaction[7], transaction[3]], (updateErr) => {
         if (updateErr) {
           return res.status(500).json({
-            msg: 'Internal server error'
+            message: 'Internal server error'
           });
         }
         const transactionQuery = 'INSERT INTO transactions (id, createdon, type, accountnumber, cashier, amount, oldbalance, newbalance) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
         client.query(transactionQuery, transaction, (insertErr) => {
           if (insertErr) {
             return res.status(500).json({
-              msg: 'Internal server error'
+              message: 'Internal server error'
             });
           }
           return res.status(201).json({
@@ -54,7 +54,7 @@ export default class TransactionController {
               transactionType: transaction[2],
               accountBalance: transaction[7].toFixed(2)
             },
-            msg: 'Transaction Successfull'
+            message: 'Transaction Successfull'
           });
         });
       });
@@ -74,7 +74,7 @@ export default class TransactionController {
       if (data.rowCount === 0) {
         return res.status(404).json({
           status: res.statusCode,
-          msg: 'Account not found'
+          message: 'Account not found'
         });
       }
       const transId = uuidv4();
@@ -93,14 +93,14 @@ export default class TransactionController {
       client.query(query, [transaction[7], transaction[3]], (updateErr) => {
         if (updateErr) {
           return res.status(500).json({
-            msg: 'Internal server error'
+            message: 'Internal server error'
           });
         }
         const transactionQuery = 'INSERT INTO transactions (id, createdon, type, accountnumber, cashier, amount, oldbalance, newbalance) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
         client.query(transactionQuery, transaction, (insertErr) => {
           if (insertErr) {
             return res.status(500).json({
-              msg: 'Internal server error'
+              message: 'Internal server error'
             });
           }
           return res.status(201).json({
@@ -113,7 +113,7 @@ export default class TransactionController {
               transactionType: transaction[2],
               accountBalance: transaction[7].toFixed(2)
             },
-            msg: 'Transaction Successfull'
+            message: 'Transaction Successfull'
           });
         });
       });
@@ -132,7 +132,7 @@ export default class TransactionController {
     if (type !== 'client' && type !== 'staff') {
       return res.status(403).json({
         status: res.statusCode,
-        msg: 'You are forbidden to view this endpoint'
+        message: 'You are forbidden to view this endpoint'
       });
     }
     const query = 'SELECT * FROM transactions WHERE id = $1';
@@ -145,7 +145,7 @@ export default class TransactionController {
       }
       return res.status(404).json({
         status: res.statusCode,
-        msg: 'transaction not found'
+        message: 'transaction not found'
       });
     });
   }
