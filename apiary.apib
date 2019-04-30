@@ -1,80 +1,285 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://obayomi-banka.herokuapp.com/api/v1
 
 # banka
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money
 
-## Questions Collection [/questions]
+## HOME [/]
 
-### List All Questions [GET]
-
+### Welcome [GET]
 + Response 200 (application/json)
 
-        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "status": 200,
+                "msg": "Welcome to banka 1.0"
             }
-        ]
 
-### Create a New Question [POST]
+## USER [/auth]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### USER CAN SIGN UP [POST]
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+            {
+                "firstname": "yourFirstname"
+                "lastname": "yourLastname"
+                "email": "yourEmail@email.com"
+                "password": "yourPassword"
+            }
 
 + Response 201 (application/json)
-
     + Headers
-
-            Location: /questions/2
-
+        Location: https://obayomi-banka.herokuapp.com/api/v1/auth/signup
+    
     + Body
+    
+            {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0ZDkyYzNhLTUzYzktNDQ5ZC05MzE1LTVkNzNkZmZjMWY1NCIsImZpcnN0bmFtZSI6ImRhdmlzIiwibGFzdG5hbWUiOiJpc3JhZWwiLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkZnF5VVBIVi5rTWs0amczaGdRV1AxdUJOa1VUNXBTdWJpazg1bEZndzJOZlczSGpVN3AydzIiLCJ0eXBlIjoiY2xpZW50IiwiaXNhZG1pbiI6ZmFsc2UsImlhdCI6MTU1NjQ1MDM1OCwiZXhwIjoxNTU2NjIzMTU4fQ.hPBu7FGWqNh2-AuUcneCX2J6ZxBtN03PDhhXk0G74zc"
+                "id": "a4d92c3a-53c9-449d-9315-5d73dffc1f54",
+                "firstname": "davis",
+                "lastname": "israel",
+                "email": "admin@mail.com",
+                "password": "$2a$10$fqyUPHV.kMk4jg3hgQWP1uBNkUT5pSubik85lFgw2NfW3HjU7p2w2",
+                "type": "client",
+                "isAdmin": false
+            },
+            "msg": "Account created successfully!"
+
+      
+### USER CAN SIGN IN [POST]
++ Request (application/json)
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "email": "yourEmail@email.com"
+                "password": "yourPassword"
             }
+
++ Response 200 (application/json)
+    + Headers
+        Location: https://obayomi-banka.herokuapp.com/api/v1/auth/signin
+    
+    + Body
+    
+            {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjQ1MjI5OCwiZXhwIjoxNTU2NjI1MDk4fQ.dGCYwCaKNvO7LMyLUxugDvoVbFthawypcKHL3JcpSIs",
+                "id": "c714914f-9cb9-472b-ac5e-530cc2365826",
+                "firstname": "YourFirstname",
+                "lastname": "YourLastname",
+                "email": "yourEmail@mail.com"
+            },
+            "msg": "Login success!, welcome YourFirstname"
+
+
+
+## ACCOUNTS [/accounts]
+
+### ADMIN CAN UPDATE AN ACCOUNT STATUS [PATCH]
++ Request (application/json)
+    + Headers
+            
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+            
+    + Body
+        
+            {
+                "status": "active"
+            }
+            
++ Response 200 (applicaion/json)
+    + Headers
+        Location: https://obayomi-banka.herokuapp.com/api/v1/accounts/717042260
+        
+    + Body
+    
+            {
+                "accountNumber": 717042260,
+                "status": "active
+            },
+            "msg": "Account status updated successfully"
+
+### ADMIN CAN DELETE A BANK ACCOUNT [POST]
++ Request (application/json)
+    + Headers
+            
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+            
++ Response 200 (application/json)
+    + Headers
+        Location: https://obayomi-banka.herokuapp.com/api/v1/accounts/234685733
+    
+    + Body
+            
+            "msg": "Account deleted successfully"
+
+### ALL USERS CAN GET A SPECIFIC ACCOUNT TRANSACTION HISTORY [GET]
++ Request (application/json
+    + Headers
+        
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+
++ Response 200 (application/json)
+    + Headers
+        
+        Location: https://obayomi-banka.herokuapp.com/api/v1/accounts/7179044288/transactions
+        
+    + Body
+    
+                “status” : Integer,
+                “data” : [{
+                    “transactionId” : "c714914f-9cb9-472b-ac5e-530cc2365826",
+                    “createdOn” : "2019-04-26T13:21:48.404Z",
+                    “type” : "credit",
+                    “accountNumber” : 7179044288,
+                    “amount” : 350.00,
+                    “oldBalance” : 100.00,
+                    “newBalance” : 450.00,
+                },
+                {
+                     “transactionId” : "c714914f-9cb9-472b-ac5e-530cc2365826",
+                    “createdOn” : "2019-04-26T13:21:48.404Z",
+                    “type” : "debit
+                    “accountNumber” : 7179044288,
+                    “amount” : 50.00,
+                    “oldBalance” : 450.00,
+                    “newBalance” : 400.00,
+                }]
+
+### ALL USERS CAN CREATE A BANK ACCOUNT [POST]
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+        
+    + Body
+    
+            {
+                "initialDeposit": 150.55,
+                "type": "savings"
+            }
+        
++ Response 201 (application/json)
+    + Headers
+        Location: https://obayomi-banka.herokuapp.com/api/v1/accounts
+    
+    + Body
+    
+            {
+                "id": a4d92c3a-53c9-449d-9315-5d73dffc1f54,
+                "accountnumber": 717042260,
+                "createdon": "2019-04-28T13:21:48.404Z",
+                "owner": c714914f-9cb9-472b-ac5e-530cc2365826,
+                "type": "savings",
+                "status": "draft",
+                "balance": "0.00"
+            },
+            "msg": "Bank account created successfully"
+
+
+### A USER CAN VIEW ACCOUNT DETAILS [GET]
++ Request (application/json)
+    + Headers
+    
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+    
++ Response 200 (application/json)
+    + Headers
+        Location: https://obayomi-banka.herokuapp.com/api/v1/accounts/234685733
+        
+    + Body
+        
+            "status": 200,
+            "data": {
+                “createdOn” : "2019-04-28T13:21:48.404Z",
+                “accountNumber” : 234685733,
+                “ownerEmail” : yourEmail@mail.com,
+                “type” : "savings",
+                “status” : "active",
+                “balance” : 4,500.55
+            },
+            "msg": "User account details"
+
+
+
+## TRANSACTIONS [/transactions]
+### STAFF USER CAN CREDIT A BANK ACCOUNT [POST]
++ Request (application/json)
+    + Headers
+        
+            Autorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+            
+    + Body
+        
+            {
+                "amount": 65.25
+            }
+            
++ Response 200 (application/json)
+    + Headers
+        Location: https://obayomi-banka.herokuapp.com/api/v1/transactions/717042260/credit
+    
+    + Body 
+            
+            {
+                “transactionId”: "a4d92c3a-53c9-449d-9315-5d73dffc1f54",
+                “accountNumber” : 717042260,
+                “amount” : 65.25,
+                “cashier” : c714914f-9cb9-472b-ac5e-530cc2365826,
+                “transactionType” : "credit",
+                “accountBalance” : 250.55,
+            },
+            "msg": "Account credited successfully"
+
+### STAFF USER CAN DEBIT A BANK ACCOUNT [POST]
++ Request (application/json)
+    + Headers
+        
+            Autorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+            
+    + Body
+        
+            {
+                "amount": 65.25
+            }
+            
++ Response 200 (application/json)
+    + Headers
+        Location: https://obayomi-banka.herokuapp.com/api/v1/transactions/717042260/credit
+    
+    + Body 
+            
+            {
+                “transactionId”: "a4d92c3a-53c9-449d-9315-5d73dffc1f54",
+                “accountNumber” : 717042260,
+                “amount” : 65.25,
+                “cashier” : c714914f-9cb9-472b-ac5e-530cc2365826,
+                “transactionType” : "debit",
+                “accountBalance” : 250.55,
+            },
+            "msg": "Account debited successfully"
+
+
+### ALL USER CAN GET A SPECIFIC TRANSACTION OF THIER OWN [GET]
++ Request (application/json)
+    + Headers
+    
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM3MTQ5MTRmLTljYjktNDcyYi1hYzVlLTUzMGNjMjM2NTgyNiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJBZG1pbiIsImxhc3RuYW1lIjoiU2V1biIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NjI4ODQxOCwiZXhwIjoxNTU2NDYxMjE4fQ.jJZ74gjGcpdhjOACfQVv0BBy_k905cr8P5Ter5D_djA
+
++ Response 200 (application/json)
+    + Headers
+        
+        Location: https://https://obayomi-banka.herokuapp.com/api/v1/transactions/c714914f-9cb9-472b-ac5e-530cc2365826
+    
+    + Body
+    
+            “status” : Integer,
+            “data” : {
+                “transactionId” : "c714914f-9cb9-472b-ac5e-530cc2365826",
+                “createdOn” : "2019-04-28T13:21:48.404Z",
+                “type” : "credit",
+                “accountNumber” : 7179044288,
+                “amount” : 350.00,
+                “oldBalance” : 100.00,
+                “newBalance” : 450.00,
+            }
+
