@@ -166,9 +166,9 @@ nav #menuLogo {
 }
 .userAccountCoverPage #accountSection .details {
   background: #ddd !important;
-    border-radius: 4px;
-    margin-bottom: 50px;
-    border: 1px black solid;
+  border-radius: 4px;
+  margin-bottom: 50px;
+  border: 1px black solid;
   text-align: left;
 }
 .userAccountCoverPage #accountSection {
@@ -203,9 +203,9 @@ div.topDivs {
 }
 
 .userAccountCoverPage div.viewAllBtn {
-float: right;
-font-size: 20px;
-/* padding-left: 40px; */
+  float: right;
+  font-size: 20px;
+  /* padding-left: 40px; */
 }
 #accountSection ul li b {
   padding: 0 5px;
@@ -322,7 +322,22 @@ font-size: 20px;
 .innerFooter > .create {
   float: right;
 }
-
+table button {
+  color: var(--primaryColor);
+  margin: 0px auto;
+  text-decoration: none;
+  border: var(--primaryColor) 1px solid;
+  padding: 6px 20px;
+  font-size: 18px;
+  width: 80%;
+  border-radius: 3px;
+}
+table button:hover {
+  background: var(--primaryColor);
+  color: var(--white);
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
 .pagination {
   width: 100%;
   margin: 0 auto;
@@ -446,7 +461,7 @@ div.adminFilter {
 }
 
 /* ------Admin searcher ends---- */
-#accountSection .user> table {
+#accountSection .user > table {
   width: 100%;
   min-width: 700px;
   margin: 10px auto 20px auto;
@@ -512,7 +527,7 @@ tr:nth-child(odd) {
 #accountSection .accountOwnerInfo {
   text-align: center;
   display: block;
-  width: 100%
+  width: 100%;
 }
 
 .ownerImg {
@@ -524,7 +539,7 @@ tr:nth-child(odd) {
 .ownerImg:hover {
   opacity: 0.8;
 }
-.ownerInfo>ul {
+.ownerInfo > ul {
   text-align: left;
 }
 
@@ -575,7 +590,7 @@ tr:nth-child(odd) {
   display: inline-block;
   width: 60px;
   height: 31px;
-  font-size:20px;
+  font-size: 20px;
 }
 
 /* Hide default HTML checkbox */
@@ -594,8 +609,8 @@ tr:nth-child(odd) {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -606,8 +621,8 @@ tr:nth-child(odd) {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
@@ -651,17 +666,18 @@ input:checked + .slider:before {
 .deleteAccountModal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1;  /*Sit on top*/
+  z-index: 1; /*Sit on top*/
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .deleteModalContent {
+  z-index: 100;
   text-align: left;
   background-color: #fefefe;
   margin: auto;
@@ -670,7 +686,7 @@ input:checked + .slider:before {
   border-radius: 5px;
   width: 80%;
 }
-.deleteModalContent>p {
+.deleteModalContent > p {
   line-height: 35px;
 }
 .confirmBtn {
@@ -693,6 +709,49 @@ input:checked + .slider:before {
   border-color: #3f464c;
 }
 #cancelDeleteBtn {
+  width: 80px;
+  color: #fff;
+  background: #d40424;
+  border-color: #d40424;
+}
+.changePasswordModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 150; /*Sit on top*/
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.changePasswordModalContent {
+  z-index: 100;
+  text-align: left;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 80%;
+}
+.changePasswordModalContent > form > div > input {
+  padding: 6px;
+  width: 90%;
+  outline: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font: "Roboto Slab", serif;
+}
+#savePassword {
+  width: 80px;
+  color: #fff;
+  background: #3f464c;
+  border-color: #3f464c;
+}
+#cancel {
   width: 80px;
   color: #fff;
   background: #d40424;
@@ -749,11 +808,12 @@ footer {
 
 /* Medium devices (desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .transactionPage, .userAccountCoverPage {
+  .transactionPage,
+  .userAccountCoverPage {
     width: calc(100% - 15%);
     margin-left: 15%;
   }
-  .transactionPage{
+  .transactionPage {
     margin-top: 150px;
   }
   #accountSection {
@@ -986,7 +1046,7 @@ footer {
     text-align: center;
     display: inline-flex;
     justify-content: space-around;
-    width: 100%
+    width: 100%;
   }
   .ownerImg {
     height: 200px;
@@ -1004,7 +1064,7 @@ footer {
     border-radius: 4px;
     border: 1px black solid;
   }
-  .ownerInfo>ul {
+  .ownerInfo > ul {
     text-align: left;
     padding: 5px;
   }
@@ -1034,7 +1094,8 @@ footer {
     width: 30%;
     padding: 10px;
   }
-  .deleteModalContent {
+  .deleteModalContent,
+  .changePasswordModalContent {
     width: 40%;
   }
 }
