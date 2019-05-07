@@ -14,7 +14,30 @@ const openSidebar = () => {
   });
 };
 openSidebar();
-// openSidebar ENDS
+// openSidebar end
+
+// const changePasswordModalContent = document.querySelector('.changePasswordModalContent');
+const changePasswordBtn = document.querySelector('#changePassword');
+const changePasswordModal = document.querySelector('.changePasswordModal');
+const savePassword = document.querySelector('#savePassword');
+const cancel = document.querySelector('#cancel');
+
+const changePasswordModalEffect = () => {
+  // Display modal
+  changePasswordBtn.addEventListener('click', () => {
+    changePasswordModal.style.display = 'block';
+  });
+  // Close modal
+  cancel.addEventListener('click', () => {
+    changePasswordModal.style.display = 'none';
+  });
+  // Close modal and redirect to Admin dashboard after deleting account
+  savePassword.addEventListener('click', () => {
+    changePasswordModal.style.display = 'none';
+  });
+};
+changePasswordModalEffect();
+
 
 // Delete account confirm modal
 const deleteAccountPageBtn = document.querySelector('.deleteBtn');
@@ -22,7 +45,7 @@ const deleteAccountModal = document.querySelector('.deleteAccountModal');
 const confirmDeleteBtn = document.querySelector('#deleteAccountBtn');
 const cancelDeleteBtn = document.querySelector('#cancelDeleteBtn');
 
-const modalDisplayModalRemove = () => {
+const deleteAccountModalEffect = () => {
   // Display modal
   deleteAccountPageBtn.addEventListener('click', () => {
     deleteAccountModal.style.display = 'block';
@@ -41,5 +64,5 @@ const modalDisplayModalRemove = () => {
     window.location = '../admin/allBankAccounts.html';
   });
 };
-modalDisplayModalRemove();
+deleteAccountModalEffect();
 // Delete account confirm modal ENDS
