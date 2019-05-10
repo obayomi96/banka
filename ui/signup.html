@@ -18,26 +18,30 @@
     <div class="loginCoverPage">
         <div class="formModal">
             <a href="index.html"><h1>banka</h1></a>
-            <form action="" id="loginForm">
+            <div class="loader">
+                <div class="loaderContent">
+                        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>
+            </div>
+            <form action="" id="loginForm" method="POST">
                 <div>
-                    <input type="text" value="" class="formInput" placeholder="Firstname">   
+                    <input id="firstname" required type="text" name="firstname" class="formInput" placeholder="Firstname">   
                 </div>
                 <div>
-                        <input type="text" value="" class="formInput" placeholder="Lastname">   
+                        <input id="lastname" required type="text" name="lastname" class="formInput" placeholder="Lastname">
                     </div>
                 <div>
-                        <input type="email" value="" class="formInput" placeholder="Email">   
+                        <input id="email" required type="email" name="email" class="formInput" placeholder="Email">   
                     </div>
-                    <div>
-                            <input type="number" value="" class="formInput" placeholder="Your Age">
-                        </div>
                 <div> 
-                    <input type="password" name="password" class="formInput" placeholder="Enter password">
+                    <input id="password" type="password" name="password" class="formInput" placeholder="Enter password">
                 </div>
-                <div> 
-                        <input type="password" name="password" class="formInput" placeholder="Password Confirm">
+                    <div class="errorDiv"> 
+                        <p id="errors"></p>
                     </div>
-                <div class="loginBtn"><a href="user/createBankAccount.html">Sign Up</a></div>
+                <div class="loginBtn">
+                    <input type="submit"  id="submitBtn" value="SIGN UP" name="sign-up">
+                </div>
                 <div class="innerFooter">
                     <span class="reset"><a href="resetPassword.html">RESET PASSWORD</a></span>
                     <span class="create"><a href="index.html">SIGN IN</a></span>
@@ -46,5 +50,6 @@
         </div>
         <footer>Andela Developer Challenge - &copy 2019</footer>
     </div>
+<script src="script/authSignup.js"></script>
 </body>
 </html>
