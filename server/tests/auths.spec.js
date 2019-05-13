@@ -149,6 +149,7 @@ describe('Users auth Tests', () => {
           expect(res.body.data.lastname).to.be.a('string');
           expect(res.body.data).to.have.property('email');
           expect(res.body.data.email).to.be.a('string');
+          expect(res.body.data).to.have.property('isadmin');
           done();
         });
     });

@@ -1,34 +1,31 @@
 const endpoint = 'https://obayomi-banka.herokuapp.com/api/v1';
-const signup = document.querySelector('#loginForm');
+const signin = document.querySelector('#loginForm');
 
-const firstname = document.getElementById('firstname');
-const lastname = document.getElementById('lastname');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const cssLoader = document.querySelector('.loader');
 const errorMsgs = document.querySelector('#errors');
 const errorDiv = document.querySelector('.errorDiv');
 
-signup.addEventListener('submit', (e) => {
+signin.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  fetch(`${endpoint}/auth/signup`, {
+  fetch(`${endpoint}/auth/signin`, {
     method: 'POST',
     body: JSON.stringify({
-      firstname: firstname.value,
-      lastname: lastname.value,
       email: email.value,
-      password: password.value
+      password: password.value,
     }),
     headers: {
-      'Content-Type': 'application/json',
+      'Content-type': 'application/json',
     }
   })
     .then(res => res.json())
     .then((res) => {
-      if (res.status === 409) {
+      if (res.status === 404) {
+        console.log('res', res);
         errorDiv.style.display = 'block';
-        errorMsgs.innerHTML = 'Account already exists!';
+        errorMsgs.innerHTML = res.error;
         return setTimeout(() => {
           errorDiv.style.display = 'none';
           errorMsgs.innerHTML = '';
@@ -45,13 +42,17 @@ signup.addEventListener('submit', (e) => {
           errorMsgs.innerHTML = '';
         }, 5000);
       }
-      if (res.status === 201) {
+      if (res.status === 200) {
         cssLoader.style.display = 'block';
         setTimeout(() => {
-          window.location = 'user/userAccount.html';
+          if (res.data.isadmin === false) {
+            window.location = 'user/userAccount.html';
+          } else {
+            window.location = 'admin/adminDashboard.html';
+          }
         }, 3000);
-        localStorage.setItem('token', res.data[0].token);
-        localStorage.setItem('userDetails', JSON.stringify(res.data[0]));
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userDetails', JSON.stringify(res.data));
         localStorage.setItem('loggedIn', true);
       }
     })
