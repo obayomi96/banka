@@ -104,6 +104,7 @@ export default class UserController {
             firstname: data.rows[0].firstname,
             lastname: data.rows[0].lastname,
             email: data.rows[0].email,
+            isadmin: data.rows[0].isadmin
           },
           message: `Login success!, welcome ${user.firstname}`
         });
