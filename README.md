@@ -29,9 +29,6 @@ banka project is broken down into smaller tasks with Pivotal Tracker board for p
 # API Endpoint
 The API can be hosted at (https://obayomi-banka.herokuapp.com/api/v1/)
 
-# UI Templates
-The application is hosted online on gh-pages at (https://obayomi96.github.io/banka)
-
 # API Documentation
 The application's API Endpoints are documented with APIary and hosted at (https://obayomi-banka.herokuapp.com/api/v1/docs)
 
