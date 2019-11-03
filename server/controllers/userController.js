@@ -9,12 +9,12 @@ export default class UserController {
     */
   static async getAllAccountByUser(req, res) {
     const { userEmail } = req.params;
-    // if (req.user.type !== 'staff' || req.user.isAdmin !== true) {
-    //   return res.status(403).json({
-    //     status: res.statusCode,
-    //     message: 'You are fobidden to view this endpoint'
-    //   });
-    // }
+    if (req.user.email !== userEmail) {
+      return res.status(403).json({
+        status: res.statusCode,
+        message: 'You are fobidden to view this endpoint'
+      });
+    }
     const query = 'SELECT * FROM accounts, users WHERE accounts.owner = users.id AND email = $1';
     await client.query(query, [userEmail], (err, data) => {
       const accountDetails = data.rows.map(each => ({
